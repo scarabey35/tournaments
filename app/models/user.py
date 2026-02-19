@@ -3,20 +3,20 @@ from enum import Enum
 from flask_login import UserMixin
 from app.extensions import db
 
-
+#логіка розділення ролей
 class Role(str, Enum):
     organizer = "organizer"
     participant = "participant"
     jury = "jury"
 
-
+#параметри для користувача
 class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True, nullable=False, index=True)
 
-    # bcrypt-хэш — это текст вида "$2b$12$....", обычно 60 символов
+
     password_hash = db.Column(db.String(100), nullable=False)
 
     role = db.Column(db.String(32), nullable=False, index=True)
@@ -25,11 +25,12 @@ class User(db.Model, UserMixin):
         if not password:
             raise ValueError("Password required")
 
+#хеш паролей
+
         pw_bytes = password.encode("utf-8")
         salt = bcrypt.gensalt(rounds=12)  # 12 — нормальный баланс; можно 10-14
         hashed = bcrypt.hashpw(pw_bytes, salt)
 
-        # хранить удобнее строкой
         self.password_hash = hashed.decode("utf-8")
 
     def check_password(self, password: str) -> bool:
