@@ -7,5 +7,44 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-
+<body>
+    <div class="container">
+    <div class="logo">Назва</div>
+    <h1>Реєстрація користувача</h1>
+    <div class="subtitle">Створіть акаунт для участі у турнірі</div>
+    <form>
+        <div class="section">
+            <div class="section-title">Email</div>
+            <input
+                type="email"
+                placeholder="Введіть вашу електронну пошту"
+                required
+            >
+        </div>
+        <div class="section">
+            <div class="section-title">Пароль</div>
+            <input
+                type="password"
+                placeholder="Придумайте пароль"
+                required
+            >
+        </div>
+        <div class="section">
+            <div class="section-title">Роль користувача</div>
+            <select class="select" required>
+                <option value="">Оберіть роль</option>
+                <option value="participant">Учасник</option>
+                <option value="jury">Журі</option>
+                <option value="admin">Адміністратор</option>
+            </select>
+        </div>
+        <button type="submit" class="button">
+            Зареєструватися
+        </button>
+    </form>
+    <div class="footer">
+        Турнір з програмування © 2026
+    </div>
+</div>
+</body>
 </html>
