@@ -167,3 +167,35 @@ input:focus {
         padding: 28px;
     }
 }
+
+.select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+
+    border: 1px solid rgba(255, 204, 0, 0.15);
+
+    background: rgba(0, 20, 60, 0.6);
+
+    color: #ffffff;
+    font-size: 14px;
+
+    transition: all 0.25s ease;
+
+    outline: none;
+}
+
+.select:focus {
+    border: 1px solid #ffcc00;
+
+    box-shadow:
+        0 0 10px rgba(255, 204, 0, 0.5),
+        0 0 20px rgba(0, 87, 183, 0.4);
+
+    background: rgba(0, 30, 80, 0.85);
+}
+
+.select option {
+    background: #0a1f44;
+    color: white;
+}
