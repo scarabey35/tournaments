@@ -1,0 +1,246 @@
+/* ===== ТЕМА ===== */
+:root {
+    --bg-gradient-start: #020617;
+    --bg-gradient-mid: #031633;
+    --bg-gradient-end: #062a63;
+    --text-primary: #ffffff;
+    --text-secondary: #9fb3d9;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --header-bg: rgba(2, 6, 23, 0.85);
+    --border-color: rgba(255, 204, 0, 0.25);
+    --radial-1: rgba(0, 87, 183, 0.5);
+    --radial-2: rgba(255, 204, 0, 0.18);
+}
+
+body.light-theme {
+    --bg-gradient-start: #f0f4fa;
+    --bg-gradient-mid: #e6ecf5;
+    --bg-gradient-end: #d9e2f0;
+    --text-primary: #1a2639;
+    --text-secondary: #3a4a6b;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(0, 87, 183, 0.3);
+    --radial-1: rgba(180, 205, 240, 0.7);
+    --radial-2: rgba(255, 230, 100, 0.25);
+}
+
+/* ===== БАЗОВІ СТИЛІ ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Фіксований фон через псевдо-елемент — уникаємо проблеми з background-attachment: fixed */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 15% 25%, var(--radial-1), transparent 45%),
+        radial-gradient(circle at 85% 75%, var(--radial-2), transparent 45%),
+        linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    transition: background 0.4s ease;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: color 0.3s;
+}
+
+/* ===== ХЕДЕР ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffcc00;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== КНОПКА ТЕМИ ===== */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    border-color: #ffcc00;
+}
+
+/* ===== КНОПКА РЕЄСТРАЦІЇ ===== */
+.register-btn {
+    background: #ffcc00;
+    color: #001133;
+    padding: 10px 22px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.register-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+/* ===== ГОЛОВНИЙ КОНТЕНТ ===== */
+.main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== HERO ===== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 20px 70px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffcc00, #ffd966);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.hero-button {
+    background: linear-gradient(135deg, #ffcc00, #ffd633);
+    color: #001133;
+    padding: 15px 50px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
+}
+
+.hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(255, 204, 0, 0.6);
+}
+
+/* ===== INFO ===== */
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 50px 0 40px;
+}
+
+.info h2 {
+    font-size: 36px;
+    color: #ffcc00;
+    margin-bottom: 16px;
+}
+
+.info p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+/* ===== КАРТКИ ===== */
+.details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 0 0 80px;
+}
+
+.detail-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffcc00;
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
+}
+
+.detail-card h3 {
+    color: #ffcc00;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.detail-card p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* ===== ФУТЕР ===== */
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: auto;
+}
