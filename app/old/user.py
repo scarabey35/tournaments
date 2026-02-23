@@ -25,10 +25,10 @@ class User(db.Model, UserMixin):
         if not password:
             raise ValueError("Password required")
 
-#хеш паролей
+#хеш паролів
 
         pw_bytes = password.encode("utf-8")
-        salt = bcrypt.gensalt(rounds=12)  # 12 — нормальный баланс; можно 10-14
+        salt = bcrypt.gensalt(rounds=12)  # 12 — нормальний баланс; можна 10–14
         hashed = bcrypt.hashpw(pw_bytes, salt)
 
         self.password_hash = hashed.decode("utf-8")
