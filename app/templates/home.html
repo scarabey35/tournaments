@@ -9,6 +9,103 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <body>
+    <!-- Шапка -->
+    <header class="header">
+        <button id="themeToggle" class="theme-toggle">🌙</button>
+        <div class="logo"># Logo</div>
+        <div class="role">Роль: ---</div>
+    </header>
+
+    <aside class="sidebar">
+    <nav class="sidebar-nav">
+        <a href="/" class="nav-item" title="Головна">
+            <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
+        </a>
+        <a href="/tournaments" class="nav-item" title="Турніри">
+            <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
+        </a>
+        <a href="/leaderboard" class="nav-item" title="Лідерборд">
+            <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
+        </a>
+        <a href="/profile" class="nav-item" title="Профіль">
+            <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
+        </a>
+        <a href="/settings" class="nav-item" title="Налаштування">
+            <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
+        </a>
+    </nav>
+</aside>
+
+    <main class="main">
+        <!-- Поточні турніри -->
+        <section class="tournaments-section">
+            <h2>Поточні турніри:</h2>
+            <div class="tournament-list">
+                <div class="tournament-card">
+                    <h3>Назва</h3>
+                    <p class="time-left">Залишилось: Х дн Х год Х хв</p>
+                    <p class="description">Опис: ---</p>
+                </div>
+                <!-- Можна додати ще карток -->
+            </div>
+        </section>
+
+        <!-- Заплановані турніри -->
+        <section class="tournaments-section">
+            <h2>Заплановані турніри:</h2>
+            <div class="tournament-list">
+                <div class="tournament-card">
+                    <h3>Назва</h3>
+                    <p class="start-date">Старт: 23.02.2026 ХХ:ХХ</p>
+                    <p class="description">Опис: ---</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Завершені турніри -->
+        <section class="tournaments-section">
+            <h2>Завершені турніри:</h2>
+            <div class="tournament-list">
+                <div class="tournament-card">
+                    <h3>Назва</h3>
+                    <p>Старт: 23.02.2026</p>
+                    <p>Опис: ---</p>
+                    <p>Кінець: 24.02.2026</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Фільтри -->
+        <section class="filters">
+            <h3>Знайти турнір</h3>
+            
+            <div class="filter-group">
+                <label>Статус:</label>
+                <div class="filter-options">
+                    <label><input type="checkbox"> Запланований</label>
+                    <label><input type="checkbox"> Триває</label>
+                    <label><input type="checkbox"> Завершений</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Додатковий фільтр:</label>
+                <input type="text" placeholder="...">
+            </div>
+
+            <div class="filter-group">
+                <label>Закінчення:</label>
+                <select>
+                    <option>Запланований</option>
+                    <option>Триває</option>
+                    <option>Завершений</option>
+                </select>
+            </div>
+
+            <button class="filter-btn">Застосувати</button>
+        </section>
+    </main>
+        
 </body>
 </html>

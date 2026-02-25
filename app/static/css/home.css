@@ -1,0 +1,683 @@
+/* ========== ЗМІННІ ТЕМ ========== */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --text-secondary: #6c757d;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #dee2e6;
+    --accent-color: #ffcc00;
+    --accent-hover: #ffd633;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+    --hover-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --deadline-color: #e67e22;
+    --start-color: #2c3e50;
+}
+
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --text-secondary: #a0a0a0;
+    --card-bg: #2d2d2d;
+    --header-bg: #2d2d2d;
+    --border-color: #404040;
+    --accent-color: #ffcc00;
+    --accent-hover: #ffd633;
+    --shadow: 0 2px 8px rgba(0,0,0,0.2);
+    --hover-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    --deadline-color: #f39c12;
+    --start-color: #95a5a6;
+}
+
+/* ========== СКИДАННЯ ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ========== БАЗОВІ СТИЛІ ========== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========== ШАПКА ========== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+.role {
+    color: var(--text-secondary);
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+/* ========== КНОПКА ТЕМИ ========== */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-color);
+}
+
+/* ========== ОСНОВНИЙ КОНТЕНТ ========== */
+.main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ========== СЕКЦІЇ ТУРНІРІВ ========== */
+.tournaments-section {
+    margin-bottom: 50px;
+}
+
+.tournaments-section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.tournament-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* ========== КАРТКА ТУРНІРУ ========== */
+.tournament-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.tournament-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: var(--hover-shadow);
+}
+
+.tournament-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* ========== ТЕКСТ В КАРТКАХ ========== */
+.time-left {
+    color: var(--deadline-color);
+    font-weight: 600;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.start-date {
+    color: var(--start-color);
+    font-weight: 500;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+/* ========== ФІЛЬТРИ ========== */
+.filters {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.filters h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* ========== ПОЛЯ ФІЛЬТРІВ ========== */
+.filter-group input[type="text"],
+.filter-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.filter-group input[type="text"]:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
+}
+
+.filter-group input[type="text"]::placeholder {
+    color: var(--text-secondary);
+}
+
+/* ========== КНОПКА ФІЛЬТРУ ========== */
+.filter-btn {
+    background: var(--accent-color);
+    color: #001133;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .tournament-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters {
+        padding: 20px;
+    }
+    
+    .filter-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .logo {
+        margin-bottom: 5px;
+    }
+}/* ========== ЗМІННІ ТЕМ ========== */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --text-secondary: #6c757d;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --border-color: #dee2e6;
+    --accent-color: #ffcc00;
+    --accent-hover: #ffd633;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+    --hover-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --deadline-color: #e67e22;
+    --start-color: #2c3e50;
+}
+
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --text-secondary: #a0a0a0;
+    --card-bg: #2d2d2d;
+    --header-bg: #2d2d2d;
+    --border-color: #404040;
+    --accent-color: #ffcc00;
+    --accent-hover: #ffd633;
+    --shadow: 0 2px 8px rgba(0,0,0,0.2);
+    --hover-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    --deadline-color: #f39c12;
+    --start-color: #95a5a6;
+}
+
+/* ========== СКИДАННЯ ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ========== БАЗОВІ СТИЛІ ========== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========== ШАПКА ========== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+.role {
+    color: var(--text-secondary);
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+/* ========== КНОПКА ТЕМИ ========== */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 50px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-color);
+}
+
+/* ========== ОСНОВНИЙ КОНТЕНТ ========== */
+.main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ========== СЕКЦІЇ ТУРНІРІВ ========== */
+.tournaments-section {
+    margin-bottom: 50px;
+}
+
+.tournaments-section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.tournament-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* ========== КАРТКА ТУРНІРУ ========== */
+.tournament-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.tournament-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: var(--hover-shadow);
+}
+
+.tournament-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* ========== ТЕКСТ В КАРТКАХ ========== */
+.time-left {
+    color: var(--deadline-color);
+    font-weight: 600;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.start-date {
+    color: var(--start-color);
+    font-weight: 500;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Стандартний стан (темна тема) */
+.nav-item img {
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+/* Світла тема - фон жовтий, іконка темна */
+body:not(.dark-theme) .nav-item {
+    background-color: #ffcc00;
+}
+
+body:not(.dark-theme) .nav-item img {
+    filter: brightness(0) invert(0);
+    opacity: 0.9;
+}
+
+/* Ховер для темної теми */
+.nav-item:hover {
+    background-color: var(--accent-color);
+}
+
+.nav-item:hover img {
+    opacity: 1;
+}
+
+/* Темна тема - ховер */
+body.dark-theme .nav-item:hover img {
+    filter: brightness(0) invert(1);
+}
+
+/* Світла тема - ховер (фон темнішає) */
+body:not(.dark-theme) .nav-item:hover {
+    background-color: #e6b800;
+}
+
+body:not(.dark-theme) .nav-item:hover img {
+    filter: brightness(0) invert(0);
+    opacity: 1;
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+/* ========== ФІЛЬТРИ ========== */
+.filters {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.filters h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* ========== ПОЛЯ ФІЛЬТРІВ ========== */
+.filter-group input[type="text"],
+.filter-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.filter-group input[type="text"]:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
+}
+
+.filter-group input[type="text"]::placeholder {
+    color: var(--text-secondary);
+}
+
+/* ========== КНОПКА ФІЛЬТРУ ========== */
+.filter-btn {
+    background: var(--accent-color);
+    color: #001133;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .tournament-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters {
+        padding: 20px;
+    }
+    
+    .filter-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 70px;
+    background-color: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.nav-item:hover {
+    background-color: var(--accent-color);
+}
+
+.nav-item img {
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover img {
+    opacity: 1;
+    filter: brightness(0) invert(1);
+}
+
+/* Спливаючий текст */
+.nav-item::after {
+    content: attr(title);
+    position: absolute;
+    left: 60px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    border: 1px solid var(--border-color);
+}
+
+.nav-item:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .logo {
+        margin-bottom: 5px;
+    }
+}
