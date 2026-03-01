@@ -1,20 +1,20 @@
 from flask import Flask
+from .config import get_config
+from .extensions import db, migrate
 
-from .config import Config
-from .extensions import init_extensions
-from .errors import register_error_handlers
-from .blueprints import register_blueprints
-from .cli import register_cli
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(get_config())
 
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-def create_app(config_object=Config) -> Flask:
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(config_object)
-    app.config.from_pyfile("config.py", silent=True)
+    # blueprints
+    from .routes.users import bp as users_bp
+    app.register_blueprint(users_bp, url_prefix="/api")
 
-    init_extensions(app)
-    register_blueprints(app)
-    register_error_handlers(app)
-    register_cli(app)
+    @app.get("/health")
+    def health():
+        return {"status": "ok"}
 
     return app
