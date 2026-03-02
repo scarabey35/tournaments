@@ -1,3 +1,11 @@
+:root {
+    --bg-gradient-start: #020617;
+    --bg-gradient-mid: #031633;
+    --bg-gradient-end: #062a63;
+    --radial-1: rgba(0, 87, 183, 0.35);
+    --radial-2: rgba(255, 204, 0, 0.15);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,19 +13,24 @@
     font-family: 'Inter', sans-serif;
 }
 
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 20%, var(--radial-1), transparent 40%),
+        radial-gradient(circle at 80% 70%, var(--radial-2), transparent 40%),
+        linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+}
+
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-
-    background:
-        radial-gradient(circle at 20% 20%, rgba(0, 87, 183, 0.35), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255, 204, 0, 0.15), transparent 40%),
-        linear-gradient(135deg, #020617, #031633, #062a63);
-
-    background-attachment: fixed;
 }
 
 .container {
@@ -53,6 +66,20 @@ body {
     text-shadow:
         0 0 10px rgba(255,204,0,0.5),
         0 0 20px rgba(255,204,0,0.3);
+}
+
+.header {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.register-main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
 h1 {

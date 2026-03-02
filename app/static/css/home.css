@@ -1,32 +1,61 @@
-/* ========== ЗМІННІ ТЕМ ========== */
+/* ========== ЗМІННІ ТЕМ (СВІТЛА + ТЕМНА, В СТИЛІ РЕЄСТРАЦІЇ) ========== */
 :root {
-    --bg-color: #f8f9fa;
-    --text-color: #212529;
-    --text-secondary: #6c757d;
-    --card-bg: #ffffff;
-    --header-bg: #ffffff;
-    --border-color: #dee2e6;
+    /* Базово — темний стиль, максимально подібний до .container з register.css */
+    --bg-gradient-start: #020617;
+    --bg-gradient-mid: #031633;
+    --bg-gradient-end: #062a63;
+    --radial-1: rgba(0, 87, 183, 0.35);
+    --radial-2: rgba(255, 204, 0, 0.15);
+
+    --text-color: #ffffff;
+    --text-secondary: #9fb3d9;
+    --card-bg: linear-gradient(
+        145deg,
+        rgba(10, 25, 60, 0.95),
+        rgba(5, 15, 40, 0.98)
+    );
+    --header-bg: linear-gradient(
+        145deg,
+        rgba(10, 25, 60, 0.95),
+        rgba(5, 15, 40, 0.98)
+    );
+    --sidebar-bg: linear-gradient(
+        145deg,
+        rgba(10, 25, 60, 0.95),
+        rgba(5, 15, 40, 0.98)
+    );
+    --border-color: rgba(255, 204, 0, 0.25);
     --accent-color: #ffcc00;
     --accent-hover: #ffd633;
-    --shadow: 0 2px 8px rgba(0,0,0,0.05);
-    --hover-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    --deadline-color: #e67e22;
-    --start-color: #2c3e50;
+    --shadow: 0 0 40px rgba(0, 87, 183, 0.35),
+              0 0 80px rgba(255, 204, 0, 0.08),
+              0 20px 60px rgba(0,0,0,0.8);
+    --hover-shadow: 0 0 20px rgba(255, 204, 0, 0.8),
+                    0 0 40px rgba(0, 87, 183, 0.5);
+    --deadline-color: #ffd28a;
+    --start-color: #9fb3d9;
 }
 
-body.dark-theme {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    --text-secondary: #a0a0a0;
-    --card-bg: #2d2d2d;
-    --header-bg: #2d2d2d;
-    --border-color: #404040;
+/* Світла тема (white theme) поверх базових значень */
+body:not(.dark-theme) {
+    --bg-gradient-start: #f0f4fa;
+    --bg-gradient-mid: #e6ecf5;
+    --bg-gradient-end: #d9e2f0;
+    --radial-1: rgba(180, 205, 240, 0.7);
+    --radial-2: rgba(255, 230, 100, 0.25);
+
+    --text-color: #1a2639;
+    --text-secondary: #3a4a6b;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --header-bg: rgba(255, 255, 255, 0.98);
+    --sidebar-bg: rgba(255, 255, 255, 0.98);
+    --border-color: rgba(0, 87, 183, 0.22);
     --accent-color: #ffcc00;
     --accent-hover: #ffd633;
-    --shadow: 0 2px 8px rgba(0,0,0,0.2);
-    --hover-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    --deadline-color: #f39c12;
-    --start-color: #95a5a6;
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+    --hover-shadow: 0 14px 40px rgba(15, 23, 42, 0.2);
+    --deadline-color: #e67e22;
+    --start-color: #2c3e50;
 }
 
 /* ========== СКИДАННЯ ========== */
@@ -37,26 +66,38 @@ body.dark-theme {
     font-family: 'Inter', sans-serif;
 }
 
-/* ========== БАЗОВІ СТИЛІ ========== */
+/* ========== БАЗОВІ СТИЛІ З ПРОЗОРИМ ФОНОМ ========== */
 body {
-    background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
-/* ========== ШАПКА ========== */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 20%, var(--radial-1), transparent 45%),
+        radial-gradient(circle at 80% 70%, var(--radial-2), transparent 45%),
+        linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+}
+
+/* ========== ШАПКА (СКЛЯНА) ========== */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: var(--header-bg);
+    background: var(--header-bg);
     border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .logo {
@@ -117,19 +158,21 @@ body {
     gap: 20px;
 }
 
-/* ========== КАРТКА ТУРНІРУ ========== */
+/* ========== КАРТКА ТУРНІРУ (СКЛЯНА / CARD) ========== */
 .tournament-card {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 24px 20px;
     box-shadow: var(--shadow);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tournament-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
+    transform: translateY(-4px);
+    border-color: #ffcc00;
     box-shadow: var(--hover-shadow);
 }
 
@@ -162,14 +205,16 @@ body {
     transition: color 0.3s ease;
 }
 
-/* ========== ФІЛЬТРИ ========== */
+/* ========== ФІЛЬТРИ (СКЛЯНА ПАНЕЛЬ / CARD) ========== */
 .filters {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 18px;
     padding: 30px;
     margin-top: 30px;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
@@ -231,6 +276,17 @@ body {
     color: var(--text-secondary);
 }
 
+/* Стилізація випадаючого меню статусу */
+.filter-group select option {
+    background: #0a1f44;
+    color: #ffffff;
+}
+
+body:not(.dark-theme) .filter-group select option {
+    background: #ffffff;
+    color: #1a2639;
+}
+
 /* ========== КНОПКА ФІЛЬТРУ ========== */
 .filter-btn {
     background: var(--accent-color);
@@ -280,53 +336,6 @@ body {
     .logo {
         margin-bottom: 5px;
     }
-}/* ========== ЗМІННІ ТЕМ ========== */
-:root {
-    --bg-color: #f8f9fa;
-    --text-color: #212529;
-    --text-secondary: #6c757d;
-    --card-bg: #ffffff;
-    --header-bg: #ffffff;
-    --border-color: #dee2e6;
-    --accent-color: #ffcc00;
-    --accent-hover: #ffd633;
-    --shadow: 0 2px 8px rgba(0,0,0,0.05);
-    --hover-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    --deadline-color: #e67e22;
-    --start-color: #2c3e50;
-}
-
-body.dark-theme {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    --text-secondary: #a0a0a0;
-    --card-bg: #2d2d2d;
-    --header-bg: #2d2d2d;
-    --border-color: #404040;
-    --accent-color: #ffcc00;
-    --accent-hover: #ffd633;
-    --shadow: 0 2px 8px rgba(0,0,0,0.2);
-    --hover-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    --deadline-color: #f39c12;
-    --start-color: #95a5a6;
-}
-
-/* ========== СКИДАННЯ ========== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-
-/* ========== БАЗОВІ СТИЛІ ========== */
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ========== ШАПКА ========== */
@@ -584,18 +593,26 @@ body:not(.dark-theme) .nav-item:hover img {
     box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
 }
 
-/* ========= НАВIГАЦIЯ ========== */
+/* ========= НАВIГАЦIЯ (СКЛЯНА) ========== */
 .sidebar {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     width: 70px;
-    background-color: var(--card-bg);
+    background: var(--sidebar-bg);
     border-right: 1px solid var(--border-color);
     padding: 20px 0;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
+
+    /* центрируем навигацию внутри панели */
+    display: flex;
+    align-items: center;    /* вертикально */
+    justify-content: center;/* горизонтально */
 }
 
 .sidebar-nav {
@@ -692,7 +709,7 @@ body:not(.dark-theme) .nav-item:hover img {
         height: 60px;
         border-right: none;
         border-top: 1px solid var(--border-color);
-        padding: 8px 0;
+        padding: 8px 12px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -701,6 +718,8 @@ body:not(.dark-theme) .nav-item:hover img {
     .sidebar-nav {
         flex-direction: row;
         gap: 12px;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .nav-item {
