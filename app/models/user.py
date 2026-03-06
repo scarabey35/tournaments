@@ -30,8 +30,7 @@ class User(UserMixin, db.Model):
     )
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
+"""
     def set_password(self, password: str) -> None:
         self.password_hash = generate_password_hash(password)
 
@@ -49,3 +48,4 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"<User {self.username} ({self.role.value})>"
+"""
