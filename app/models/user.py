@@ -1,16 +1,15 @@
 from enum import Enum
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SQLAlchemy()
+from . import db
 
 
 class UserRole(Enum):
-    ADMIN = "admin"          
-    PARTICIPANT = "participant"  
-    JURY = "jury"           
+    ADMIN = "admin"
+    PARTICIPANT = "participant"
+    JURY = "jury"
 
 
 class User(UserMixin, db.Model):
@@ -30,7 +29,11 @@ class User(UserMixin, db.Model):
     )
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+<<<<<<< HEAD
 """
+=======
+
+>>>>>>> 873290a (Created app.py file + edited templates)
     def set_password(self, password: str) -> None:
         self.password_hash = generate_password_hash(password)
 

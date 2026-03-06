@@ -1,0 +1,1 @@
+from .landing import landing_bp
