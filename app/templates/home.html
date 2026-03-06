@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -11,14 +11,14 @@
 <body>
     <!-- Шапка -->
     <header class="header">
-        <button id="themeToggle" class="theme-toggle">🌙</button>
+        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
         <div class="role">Роль: ---</div>
     </header>
 
     <aside class="sidebar">
     <nav class="sidebar-nav">
-        <a href="/" class="nav-item" title="Головна">
+        <a href="/" class="nav-item active" title="Головна">
             <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
         </a>
         <a href="/tournaments" class="nav-item" title="Турніри">
@@ -37,40 +37,115 @@
 </aside>
 
     <main class="main">
-        <!-- Поточні турніри -->
-        <section class="tournaments-section">
-            <h2>Поточні турніри:</h2>
-            <div class="tournament-list">
-                <div class="tournament-card">
-                    <h3>Назва</h3>
-                    <p class="time-left">Залишилось: Х дн Х год Х хв</p>
-                    <p class="description">Опис: ---</p>
+        <section class="tournaments-board">
+            <!-- Поточні -->
+            <div class="tournaments-section tournaments-section-current">
+                <div class="section-header">
+                    <div class="section-title">
+                        <span class="status-dot status-current"></span>
+                        <h2>Поточні</h2>
+                    </div>
+                    <span class="section-note">Йдуть прямо зараз</span>
                 </div>
-                <!-- Можна додати ще карток -->
-            </div>
-        </section>
 
-        <!-- Заплановані турніри -->
-        <section class="tournaments-section">
-            <h2>Заплановані турніри:</h2>
-            <div class="tournament-list">
-                <div class="tournament-card">
-                    <h3>Назва</h3>
-                    <p class="start-date">Старт: 23.02.2026 ХХ:ХХ</p>
-                    <p class="description">Опис: ---</p>
+                <div class="tournament-list">
+                    <article class="tournament-card tournament-card-current">
+                        <div class="title-row">
+                            <span class="status-badge status-current">LIVE</span>
+                            <h3>Назва турніру</h3>
+                        </div>
+
+                        <p class="description">Короткий опис події в один рядок.</p>
+
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <span class="icon icon-calendar" aria-hidden="true"></span>
+                                <span class="meta-label">Старт: 12.03.2026 14:00</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="icon icon-clock" aria-hidden="true"></span>
+                                <span class="time-left">Залишилось: 02 дн 05 год 30 хв</span>
+                            </div>
+                        </div>
+
+                        <button class="tournament-btn">Перейти</button>
+                    </article>
+
+                    <div class="empty-message">Немає активних турнірів</div>
                 </div>
             </div>
-        </section>
 
-        <!-- Завершені турніри -->
-        <section class="tournaments-section">
-            <h2>Завершені турніри:</h2>
-            <div class="tournament-list">
-                <div class="tournament-card">
-                    <h3>Назва</h3>
-                    <p>Старт: 23.02.2026</p>
-                    <p>Опис: ---</p>
-                    <p>Кінець: 24.02.2026</p>
+            <!-- Заплановані -->
+            <div class="tournaments-section tournaments-section-upcoming">
+                <div class="section-header">
+                    <div class="section-title">
+                        <span class="status-dot status-upcoming"></span>
+                        <h2>Заплановані</h2>
+                    </div>
+                    <span class="section-note">Готуємо старт</span>
+                </div>
+
+                <div class="tournament-list">
+                    <article class="tournament-card tournament-card-upcoming">
+                        <div class="title-row">
+                            <span class="status-badge status-upcoming">SOON</span>
+                            <h3>Назва турніру</h3>
+                        </div>
+
+                        <p class="description">Один рядок опису для швидкого огляду.</p>
+
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <span class="icon icon-calendar" aria-hidden="true"></span>
+                                <span class="meta-label">Старт: 20.03.2026 10:00</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="icon icon-flag" aria-hidden="true"></span>
+                                <span class="meta-label">Формат: онлайн</span>
+                            </div>
+                        </div>
+
+                        <button class="tournament-btn">Детальніше</button>
+                    </article>
+
+                    <div class="empty-message">Немає запланованих турнірів</div>
+                </div>
+            </div>
+
+            <!-- Завершені -->
+            <div class="tournaments-section tournaments-section-past">
+                <div class="section-header">
+                    <div class="section-title">
+                        <span class="status-dot status-past"></span>
+                        <h2>Завершені</h2>
+                    </div>
+                    <span class="section-note">Архів</span>
+                </div>
+
+                <div class="tournament-list">
+                    <article class="tournament-card tournament-card-past">
+                        <div class="title-row">
+                            <span class="status-badge status-past">DONE</span>
+                            <h3>Назва турніру</h3>
+                        </div>
+
+                        <p class="description">Короткий опис результатів.</p>
+
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <span class="icon icon-calendar" aria-hidden="true"></span>
+                                <span class="meta-label">Старт: 01.02.2026</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="icon icon-flag" aria-hidden="true"></span>
+                                <span class="meta-label">Фініш: 05.02.2026</span>
+                            </div>
+                        </div>
+
+                        <button class="tournament-btn">Детальніше</button>
+                    </article>
+
+                    <div class="empty-message">Немає завершених турнірів</div>
                 </div>
             </div>
         </section>
@@ -93,15 +168,7 @@
                 <input type="text" placeholder="...">
             </div>
 
-            <div class="filter-group">
-                <label>Статус:</label>
-                <select>
-                    <option>Запланований</option>
-                    <option>Триває</option>
-                    <option>Завершений</option>
-                </select>
-            </div>
-
+            
             <button class="filter-btn">Застосувати</button>
         </section>
     </main>
