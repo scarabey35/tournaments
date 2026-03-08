@@ -1,4 +1,4 @@
-(function initThemeToggle() {
+document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
     const storage = window.localStorage;
@@ -11,14 +11,14 @@
         } else {
             if (toggle) toggle.textContent = '🌙';
         }
-    } catch(e) {}
+    } catch (e) {}
 
     if (toggle) {
         toggle.addEventListener('click', () => {
             body.classList.toggle('light-theme');
             const isLight = body.classList.contains('light-theme');
             toggle.textContent = isLight ? '☀️' : '🌙';
-            try { storage.setItem('theme', isLight ? 'light' : 'dark'); } catch(e) {}
+            try { storage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
         });
     }
-})();
+});
