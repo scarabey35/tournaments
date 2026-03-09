@@ -152,6 +152,49 @@ body::before {
     width: calc(100% - 80px);
 }
 
+/* ========== РОЛЬОВИЙ ДАШБОРД ========== */
+.role-dashboard {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1fr;
+}
+
+.role-section {
+    display: none;
+}
+
+body[data-role="teacher"] .role-section.teacher,
+body[data-role="jury"] .role-section.jury,
+body[data-role="student"] .role-section.student {
+    display: block;
+}
+
+.action-header {
+    align-items: center;
+}
+
+.create-btn {
+    width: auto;
+    padding: 12px 20px;
+}
+
+.section-header > .tournament-btn,
+.section-header > .link-btn {
+    width: auto;
+    min-width: 180px;
+}
+
+.role-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+}
+
 /* ========== СЕКЦІЇ ТУРНІРІВ ========== */
 /* .tournaments-section — настройки секции заданы ниже (объединены) */
 
@@ -393,6 +436,10 @@ body::before {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .tournament-btn:hover {

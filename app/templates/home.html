@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../static/css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-role="student">
     <!-- Шапка -->
     <header class="header">
         <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
-        <div class="role">Роль: ---</div>
+        <div class="role">Роль: <span id="roleDisplay">Учитель</span></div>
     </header>
 
     <aside class="sidebar">
@@ -37,141 +37,276 @@
 </aside>
 
     <main class="main">
-        <section class="tournaments-board">
-            <!-- Поточні -->
-            <div class="tournaments-section tournaments-section-current">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-current"></span>
-                        <h2>Поточні</h2>
+        <section class="role-dashboard">
+            <!-- Учитель -->
+            <div class="role-section teacher" data-role-section="teacher">
+                <div class="tournaments-section">
+                    <div class="section-header action-header">
+                        <div class="section-title">
+                            <span class="status-dot status-upcoming"></span>
+                            <h2>Мої турніри</h2>
+                        </div>
+                        <button class="tournament-btn create-btn">+ Створити турнір</button>
                     </div>
-                    <span class="section-note">Йдуть прямо зараз</span>
-                </div>
 
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-current">
-                        <div class="title-row">
-                            <span class="status-badge status-current">LIVE</span>
-                            <h3>Назва турніру</h3>
-                        </div>
-
-                        <p class="description">Короткий опис події в один рядок.</p>
-
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 12.03.2026 14:00</span>
+                    <div class="tournament-list">
+                        <article class="tournament-card tournament-card-upcoming">
+                            <div class="title-row">
+                                <span class="status-badge status-upcoming">DRAFT</span>
+                                <h3>Весняний хакатон</h3>
                             </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="time-left">Залишилось: 02 дн 05 год 30 хв</span>
+                            <p class="description">Заявки відкриті, ви головний організатор.</p>
+                            <div class="card-meta">
+                                <div class="meta-item">
+                                    <span class="icon icon-calendar" aria-hidden="true"></span>
+                                    <span class="meta-label">Старт: 25.03.2026 10:00</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="icon icon-flag" aria-hidden="true"></span>
+                                    <span class="meta-label">Статус: Підготовка</span>
+                                </div>
                             </div>
-                        </div>
+                            <button class="tournament-btn">Перейти</button>
+                        </article>
 
-                        <button class="tournament-btn">Перейти</button>
-                    </article>
+                        <article class="tournament-card tournament-card-current">
+                            <div class="title-row">
+                                <span class="status-badge status-current">LIVE</span>
+                                <h3>Олімпіада з алгоритмів</h3>
+                            </div>
+                            <p class="description">Команди вже виконують завдання, ви можете керувати процесом.</p>
+                            <div class="card-meta">
+                                <div class="meta-item">
+                                    <span class="icon icon-clock" aria-hidden="true"></span>
+                                    <span class="time-left">Залишилось: 01 дн 12 год</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="icon icon-flag" aria-hidden="true"></span>
+                                    <span class="meta-label">Етап: Фінал</span>
+                                </div>
+                            </div>
+                            <button class="tournament-btn">Відкрити панель</button>
+                        </article>
 
-                    <div class="empty-message">Немає активних турнірів</div>
-                </div>
-            </div>
-
-            <!-- Заплановані -->
-            <div class="tournaments-section tournaments-section-upcoming">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-upcoming"></span>
-                        <h2>Заплановані</h2>
+                        <div class="empty-message">У вас ще немає турнірів</div>
                     </div>
-                    <span class="section-note">Готуємо старт</span>
-                </div>
-
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-upcoming">
-                        <div class="title-row">
-                            <span class="status-badge status-upcoming">SOON</span>
-                            <h3>Назва турніру</h3>
-                        </div>
-
-                        <p class="description">Один рядок опису для швидкого огляду.</p>
-
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 20.03.2026 10:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: онлайн</span>
-                            </div>
-                        </div>
-
-                        <button class="tournament-btn">Детальніше</button>
-                    </article>
-
-                    <div class="empty-message">Немає запланованих турнірів</div>
                 </div>
             </div>
 
-            <!-- Завершені -->
-            <div class="tournaments-section tournaments-section-past">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-past"></span>
-                        <h2>Завершені</h2>
+            <!-- Журі -->
+            <div class="role-section jury" data-role-section="jury">
+                <div class="role-grid">
+                    <div class="tournaments-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <span class="status-dot status-current"></span>
+                                <h2>Активні перевірки</h2>
+                            </div>
+                            <span class="section-note">Очікують ваші бали</span>
+                        </div>
+
+                        <div class="tournament-list">
+                            <article class="tournament-card tournament-card-current">
+                                <div class="title-row">
+                                    <span class="status-badge status-current">LIVE</span>
+                                    <h3>Smart City Challenge</h3>
+                                </div>
+                                <p class="description">Потрібно оцінити 5 команд до 12.03</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-clock" aria-hidden="true"></span>
+                                        <span class="time-left">Дедлайн: 12.03.2026 23:59</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Залишилось команд: 2</span>
+                                    </div>
+                                </div>
+                                <button class="tournament-btn">Перейти до перевірки</button>
+                            </article>
+
+                            <article class="tournament-card tournament-card-upcoming">
+                                <div class="title-row">
+                                    <span class="status-badge status-upcoming">SOON</span>
+                                    <h3>AI Lab Battle</h3>
+                                </div>
+                                <p class="description">Матеріали стануть доступні після старту.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-calendar" aria-hidden="true"></span>
+                                        <span class="meta-label">Старт оцінки: 18.03.2026</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Формат: онлайн</span>
+                                    </div>
+                                </div>
+                                <button class="tournament-btn">Перейти до перевірки</button>
+                            </article>
+
+                            <div class="empty-message">Немає активних перевірок</div>
+                        </div>
                     </div>
-                    <span class="section-note">Архів</span>
-                </div>
 
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-past">
-                        <div class="title-row">
-                            <span class="status-badge status-past">DONE</span>
-                            <h3>Назва турніру</h3>
+                    <div class="tournaments-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <span class="status-dot status-upcoming"></span>
+                                <h2>Запрошення</h2>
+                            </div>
+                            <span class="section-note">Очікують підтвердження</span>
                         </div>
 
-                        <p class="description">Короткий опис результатів.</p>
+                        <div class="tournament-list">
+                            <article class="tournament-card tournament-card-upcoming">
+                                <div class="title-row">
+                                    <span class="status-badge status-upcoming">INVITE</span>
+                                    <h3>EcoTech Cup</h3>
+                                </div>
+                                <p class="description">Вас запросили оцінювати проєкти екології.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Статус: Очікує відповіді</span>
+                                    </div>
+                                </div>
+                                <div class="button-row">
+                                    <button class="tournament-btn">Перейти до перевірки</button>
+                                </div>
+                            </article>
 
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 01.02.2026</span>
+                            <div class="empty-message">Немає запрошень</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Учень -->
+            <div class="role-section student" data-role-section="student">
+                <div class="role-grid">
+                    <div class="tournaments-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <span class="status-dot status-current"></span>
+                                <h2>Мої команди</h2>
                             </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Фініш: 05.02.2026</span>
-                            </div>
+                            <span class="section-note">Участь у турнірах</span>
                         </div>
 
-                        <button class="tournament-btn">Детальніше</button>
-                    </article>
+                        <div class="tournament-list">
+                            <article class="tournament-card tournament-card-current">
+                                <div class="title-row">
+                                    <span class="status-badge status-current">TEAM</span>
+                                    <h3>Binary Owls</h3>
+                                </div>
+                                <p class="description">Команда з вашого класу, капітан: Марія.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Турнір: Олімпіада з алгоритмів</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="icon icon-clock" aria-hidden="true"></span>
+                                        <span class="time-left">Статус: Участь</span>
+                                    </div>
+                                </div>
+                                <button class="tournament-btn">Перейти до команди</button>
+                            </article>
 
-                    <div class="empty-message">Немає завершених турнірів</div>
+                            <div class="empty-message">Поки немає команд</div>
+                        </div>
+                    </div>
+
+                    <div class="tournaments-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <span class="status-dot status-upcoming"></span>
+                                <h2>Активні турніри</h2>
+                            </div>
+                            <a class="tournament-btn link-btn" href="/tournaments">Знайти турнір</a>
+                        </div>
+
+                        <div class="tournament-list">
+                            <article class="tournament-card tournament-card-upcoming">
+                                <div class="title-row">
+                                    <span class="status-badge status-upcoming">SOON</span>
+                                    <h3>Junior Dev Clash</h3>
+                                </div>
+                                <p class="description">Зареєструйтесь, щоб зібрати команду до 15.03.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-calendar" aria-hidden="true"></span>
+                                        <span class="meta-label">Старт: 22.03.2026</span>
+                                    </div>
+                                </div>
+                                <button class="tournament-btn">Перейти</button>
+                            </article>
+
+                            <div class="empty-message">Немає активних турнірів</div>
+                        </div>
+                    </div>
+
+                    <div class="tournaments-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <span class="status-dot status-past"></span>
+                                <h2>Запрошення до команд</h2>
+                            </div>
+                            <span class="section-note">Нове</span>
+                        </div>
+
+                        <div class="tournament-list">
+                            <article class="tournament-card tournament-card-upcoming">
+                                <div class="title-row">
+                                    <span class="status-badge status-upcoming">INVITE</span>
+                                    <h3>Команда "Quantum"</h3>
+                                </div>
+                                <p class="description">Вас запросили приєднатись як data engineer.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Турнір: AI Lab Battle</span>
+                                    </div>
+                                </div>
+                                <div class="button-row">
+                                    <button class="tournament-btn">Прийняти</button>
+                                </div>
+                            </article>
+
+                            <div class="empty-message">Немає запрошень</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Фільтри -->
-        <section class="filters">
-            <h3>Знайти турнір</h3>
-            
-            <div class="filter-group">
-                <label>Статус:</label>
-                <div class="filter-options">
-                    <label><input type="checkbox"> Запланований</label>
-                    <label><input type="checkbox"> Триває</label>
-                    <label><input type="checkbox"> Завершений</label>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label>Додатковий фільтр:</label>
-                <input type="text" placeholder="...">
-            </div>
-
-            
-            <button class="filter-btn">Застосувати</button>
         </section>
     </main>
-        
+ 
+    
+    
+<div style="position: fixed; bottom: 10px; right: 10px; background: white; padding: 10px; border-radius: 5px; z-index: 9999;">
+    <button onclick="setRole('teacher')">Учитель</button>
+    <button onclick="setRole('jury')">Журі</button>
+    <button onclick="setRole('student')">Учень</button>
+</div>
+
+<script>
+function setRole(role) {
+    // 1. Міняємо data-role (відповідає за блоки)
+    document.body.setAttribute('data-role', role);
+    
+    // 2. Міняємо текст у шапці
+    const roleMap = {
+        teacher: 'Учитель',
+        jury: 'Журі',
+        student: 'Учень'
+    };
+    
+    const roleSpan = document.getElementById('roleDisplay');
+    if (roleSpan) {
+        roleSpan.textContent = roleMap[role] || role;
+    }
+}
+</script> 
+
 </body>
 </html>
