@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Турніри • HACKATHON 2026</title>
     <script src="../static/js/home.js" defer></script>
+    <script src="../static/js/tournaments.js" defer></script>
     <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/tournaments.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body data-role="guest">
@@ -37,139 +39,149 @@
 </aside>
 
     <main class="main">
-        <section class="tournaments-board">
-            <!-- Поточні -->
-            <div class="tournaments-section tournaments-section-current">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-current"></span>
-                        <h2>Поточні</h2>
-                    </div>
-                    <span class="section-note">Йдуть прямо зараз</span>
-                </div>
-
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-current">
-                        <div class="title-row">
-                            <span class="status-badge status-current">LIVE</span>
-                            <h3>Назва турніру</h3>
-                        </div>
-
-                        <p class="description">Короткий опис події в один рядок.</p>
-
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 12.03.2026 14:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="time-left">Залишилось: 02 дн 05 год 30 хв</span>
-                            </div>
-                        </div>
-
-                        <button class="tournament-btn">Перейти</button>
-                    </article>
-
-                    <div class="empty-message">Немає активних турнірів</div>
+        <h1 class="page-title">Змагання</h1>
+        <section class="filters" aria-label="Фільтри турнірів">
+            <div class="filter-group search-group">
+                <label for="tournamentSearch">Пошук</label>
+                <div class="search-row">
+                    <input id="tournamentSearch" type="text" placeholder="Пошук по назвi">
+                    <button type="button" class="search-btn" id="tournamentSearchBtn" aria-label="Шукати">
+                        <span class="icon icon-search" aria-hidden="true">🔍</span>
+                    </button>
                 </div>
             </div>
-
-            <!-- Заплановані -->
-            <div class="tournaments-section tournaments-section-upcoming">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-upcoming"></span>
-                        <h2>Заплановані</h2>
-                    </div>
-                    <span class="section-note">Готуємо старт</span>
-                </div>
-
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-upcoming">
-                        <div class="title-row">
-                            <span class="status-badge status-upcoming">SOON</span>
-                            <h3>Назва турніру</h3>
-                        </div>
-
-                        <p class="description">Один рядок опису для швидкого огляду.</p>
-
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 20.03.2026 10:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: онлайн</span>
-                            </div>
-                        </div>
-
-                        <button class="tournament-btn">Детальніше</button>
-                    </article>
-
-                    <div class="empty-message">Немає запланованих турнірів</div>
+            <div class="filter-group" data-filter-group="series">
+                <label>Серії</label>
+                <div class="filter-options">
+                    <label><input type="checkbox" data-filter="series" value="hackathon"> Хакатони</label>
+                    <label><input type="checkbox" data-filter="series" value="regional"> Регіональні</label>
+                    <label><input type="checkbox" data-filter="series" value="global-dev"> Global Dev</label>
+                    <label><input type="checkbox" data-filter="series" value="hybrid"> Гібридна</label>
+                    <label><input type="checkbox" data-filter="series" value="final"> Фінал</label>
                 </div>
             </div>
-
-            <!-- Завершені -->
-            <div class="tournaments-section tournaments-section-past">
-                <div class="section-header">
-                    <div class="section-title">
-                        <span class="status-dot status-past"></span>
-                        <h2>Завершені</h2>
-                    </div>
-                    <span class="section-note">Архів</span>
-                </div>
-
-                <div class="tournament-list">
-                    <article class="tournament-card tournament-card-past">
-                        <div class="title-row">
-                            <span class="status-badge status-past">DONE</span>
-                            <h3>Назва турніру</h3>
-                        </div>
-
-                        <p class="description">Короткий опис результатів.</p>
-
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Старт: 01.02.2026</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Фініш: 05.02.2026</span>
-                            </div>
-                        </div>
-
-                        <button class="tournament-btn">Детальніше</button>
-                    </article>
-
-                    <div class="empty-message">Немає завершених турнірів</div>
+            <div class="filter-group" data-filter-group="format">
+                <label>Формат</label>
+                <div class="filter-options">
+                    <label><input type="checkbox" data-filter="format" value="online"> Онлайн</label>
+                    <label><input type="checkbox" data-filter="format" value="offline"> Офлайн</label>
+                    <label><input type="checkbox" data-filter="format" value="hybrid"> Гібрид</label>
                 </div>
             </div>
         </section>
 
-        <!-- Фільтри -->
-        <section class="filters">
-            <h3>Знайти турнір</h3>
-            
-            <div class="filter-group">
-                <label>Статус:</label>
-                <div class="filter-options">
-                    <label><input type="checkbox"> Запланований</label>
-                    <label><input type="checkbox"> Триває</label>
-                    <label><input type="checkbox"> Завершений</label>
-                </div>
+        <section class="tournaments">
+            <div class="tournament-list">
+                <article class="tournament-card" data-series="hackathon" data-format="online">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Хакатони</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Онлайн</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">12 березня • 14:00</span>
+                        </div>
+                    </div>
+                    <h3>Хакатон Future Labs</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <article class="tournament-card" data-series="regional" data-format="offline">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Регіональні</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Офлайн</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">15 березня • 09:00</span>
+                        </div>
+                    </div>
+                    <h3>Інноваційна серія 3</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <article class="tournament-card" data-series="regional" data-format="online">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Регіональні</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Онлайн</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">20 березня • 16:00</span>
+                        </div>
+                    </div>
+                    <h3>Регіональні виклики</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <article class="tournament-card" data-series="global-dev" data-format="hybrid">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Global Dev</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Гібрид</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">25 березня • 11:30</span>
+                        </div>
+                    </div>
+                    <h3>Global Dev Sprint</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <article class="tournament-card" data-series="hybrid" data-format="offline">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Гібридна</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Офлайн</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">28 березня • 18:00</span>
+                        </div>
+                    </div>
+                    <h3>Гібридна ліга</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <article class="tournament-card" data-series="final" data-format="online">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="icon icon-flag" aria-hidden="true"></span>
+                            <span class="meta-label">Серія: Фінал</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-clock" aria-hidden="true"></span>
+                            <span class="meta-label">Формат: Онлайн</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="icon icon-calendar" aria-hidden="true"></span>
+                            <span class="meta-label">02 квітня • 12:00</span>
+                        </div>
+                    </div>
+                    <h3>Фінал #HACK2026</h3>
+                    <button type="button" class="tournament-btn">Детальніше</button>
+                </article>
+                <div class="empty-message">Нічого не знайдено</div>
             </div>
-
-            <div class="filter-group">
-                <label>Додатковий фільтр:</label>
-                <input type="text" placeholder="...">
-            </div>
-
-            
-            <button class="filter-btn">Застосувати</button>
         </section>
     </main>
         

@@ -1,0 +1,354 @@
+﻿.page-title {
+    margin: 0 0 18px;
+    font-size: 22px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.tournaments {
+    margin-top: 24px;
+}
+
+.tournament-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.tournament-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tournament-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.tournament-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(120deg, rgba(255, 204, 0, 0.12), rgba(77, 208, 225, 0.08), rgba(255, 255, 255, 0));
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.tournament-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+    pointer-events: none;
+}
+
+.tournament-card:hover {
+    transform: translateY(-4px);
+    border-color: #ffcc00;
+    box-shadow: var(--hover-shadow);
+}
+
+.tournament-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 18px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.meta-label {
+    color: var(--text-color);
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: var(--accent-color);
+    mask-size: 14px 14px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: 14px 14px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    opacity: 0.92;
+}
+
+.icon-calendar {
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTcgMmgydjNoNlYySDJ2M2gzVjE3SDN2NUg0VjJabTEyIDdINXYxMWgxNFY5WicvPjwvc3ZnPg==");
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTcgMmgydjNoNlYySDJ2M2gzVjE3SDN2NUg0VjJabTEyIDdINXYxMWgxNFY5WicvPjwvc3ZnPg==");
+}
+
+.icon-clock {
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTEyIDEuNzVhMTAuMjUgMTAuMjUgMCAxIDAgMCAyMC41IDEwLjI1IDEwLjI1IDAgMCAwIDAtMjAuNVouNzUgMTAuMTQgNC4wNSAyLjM0LS43NSAxLjI5LTQuOC0yLjc4VjYuNWgxLjV2NS4zOVonLz48L3N2Zz4=");
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTEyIDEuNzVhMTAuMjUgMTAuMjUgMCAxIDAgMCAyMC41IDEwLjI1IDEwLjI1IDAgMCAwIDAtMjAuNVouNzUgMTAuMTQgNC4wNSAyLjM0LS43NSAxLjI5LTQuOC0yLjc4VjYuNWgxLjV2NS4zOVonLz48L3N2Zz4=");
+}
+
+.icon-flag {
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTUgM2gxMWwtMSA1IDMgMS0xIDZIOHY2SDVWM1onLz48L3N2Zz4=");
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nIzAwMCcgZD0nTTUgM2gxMWwtMSA1IDMgMS0xIDZIOHY2SDVWM1onLz48L3N2Zz4=");
+}
+
+.tournament-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(120deg, rgba(255, 204, 0, 0.18), rgba(255, 255, 255, 0.06));
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.tournament-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+
+.tournament-btn:focus-visible,
+.filter-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.25);
+}
+
+.empty-message {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 500;
+    backdrop-filter: blur(6px);
+}
+
+.tournament-list.is-empty .empty-message { display: flex; }
+.tournament-list.is-empty .tournament-card { display: none; }
+
+.filters {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 30px;
+    margin-top: 0;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    position: relative;
+    overflow: hidden;
+}
+
+.filters::before {
+    content: '';
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.15), transparent 60%);
+    top: -80px;
+    right: -60px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.filter-group input[type="checkbox"] {
+    accent-color: var(--accent-color);
+    width: 16px;
+    height: 16px;
+}
+
+.filter-group input[type="text"],
+.filter-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: rgba(255,255,255,0.03);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.search-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-row input[type="text"] {
+    flex: 1;
+}
+
+.search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(120deg, rgba(255, 204, 0, 0.18), rgba(255, 255, 255, 0.06));
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+
+.search-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.25);
+}
+
+.icon-search {
+    font-size: 20px;
+    color: var(--accent-color);
+    background: transparent;
+    
+}
+
+.filter-group input[type="text"]:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
+}
+
+.filter-group input[type="text"]::placeholder {
+    color: var(--text-secondary);
+}
+
+.filter-group select option {
+    background: #0a1f44;
+    color: #ffffff;
+}
+
+body:not(.dark-theme) .filter-group select option {
+    background: #ffffff;
+    color: #1a2639;
+}
+
+.filter-btn {
+    background: linear-gradient(120deg, var(--accent-color), #ffe680);
+    color: #0b1226;
+    border: 1px solid var(--border-color);
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 4px;
+    grid-column: 1 / -1;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 26px rgba(255, 204, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+    .tournament-list {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        padding: 20px;
+    }
+
+    .filter-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .tournament-list {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        padding: 16px;
+        margin-top: 0;
+    }
+
+    .filter-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
