@@ -36,6 +36,7 @@
     </nav>
 </aside>
 
+
     <main class="main">
         <section class="role-dashboard">
             <!-- Учитель -->
@@ -92,6 +93,57 @@
                     </div>
                 </div>
             </div>
+
+
+            
+            <!-- Адмін -->
+            <div class="role-section admin" data-role-section="admin">
+                <div class="role-grid">
+                    <div class="tournaments-section">
+                        <div class="section-header action-header">
+                            <div class="section-title">
+                                <span class="status-dot status-upcoming"></span>
+                                <h2>Адмін-панель</h2>
+                            </div>
+                            <button class="tournament-btn create-btn">+ Створити турнір</button>
+                        </div>
+            
+                        <div class="tournament-list">
+                            <!-- Здесь будут карточки турниров, с командами и кнопками удаления -->
+                            <article class="tournament-card tournament-card-upcoming">
+                                <div class="title-row">
+                                    <span class="status-badge status-upcoming">DRAFT</span>
+                                    <h3>Турнір 1</h3>
+                                </div>
+                                <p class="description">Адмін може керувати турніром.</p>
+                                <div class="card-meta">
+                                    <div class="meta-item">
+                                        <span class="icon icon-calendar" aria-hidden="true"></span>
+                                        <span class="meta-label">Дедлайн: 25.03.2026</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="icon icon-flag" aria-hidden="true"></span>
+                                        <span class="meta-label">Команди: 5</span>
+                                    </div>
+                                </div>
+                                <button class="tournament-btn">Додати команду</button>
+                                <button class="tournament-btn">Видалити команду</button>
+                                <button class="tournament-btn">Переглянути подання</button>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        
+
+
+
+            
 
             <!-- Журі -->
             <div class="role-section jury" data-role-section="jury">
@@ -287,18 +339,19 @@
     <button onclick="setRole('teacher')">Учитель</button>
     <button onclick="setRole('jury')">Журі</button>
     <button onclick="setRole('student')">Учень</button>
+    <button onclick="setRole('admin')">Адмін</button>
 </div>
 
 <script>
 function setRole(role) {
-    // 1. Міняємо data-role (відповідає за блоки)
+ 
     document.body.setAttribute('data-role', role);
     
-    // 2. Міняємо текст у шапці
     const roleMap = {
         teacher: 'Учитель',
         jury: 'Журі',
-        student: 'Учень'
+        student: 'Учень',
+        admin: 'Адмін'
     };
     
     const roleSpan = document.getElementById('roleDisplay');
