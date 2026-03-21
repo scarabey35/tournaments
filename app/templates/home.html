@@ -18,10 +18,10 @@
 
     <aside class="sidebar">
     <nav class="sidebar-nav">
-        <a href="/" class="nav-item active" title="Головна">
+        <a href="../templates/home.html" class="nav-item active" title="Головна">
             <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
         </a>
-        <a href="../static/css/tournaments.css" class="nav-item" title="Турніри">
+        <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
             <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
         </a>
         <a href="/leaderboard" class="nav-item" title="Лідерборд">
@@ -327,31 +327,12 @@
  
     
     
-<div style="position: fixed; bottom: 10px; right: 10px; background: white; padding: 10px; border-radius: 5px; z-index: 9999;">
+<div class="role-switcher">
     <button onclick="setRole('teacher')">Учитель</button>
     <button onclick="setRole('jury')">Журі</button>
     <button onclick="setRole('student')">Учень</button>
     <button onclick="setRole('admin')">Адмін</button>
 </div>
-
-<script>
-function setRole(role) {
- 
-    document.body.setAttribute('data-role', role);
-    
-    const roleMap = {
-        teacher: 'Учитель',
-        jury: 'Журі',
-        student: 'Учень',
-        admin: 'Адмін'
-    };
-    
-    const roleSpan = document.getElementById('roleDisplay');
-    if (roleSpan) {
-        roleSpan.textContent = roleMap[role] || role;
-    }
-}
-</script> 
 
 </body>
 </html>

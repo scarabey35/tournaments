@@ -1,37 +1,20 @@
-/* ========== ЗМІННІ ТЕМ (СВІТЛА + ТЕМНА, В СТИЛІ РЕЄСТРАЦІЇ) ========== */
 :root {
-    /* Базово — темний стиль, максимально подібний до .container з register.css */
     --bg-gradient-start: #020617;
     --bg-gradient-mid: #031633;
     --bg-gradient-end: #062a63;
     --radial-1: rgba(0, 87, 183, 0.35);
     --radial-2: rgba(255, 204, 0, 0.15);
-
     --text-color: #ffffff;
     --text-secondary: #9fb3d9;
-    --card-bg: linear-gradient(
-        145deg,
-        rgba(10, 25, 60, 0.95),
-        rgba(5, 15, 40, 0.98)
-    );
-    --header-bg: linear-gradient(
-        145deg,
-        rgba(10, 25, 60, 0.95),
-        rgba(5, 15, 40, 0.98)
-    );
-    --sidebar-bg: linear-gradient(
-        145deg,
-        rgba(10, 25, 60, 0.95),
-        rgba(5, 15, 40, 0.98)
-    );
+    --card-bg: linear-gradient(145deg, rgba(10, 25, 60, 0.95), rgba(5, 15, 40, 0.98));
+    --card-bg-soft: rgba(255, 255, 255, 0.06);
+    --header-bg: rgba(5, 15, 40, 0.82);
+    --sidebar-bg: rgba(5, 15, 40, 0.9);
     --border-color: rgba(255, 204, 0, 0.25);
     --accent-color: #ffcc00;
     --accent-hover: #ffd633;
-    --shadow: 0 0 40px rgba(0, 87, 183, 0.35),
-              0 0 80px rgba(255, 204, 0, 0.08),
-              0 20px 60px rgba(0,0,0,0.8);
-    --hover-shadow: 0 0 20px rgba(255, 204, 0, 0.8),
-                    0 0 40px rgba(0, 87, 183, 0.5);
+    --shadow: 0 0 40px rgba(0, 87, 183, 0.35), 0 0 80px rgba(255, 204, 0, 0.08), 0 20px 60px rgba(0, 0, 0, 0.8);
+    --hover-shadow: 0 0 20px rgba(255, 204, 0, 0.25), 0 18px 40px rgba(0, 0, 0, 0.3);
     --deadline-color: #ffd28a;
     --start-color: #9fb3d9;
     --status-current: #ff6b6b;
@@ -39,32 +22,28 @@
     --status-past: #9fb3d9;
 }
 
-/* Світла тема (white theme) поверх базових значень */
 body:not(.dark-theme) {
     --bg-gradient-start: #f0f4fa;
     --bg-gradient-mid: #e6ecf5;
     --bg-gradient-end: #d9e2f0;
     --radial-1: rgba(180, 205, 240, 0.7);
     --radial-2: rgba(255, 230, 100, 0.25);
-
     --text-color: #1a2639;
-    --text-secondary: #3a4a6b;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --header-bg: rgba(255, 255, 255, 0.98);
-    --sidebar-bg: rgba(255, 255, 255, 0.98);
-    --border-color: rgba(0, 87, 183, 0.22);
-    --accent-color: #ffcc00;
-    --accent-hover: #ffd633;
-    --shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-    --hover-shadow: 0 14px 40px rgba(15, 23, 42, 0.2);
-    --deadline-color: #e67e22;
-    --start-color: #2c3e50;
-    --status-current: #e74c3c;
-    --status-upcoming: #1abc9c;
-    --status-past: #60738f;
+    --text-secondary: #50627f;
+    --card-bg: rgba(255, 255, 255, 0.94);
+    --card-bg-soft: rgba(255, 255, 255, 0.78);
+    --header-bg: rgba(255, 255, 255, 0.92);
+    --sidebar-bg: rgba(255, 255, 255, 0.94);
+    --border-color: rgba(0, 87, 183, 0.18);
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    --hover-shadow: 0 14px 38px rgba(15, 23, 42, 0.18);
+    --deadline-color: #b45309;
+    --start-color: #334155;
+    --status-current: #dc2626;
+    --status-upcoming: #0f766e;
+    --status-past: #64748b;
 }
 
-/* ========== СКИДАННЯ ========== */
 * {
     margin: 0;
     padding: 0;
@@ -72,7 +51,6 @@ body:not(.dark-theme) {
     font-family: 'Inter', sans-serif;
 }
 
-/* ========== БАЗОВІ СТИЛІ З ПРОЗОРИМ ФОНОМ ========== */
 body {
     color: var(--text-color);
     min-height: 100vh;
@@ -92,137 +70,67 @@ body::before {
         linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
 }
 
-/* ========== ШАПКА (СКЛЯНА) ========== */
 .header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 20px 32px;
+    gap: 18px;
+    padding: 20px 28px;
+    margin: 16px 24px 12px 96px;
     background: var(--header-bg);
     border: 1px solid var(--border-color);
-    border-radius: 14px;
-    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.6);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    margin: 16px 24px 12px 96px;
 }
 
 .logo {
     font-weight: 700;
     font-size: 24px;
     color: var(--accent-color);
-    transition: color 0.3s ease;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.28);
 }
 
 .role {
+    justify-self: end;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg-soft);
     color: var(--text-secondary);
     font-size: 14px;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
-/* ========== КНОПКА ТЕМИ ========== */
+.role span {
+    color: var(--text-color);
+}
+
 .theme-toggle {
     background: transparent;
     border: 1px solid var(--border-color);
-    border-radius: 30px;
-    padding: 8px 16px;
+    border-radius: 999px;
+    width: 46px;
+    height: 46px;
     cursor: pointer;
     font-size: 18px;
-    margin-left: 15px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     color: var(--text-color);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    justify-content: center;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
     border-color: var(--accent-color);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.32);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
 }
 
-/* ========== ОСНОВНИЙ КОНТЕНТ ========== */
-/* override spacing to account for fixed sidebar */
-.main {
-    padding: 48px 28px 70px;
-    margin-left: 80px;
-    width: calc(100% - 80px);
-}
-
-/* ========== РОЛЬОВИЙ ДАШБОРД ========== */
-.role-dashboard {
-    display: grid;
-    gap: 28px;
-    grid-template-columns: 1fr;
-}
-
-.role-section {
-    display: none;
-}
-
-body[data-role="teacher"] .role-section.teacher,
-body[data-role="jury"] .role-section.jury,
-body[data-role="student"] .role-section.student {
-    display: block;
-}
-
-.action-header {
-    align-items: center;
-}
-
-.create-btn {
-    width: auto;
-    padding: 12px 20px;
-}
-
-.section-header > .tournament-btn,
-.section-header > .link-btn {
-    width: auto;
-    min-width: 180px;
-}
-
-.role-grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.button-row {
-    display: flex;
-    gap: 10px;
-}
-
-
-/* ========== АДАПТАЦІЯ ========== */
-@media (max-width: 768px) {
-    .header {
-        padding: 15px 20px;
-        margin: 12px 16px 8px 16px;
-    }
-
-    .main {
-        margin-left: 0;
-        width: 100%;
-        padding: 32px 18px 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-    
-    .logo {
-        margin-bottom: 5px;
-    }
-}
-
-/* ========= НАВIГАЦIЯ (СКЛЯНА) ========== */
 .sidebar {
     position: fixed;
     left: 0;
@@ -232,16 +140,13 @@ body[data-role="student"] .role-section.student {
     background: var(--sidebar-bg);
     border-right: 1px solid var(--border-color);
     padding: 20px 0;
-    transition: background 0.3s ease, border-color 0.3s ease;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
-
-    /* центрируем навигацию внутри панели */
     display: flex;
-    align-items: center;    /* вертикально */
-    justify-content: center;/* горизонтально */
+    align-items: center;
+    justify-content: center;
 }
 
 .sidebar-nav {
@@ -257,68 +162,52 @@ body[data-role="student"] .role-section.student {
     justify-content: center;
     width: 50px;
     height: 50px;
-    border-radius: 12px;
-    transition: all 0.2s ease;
+    border-radius: 14px;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     position: relative;
 }
 
 .nav-item:hover {
-    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    background-color: rgba(255, 204, 0, 0.18);
 }
 
 .nav-item img {
     filter: brightness(0) invert(1);
-    opacity: 0.7;
+    opacity: 0.8;
     transition: all 0.3s ease;
 }
 
 .nav-item:hover img {
     opacity: 1;
-    filter: brightness(0) invert(1);
 }
 
 .nav-item.active {
     background-color: var(--accent-color);
-    box-shadow: 0 6px 18px rgba(255, 204, 0, 0.35);
+    box-shadow: 0 10px 24px rgba(255, 204, 0, 0.35);
 }
 
 .nav-item.active img {
-    opacity: 1;
     filter: brightness(0) invert(0);
+    opacity: 1;
 }
 
 body.dark-theme .nav-item.active img {
     filter: brightness(0) invert(1);
 }
 
-.nav-item:focus-visible {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.25);
-}
-
-body:not(.dark-theme) .nav-item {
-    background-color: #ffcc00;
-}
-
 body:not(.dark-theme) .nav-item img {
     filter: brightness(0) invert(0);
-    opacity: 0.9;
 }
 
-body:not(.dark-theme) .nav-item:hover {
-    background-color: #e6b800;
-}
-
-/* Спливаючий текст */
 .nav-item::after {
     content: attr(title);
     position: absolute;
     left: 60px;
     background-color: var(--card-bg);
     color: var(--text-color);
-    padding: 5px 10px;
-    border-radius: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
     font-size: 12px;
     white-space: nowrap;
     opacity: 0;
@@ -331,42 +220,343 @@ body:not(.dark-theme) .nav-item:hover {
     opacity: 1;
 }
 
+.main {
+    padding: 24px 28px 80px;
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
 
-/* ========== АДАПТАЦІЯ (ТЕЛЕФОНИ ДО 600px) ========== */
-@media (max-width: 600px) {
+.role-dashboard {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1fr;
+}
 
-    .theme-toggle {
-        margin-left: 0;
-    }
+.role-section {
+    display: none;
+}
+
+body[data-role="teacher"] .role-section.teacher,
+body[data-role="jury"] .role-section.jury,
+body[data-role="student"] .role-section.student,
+body[data-role="admin"] .role-section.admin {
+    display: block;
+}
+
+.role-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.tournaments-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.section-header,
+.action-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title h2 {
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.section-note {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 204, 0, 0.12);
+    border: 1px solid rgba(255, 204, 0, 0.18);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 14px currentColor;
+}
+
+.status-current {
+    background: var(--status-current);
+    color: var(--status-current);
+}
+
+.status-upcoming {
+    background: var(--status-upcoming);
+    color: var(--status-upcoming);
+}
+
+.status-past {
+    background: var(--status-past);
+    color: var(--status-past);
+}
+
+.tournament-list {
+    display: grid;
+    gap: 18px;
+}
+
+.tournament-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 100%),
+        var(--card-bg-soft);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tournament-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 204, 0, 0.4);
+    box-shadow: var(--hover-shadow);
+}
+
+.tournament-card-current {
+    border-color: rgba(255, 107, 107, 0.34);
+}
+
+.tournament-card-upcoming {
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.title-row h3 {
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 74px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #06111f;
+}
+
+.status-badge.status-current {
+    background: var(--status-current);
+}
+
+.status-badge.status-upcoming {
+    background: var(--status-upcoming);
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.card-meta {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body:not(.dark-theme) .meta-item {
+    background: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.06);
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.icon-calendar {
+    background: linear-gradient(135deg, var(--status-upcoming), #7dd3fc);
+}
+
+.icon-clock {
+    background: linear-gradient(135deg, var(--status-current), #fda4af);
+}
+
+.icon-flag {
+    background: linear-gradient(135deg, var(--accent-color), #ffe58a);
+}
+
+.meta-label,
+.time-left {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.time-left {
+    color: var(--deadline-color);
+}
+
+.tournament-btn,
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 180px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: #001133;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.tournament-btn:hover,
+.link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.35);
+    filter: saturate(1.05);
+}
+
+.create-btn {
+    min-width: 210px;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.empty-message {
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1px dashed var(--border-color);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    text-align: center;
+    font-weight: 500;
+}
+
+.role-switcher {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 12px;
+    border-radius: 18px;
+    background: var(--header-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 999;
+}
+
+.role-switcher button {
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 10px 14px;
+    background: var(--card-bg-soft);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.role-switcher button:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-color);
+}
+
+@media (max-width: 900px) {
     .header {
-        padding: 12px 16px;
-        justify-content: center;
-        gap: 10px;
-        margin: 10px 12px;
+        grid-template-columns: auto 1fr;
+    }
+
+    .role {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        margin: 12px 16px 8px;
+        padding: 18px 20px;
     }
 
     .main {
-        padding: 20px 12px 80px; 
-        max-width: 100%;
+        margin-left: 0;
+        width: 100%;
+        padding: 22px 16px 92px;
     }
 
-   
     .sidebar {
         top: auto;
         bottom: 0;
         width: 100%;
-        height: 60px;
+        height: 64px;
         border-right: none;
         border-top: 1px solid var(--border-color);
         padding: 8px 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .sidebar-nav {
         flex-direction: row;
-        gap: 12px;
+        gap: 10px;
         width: 100%;
         justify-content: space-between;
     }
@@ -377,6 +567,50 @@ body:not(.dark-theme) .nav-item:hover {
     }
 
     .nav-item::after {
-        display: none; 
+        display: none;
+    }
+
+    .tournaments-section {
+        padding: 20px;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .role {
+        justify-self: center;
+    }
+
+    .section-header,
+    .action-header,
+    .button-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tournament-btn,
+    .link-btn,
+    .create-btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .role-switcher {
+        left: 12px;
+        right: 12px;
+        bottom: 76px;
+    }
+
+    .role-switcher button {
+        flex: 1 1 calc(50% - 8px);
     }
 }

@@ -1,29 +1,29 @@
 const toggle = document.getElementById('themeToggle');
 const body = document.body;
-const roleDisplay = document.querySelector('.role');
+const roleDisplay = document.getElementById('roleDisplay');
+
+const roleNames = {
+    teacher: 'Учитель',
+    jury: 'Журі',
+    student: 'Учень',
+    admin: 'Адмін',
+    guest: 'Гість'
+};
 
 const renderRole = () => {
     const role = (body.dataset.role || 'guest').toLowerCase();
-    const roleNames = {
-        teacher: 'Учитель',
-        jury: 'Журі',
-        student: 'Учень',
-        guest: 'Гість'
-    };
 
     if (roleDisplay) {
-        roleDisplay.textContent = `Роль: ${roleNames[role] || 'Гість'}`;
+        roleDisplay.textContent = roleNames[role] || roleNames.guest;
     }
 };
 
-// Допоміжна функція для зміни ролі з інших скриптів / кнопок
 window.setRole = (role) => {
     if (!role) return;
     body.dataset.role = role;
     renderRole();
 };
 
-// Слухаємо зміни атрибута data-role, щоб оновлювати текст у шапці
 const roleObserver = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-role') {
@@ -31,27 +31,26 @@ const roleObserver = new MutationObserver((mutations) => {
         }
     }
 });
+
 roleObserver.observe(body, { attributes: true, attributeFilter: ['data-role'] });
 
-// Завантаження збереженої теми
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
+const renderThemeIcon = () => {
+    if (!toggle) return;
+    toggle.textContent = body.classList.contains('dark-theme') ? '☀' : '☾';
+};
+
+if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-theme');
-    toggle.textContent = '☀️';
-} else {
-    toggle.textContent = '🌙';
 }
 
-toggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    
-    if (body.classList.contains('dark-theme')) {
-        toggle.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        toggle.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-    }
-});
+renderThemeIcon();
+
+if (toggle) {
+    toggle.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+        renderThemeIcon();
+    });
+}
 
 renderRole();
