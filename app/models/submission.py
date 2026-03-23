@@ -1,11 +1,21 @@
-from app.extension import db
+from datetime import datetime
+from . import db
 
 class Submission(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(100))
-    project_link = db.Column(db.String(200))
+    __tablename__ = "submissions"
 
-    tournament_id = db.Column(
-        db.Integer,
-        db.ForeignKey("tournament.id")
-    )
+    id = db.Column(db.Integer, primary_key=True)
+
+    github_url = db.Column(db.String(500), nullable=False)
+    video_url = db.Column(db.String(500), nullable=False)
+
+    live_demo_url = db.Column(db.String(500))
+    description = db.Column(db.Text)
+
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    team_id = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
+    round_id = db.Column(db.Integer, db.ForeignKey("rounds.id"), nullable=False)
+
+    # relations
+    evaluations = db.relationship("Evaluation", backref="submission", lazy=True)

@@ -1,54 +1,20 @@
-from enum import Enum
 from datetime import datetime
-from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-
 from . import db
 
-
-class UserRole(Enum):
-    ADMIN = "admin"
-    PARTICIPANT = "participant"
-    JURY = "jury"
-
-
-class User(UserMixin, db.Model):
+class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-
-    username = db.Column(db.String(80), unique=True, nullable=False, index=True)
-    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
-
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
 
-    role = db.Column(
-        db.Enum(UserRole),
-        nullable=False,
-        default=UserRole.PARTICIPANT
-    )
+    role = db.Column(db.String(50), nullable=False)  
+    # admin / team / jury / organizer
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-<<<<<<< HEAD
-"""
-=======
 
->>>>>>> 873290a (Created app.py file + edited templates)
-    def set_password(self, password: str) -> None:
-        self.password_hash = generate_password_hash(password)
+    # relations
+    team_id = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=True)
 
-    def check_password(self, password: str) -> bool:
-        return check_password_hash(self.password_hash, password)
-
-    def is_admin(self) -> bool:
-        return self.role == UserRole.ADMIN
-
-    def is_participant(self) -> bool:
-        return self.role == UserRole.PARTICIPANT
-
-    def is_jury(self) -> bool:
-        return self.role == UserRole.JURY
-
-    def __repr__(self):
-        return f"<User {self.username} ({self.role.value})>"
-"""
+    evaluations = db.relationship("Evaluation", backref="jury", lazy=True)
