@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лідерборд • HACKATHON 2026</title>
+    <link rel="stylesheet" href="../static/css/leaderboard.css">
+    <script src="../static/js/leaderboard.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-role="student">
+    <header class="header">
+        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
+        <div class="logo">#HACKATHONS</div>
+    </header>
+
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-item" title="Головна">
+                <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
+            </a>
+            <a href="../tournaments" class="nav-item" title="Турніри">
+                <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
+            </a>
+            <a href="../leaderboard" class="nav-item active" title="Лідерборд">
+                <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
+            </a>
+            <a href="../profile" class="nav-item" title="Профіль">
+                <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
+            </a>
+            <a href="../settings" class="nav-item" title="Налаштування">
+                <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <h1 class="page-title">Лідерборд</h1>
+        <p id="ranking-subtitle" class="page-subtitle">Глобальний рейтинг</p>
+
+        <section class="ranking-controls" aria-label="Керування рейтингом">
+            <div class="toggle-group" role="tablist">
+                <button class="toggle-btn active" type="button" role="tab" aria-selected="true" data-target="global-ranking">Глобальний рейтинг</button>
+                <button class="toggle-btn" type="button" role="tab" aria-selected="false" data-target="tournament-ranking">Турнірний рейтинг</button>
+            </div>
+            <label class="select-group" for="tournamentSelect">
+                <span>Турнір</span>
+                <select id="tournamentSelect">
+                    <option>Усі турніри</option>
+                    <option>Хакатон Future Labs</option>
+                    <option>Global Dev Sprint</option>
+                </select>
+            </label>
+        </section>
+
+        <section id="global-ranking" class="ranking-card">
+            <div class="table-wrapper">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Місце</th>
+                            <th>Назва команди</th>
+                            <th>Набрано балів</th>
+                            <th>Активність</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>AlgoStorm</td>
+                            <td>985</td>
+                            <td>24</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Team Quantum</td>
+                            <td>942</td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CodeRaptors</td>
+                            <td>910</td>
+                            <td>21</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Skyline Devs</td>
+                            <td>876</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Binary Bards</td>
+                            <td>844</td>
+                            <td>18</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="tournament-ranking" class="ranking-card hidden">
+            <div class="table-wrapper">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Місце</th>
+                            <th>Назва команди</th>
+                            <th>Набрано балів</th>
+                            <th>Активність</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Future Hackers</td>
+                            <td>768</td>
+                            <td>17</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Dev Orbit</td>
+                            <td>742</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Nova Squad</td>
+                            <td>701</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Pixel Pulse</td>
+                            <td>668</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Syntax Crew</td>
+                            <td>640</td>
+                            <td>13</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
