@@ -35,7 +35,7 @@ def register():
             return render_template("register.html")
 
         if User.query.filter_by(email=email).first():
-            flash("Email уже используется.", "danger")
+            flash("Email вже використовується.", "danger")
             return render_template("register.html")
 
         # створювання користувача
