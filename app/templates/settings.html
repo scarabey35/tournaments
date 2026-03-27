@@ -1,11 +1,161 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Налаштування</title>
+    <title>Налаштування • HACKATHONS</title>
+    <script src="../static/js/themeToggle.js" defer></script>
+    <script src="../static/js/settings.js" defer></script>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/settings.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    
+<body data-role="student">
+    <header class="header">
+        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
+        <div class="logo">#HACKATHONS</div>
+        <div class="role">Роль: <span id="roleDisplay">Учень</span></div>
+    </header>
+
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="../templates/home.html" class="nav-item" title="Головна">
+                <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
+            </a>
+            <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
+                <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
+            </a>
+            <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
+                <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
+            </a>
+            <a href="../templates/profile.html" class="nav-item" title="Профіль">
+                <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
+            </a>
+            <a href="../templates/settings.html" class="nav-item active" title="Налаштування">
+                <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
+            </a>
+        </nav>
+    </aside>
+
+<!-- я поки не знаю що додати в налаштування і як вони будуть відрізнятись то профілю -->
+
+    <main class="main settings-main">
+        <section class="tournaments-section settings-hero">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="status-dot status-upcoming"></span>
+                    <h2>Центр налаштувань</h2>
+                </div>
+                <span class="section-note">Керуйте тим, як працює ваш акаунт</span>
+            </div>
+            <p class="hero-text">Тут зібрані системні параметри: сповіщення, безпека, інтерфейс, дефолти для турнірів та керування даними.</p>
+            <div class="quick-pills">
+                <span class="pill">Мова: Українська</span>
+                <span class="pill">Тема: Системна</span>
+                <span class="pill">2FA: Вимкнено</span>
+                <span class="pill">Сповіщення: Email</span>
+            </div>
+        </section>
+
+        <section class="settings-grid" aria-label="Налаштування користувача">
+            <article class="tournaments-section settings-card">
+                <h3>Обліковий запис</h3>
+                <div class="info-grid">
+                    <div class="meta-item"><span class="meta-label">Нікнейм: Андрій Коваленко</span></div>
+                    <div class="meta-item"><span class="meta-label">Email: andrii@example.com</span></div>
+                    <div class="meta-item"><span class="meta-label">Роль: Учень</span></div>
+                    <div class="meta-item"><span class="meta-label">ID акаунта: #HA-2026-1038</span></div>
+                </div>
+                <button type="button" class="tournament-btn" disabled>Керувати профілем</button>
+            </article>
+
+            <article class="tournaments-section settings-card">
+                <h3>Безпека та доступ</h3>
+                <form class="settings-form" action="#" method="post" novalidate>
+                    <label class="form-field">
+                        <span>Старий пароль</span>
+                        <input type="password" placeholder="Введіть старий пароль" disabled>
+                    </label>
+                    <label class="form-field">
+                        <span>Новий пароль</span>
+                        <input type="password" placeholder="Введіть новий пароль" disabled>
+                    </label>
+                    <label class="form-field">
+                        <span>Підтвердити пароль</span>
+                        <input type="password" placeholder="Повторіть новий пароль" disabled>
+                    </label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Увімкнути 2FA через додаток</span></label>
+                    <button type="button" class="tournament-btn" disabled>Оновити безпеку</button>
+                </form>
+            </article>
+
+            <article class="tournaments-section settings-card">
+                <h3>Сповіщення</h3>
+                <form class="settings-form" action="#" method="post" novalidate>
+                    <div class="group-title">Канали</div>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Email</span></label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Telegram</span></label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Web push</span></label>
+
+                    <div class="group-title">Події</div>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Нові турніри</span></label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Дедлайни та нагадування</span></label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Результати та бали</span></label>
+                    <label class="option-line"><input type="checkbox" disabled> <span>Запрошення в команду</span></label>
+                    <button type="button" class="tournament-btn" disabled>Зберегти сповіщення</button>
+                </form>
+            </article>
+
+            <article class="tournaments-section settings-card">
+                <h3>Інтерфейс</h3>
+                <form class="settings-form" action="#" method="post" novalidate>
+                    <div class="group-title">Мова інтерфейсу</div>
+                    <label class="option-line"><input type="radio" name="language" disabled> <span>Українська</span></label>
+                    <label class="option-line"><input type="radio" name="language" disabled> <span>English</span></label>
+
+                    <div class="group-title">Тема</div>
+                    <label class="option-line"><input type="radio" name="theme" disabled> <span>Темна</span></label>
+                    <label class="option-line"><input type="radio" name="theme" disabled> <span>Світла</span></label>
+                    <label class="option-line"><input type="radio" name="theme" disabled> <span>Системна</span></label>
+
+                    <div class="group-title">Щільність відображення</div>
+                    <label class="option-line"><input type="radio" name="density" disabled> <span>Компактна</span></label>
+                    <label class="option-line"><input type="radio" name="density" disabled> <span>Стандартна</span></label>
+                </form>
+            </article>
+
+            <article class="tournaments-section settings-card settings-card-wide">
+                <h3>Робочі параметри</h3>
+                <div class="info-grid cols-3">
+                    <div class="meta-item"><span class="meta-label">Часовий пояс: Europe/Kiev</span></div>
+                    <div class="meta-item"><span class="meta-label">Формат дати: DD.MM.YYYY</span></div>
+                    <div class="meta-item"><span class="meta-label">Сортування турнірів: найближчі</span></div>
+                    <div class="meta-item"><span class="meta-label">Автооновлення списків: кожні 5 хв</span></div>
+                    <div class="meta-item"><span class="meta-label">Початкова сторінка: Турніри</span></div>
+                    <div class="meta-item"><span class="meta-label">Мова задач: Українська</span></div>
+                </div>
+                <button type="button" class="tournament-btn" disabled>Застосувати дефолти</button>
+            </article>
+
+            <article class="tournaments-section settings-card settings-card-wide danger-zone">
+                <h3>Дані та небезпечні дії</h3>
+                <p class="danger-note">Ці дії впливають на збережені дані. Перед виконанням система попросить підтвердження.</p>
+                <div class="extra-actions">
+                    <button type="button" class="tournament-btn" disabled>Завантажити архів даних</button>
+                    <button type="button" class="tournament-btn" disabled>Очистити локальний кеш</button>
+                    <button type="button" class="tournament-btn danger-btn" disabled>Видалити акаунт</button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="settings-footer">
+        <p class="footer-copy">© 2026 #HACKATHONS</p>
+        <nav class="footer-links" aria-label="Інформаційні посилання">
+            <a href="/about">Про нас</a>
+            <a href="/privacy">Політика конфіденційності</a>
+            <a href="/support">Підтримка</a>
+        </nav>
+    </footer>
 </body>
 </html>

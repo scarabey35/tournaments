@@ -1,0 +1,228 @@
+﻿.settings-main {
+    display: grid;
+    gap: 20px;
+}
+
+.settings-hero {
+    gap: 16px;
+}
+
+.hero-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.quick-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pill {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg-soft);
+    color: var(--text-color);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.settings-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+}
+
+.settings-card {
+    gap: 14px;
+}
+
+.settings-card h3 {
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.info-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+}
+
+.info-grid.cols-3 {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.settings-form {
+    display: grid;
+    gap: 10px;
+}
+
+.form-field {
+    display: grid;
+    gap: 8px;
+}
+
+.form-field span,
+.group-title {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.group-title {
+    margin-top: 4px;
+}
+
+.form-field input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg-soft);
+    color: var(--text-color);
+    padding: 12px 14px;
+    font-size: 14px;
+}
+
+.form-field input::placeholder {
+    color: var(--text-secondary);
+}
+
+.option-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body:not(.dark-theme) .option-line {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.02);
+}
+
+.option-line span {
+    font-size: 14px;
+}
+
+.form-field input:disabled,
+.option-line input:disabled,
+.tournament-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.72;
+}
+
+.tournament-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    filter: none;
+}
+
+.settings-card-wide {
+    grid-column: 1 / -1;
+}
+
+.extra-actions {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.danger-zone {
+    border-color: rgba(239, 68, 68, 0.35);
+}
+
+.danger-note {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.danger-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+}
+
+.settings-footer {
+    margin: 0 24px 20px 96px;
+    padding: 18px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--header-bg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-copy {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+@media (max-width: 1100px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-card-wide {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-footer {
+        margin: 0 16px 88px;
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-pills {
+        flex-direction: column;
+    }
+
+    .settings-card {
+        padding: 18px;
+    }
+
+    .extra-actions,
+    .info-grid.cols-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
