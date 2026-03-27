@@ -35,7 +35,7 @@ def register():
             return render_template("register.html")
 
         if User.query.filter_by(email=email).first():
-            flash("Email уже используется.", "danger")
+            flash("Email вже використовується.", "danger")
             return render_template("register.html")
 
         # створювання користувача
@@ -51,7 +51,7 @@ def register():
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            flash("Помилка бази даних чорт візьми.", "danger")
+            flash("Помилка бази даних .", "danger")
             return render_template("register.html")
 
         flash("Реєстрація успішна!", "success")
