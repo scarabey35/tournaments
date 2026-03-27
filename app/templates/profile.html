@@ -1,12 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профiль</title>
+    <title>Мій профіль • HACKATHONS</title>
+    <script src="../static/js/themeToggle.js" defer></script>
+    <script src="../static/js/profile.js" defer></script>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    
-    
+<body data-role="student">
+    <header class="header">
+        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
+        <div class="logo">#HACKATHONS</div>
+        <div class="role">Роль: <span id="roleDisplay">Учень</span></div>
+    </header>
+
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="../templates/home.html" class="nav-item" title="Головна">
+                <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
+            </a>
+            <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
+                <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
+            </a>
+            <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
+                <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
+            </a>
+            <a href="../templates/profile.html" class="nav-item active" title="Профіль">
+                <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
+            </a>
+            <a href="../templates/settings.html" class="nav-item" title="Налаштування">
+                <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main profile-main">
+        <section class="section-header profile-header">
+            <div class="section-title">
+                <span class="status-dot status-upcoming"></span>
+                <h2>Мій профіль</h2>
+            </div>
+        </section>
+
+        <section class="profile-grid" aria-label="Профіль користувача">
+            <article class="tournaments-section profile-card">
+                <h3 class="profile-card-title">Особисті дані</h3>
+                <div class="profile-user">
+                    <div class="profile-avatar" aria-hidden="true">
+                        <img src="../static/icons/profile.svg" alt="" width="44" height="44">
+                    </div>
+                    <div class="profile-user-info">
+                        <h4>Андрій Коваленко</h4>
+                        <p>andrii@example.com</p>
+                    </div>
+                </div>
+                <div class="profile-meta">
+                    <div class="meta-item">
+                        <span class="icon icon-flag" aria-hidden="true"></span>
+                        <span class="meta-label">Роль: Учень</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon icon-calendar" aria-hidden="true"></span>
+                        <span class="meta-label">Зареєстровано: 12.03.2026</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tournaments-section profile-card">
+                <h3 class="profile-card-title">Зміна паролю</h3>
+                <form class="password-form" action="#" method="post" novalidate>
+                    <label class="form-field">
+                        <span>Старий пароль</span>
+                        <input type="password" placeholder="Введіть старий пароль" disabled>
+                    </label>
+                    <label class="form-field">
+                        <span>Новий пароль</span>
+                        <input type="password" placeholder="Введіть новий пароль" disabled>
+                    </label>
+                    <label class="form-field">
+                        <span>Підтвердити пароль</span>
+                        <input type="password" placeholder="Повторіть новий пароль" disabled>
+                    </label>
+                    <button type="button" class="tournament-btn" disabled>Змінити пароль</button>
+                    <p class="form-note">Кнопка неактивна: логіку зміни паролю буде додано пізніше.</p>
+                </form>
+            </article>
+
+            <article class="tournaments-section profile-card profile-stats">
+                <h3 class="profile-card-title">Додаткова інформація</h3>
+                <div class="stats-grid">
+                    <div class="meta-item">
+                        <span class="icon icon-calendar" aria-hidden="true"></span>
+                        <span class="meta-label">Участь у 12 турнірах</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon icon-flag" aria-hidden="true"></span>
+                        <span class="meta-label">3 місце в хакатоні Future Labs</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon icon-clock" aria-hidden="true"></span>
+                        <span class="meta-label">Python, JavaScript, React</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="profile-footer">
+        <p class="profile-footer-copy">© 2026 #HACKATHONS</p>
+        <nav class="profile-footer-links" aria-label="Інформаційні посилання">
+            <a href="/about">Про нас</a>
+            <a href="/privacy">Політика конфіденційності</a>
+            <a href="/support">Підтримка</a>
+        </nav>
+        <div class="profile-footer-social" aria-label="Соціальні мережі">
+            <a href="#" aria-label="Instagram" title="Instagram">IG</a>
+            <a href="#" aria-label="Telegram" title="Telegram">TG</a>
+            <a href="#" aria-label="GitHub" title="GitHub">GH</a>
+        </div>
+    </footer>
 </body>
 </html>

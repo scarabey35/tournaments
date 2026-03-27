@@ -1,36 +1,48 @@
-const body = document.body;
-const roleDisplay = document.getElementById('roleDisplay');
+(function () {
+    const roleNames = {
+        teacher: '\u0423\u0447\u0438\u0442\u0435\u043b\u044c',
+        jury: '\u0416\u0443\u0440\u0456',
+        student: '\u0423\u0447\u0435\u043d\u044c',
+        admin: '\u0410\u0434\u043c\u0456\u043d',
+        guest: '\u0413\u0456\u0441\u0442\u044c'
+    };
 
-const roleNames = {
-    teacher: 'Учитель',
-    jury: 'Журі',
-    student: 'Учень',
-    admin: 'Адмін',
-    guest: 'Гість'
-};
-
-const renderRole = () => {
-    const role = (body.dataset.role || 'guest').toLowerCase();
-
-    if (roleDisplay) {
-        roleDisplay.textContent = roleNames[role] || roleNames.guest;
+    function normalizeRole(role) {
+        const nextRole = String(role || '').toLowerCase();
+        return Object.prototype.hasOwnProperty.call(roleNames, nextRole) ? nextRole : 'guest';
     }
-};
 
-window.setRole = (role) => {
-    if (!role) return;
-    body.dataset.role = role;
-    renderRole();
-};
+    function renderRole() {
+        const body = document.body;
+        if (!body) return;
 
-const roleObserver = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-role') {
-            renderRole();
+        const activeRole = normalizeRole(body.dataset.role);
+        body.dataset.role = activeRole;
+
+        const roleDisplay = document.getElementById('roleDisplay');
+        if (roleDisplay) {
+            roleDisplay.textContent = roleNames[activeRole];
         }
     }
-});
 
-roleObserver.observe(body, { attributes: true, attributeFilter: ['data-role'] });
+    window.setRole = function setRole(role) {
+        const body = document.body;
+        if (!body) return;
 
-renderRole();
+        body.dataset.role = normalizeRole(role);
+        renderRole();
+    };
+
+    document.addEventListener('click', function (event) {
+        const button = event.target.closest('.role-switcher button[data-role]');
+        if (!button) return;
+
+        window.setRole(button.dataset.role);
+    });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderRole, { once: true });
+    } else {
+        renderRole();
+    }
+})();

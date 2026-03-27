@@ -329,11 +329,47 @@
     
     
 <div class="role-switcher">
-    <button onclick="setRole('teacher')">Учитель</button>
-    <button onclick="setRole('jury')">Журі</button>
-    <button onclick="setRole('student')">Учень</button>
-    <button onclick="setRole('admin')">Адмін</button>
+    <button data-role="teacher" onclick="setRole('teacher')">Учитель</button>
+    <button data-role="jury" onclick="setRole('jury')">Журі</button>
+    <button data-role="student" onclick="setRole('student')">Учень</button>
+    <button data-role="admin" onclick="setRole('admin')">Адмін</button>
 </div>
 
+<script>
+(function () {
+    if (typeof window.setRole === 'function') return;
+
+    const roleNames = {
+        teacher: '\u0423\u0447\u0438\u0442\u0435\u043b\u044c',
+        jury: '\u0416\u0443\u0440\u0456',
+        student: '\u0423\u0447\u0435\u043d\u044c',
+        admin: '\u0410\u0434\u043c\u0456\u043d',
+        guest: '\u0413\u0456\u0441\u0442\u044c'
+    };
+
+    function normalizeRole(role) {
+        const nextRole = String(role || '').toLowerCase();
+        return roleNames[nextRole] ? nextRole : 'guest';
+    }
+
+    window.setRole = function (role) {
+        const activeRole = normalizeRole(role);
+        document.body.dataset.role = activeRole;
+
+        const roleDisplay = document.getElementById('roleDisplay');
+        if (roleDisplay) {
+            roleDisplay.textContent = roleNames[activeRole];
+        }
+    };
+
+    document.addEventListener('click', function (event) {
+        const button = event.target.closest('.role-switcher button[data-role]');
+        if (!button) return;
+        window.setRole(button.dataset.role);
+    });
+
+    window.setRole(document.body.dataset.role || 'student');
+})();
+</script>
 </body>
 </html>
