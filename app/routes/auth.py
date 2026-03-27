@@ -51,7 +51,7 @@ def register():
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            flash("Помилка бази даних чорт візьми.", "danger")
+            flash("Помилка бази даних .", "danger")
             return render_template("register.html")
 
         flash("Реєстрація успішна!", "success")
