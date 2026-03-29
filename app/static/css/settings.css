@@ -157,7 +157,6 @@ body:not(.dark-theme) .option-line {
     -webkit-backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
 }
@@ -170,12 +169,15 @@ body:not(.dark-theme) .option-line {
 .footer-links {
     display: flex;
     align-items: center;
+    text-align: center;
     gap: 14px;
     flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 .footer-links a {
     color: var(--text-color);
+    text-align: center;
     text-decoration: none;
     font-size: 14px;
     border-bottom: 1px solid transparent;
@@ -184,6 +186,7 @@ body:not(.dark-theme) .option-line {
 
 .footer-links a:hover {
     color: var(--accent-color);
+    text-align: center;
     border-color: var(--accent-color);
 }
 
@@ -204,6 +207,8 @@ body:not(.dark-theme) .option-line {
         flex-direction: column;
         align-items: flex-start;
     }
+    
+
 }
 
 @media (max-width: 480px) {
@@ -224,5 +229,6 @@ body:not(.dark-theme) .option-line {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+
     }
 }

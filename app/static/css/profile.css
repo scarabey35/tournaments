@@ -148,6 +148,7 @@ body:not(.dark-theme) .profile-user {
 .profile-footer-social {
     display: flex;
     align-items: center;
+    text-align: center;
     gap: 14px;
     flex-wrap: wrap;
 }
