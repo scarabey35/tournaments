@@ -3,10 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Політика конфіденційності • HACKATHONS</title>
+    <script src="../static/js/themeToggle.js" defer></script>
+    <link rel="stylesheet" href="../static/css/home.css">
     <link rel="stylesheet" href="../static/css/privacy.css">
-    <title>Політика конфіденційності</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-role="student">
+    <header class="header">
+        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
+        <div class="logo">#HACKATHONS</div>
+    </header>
 
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="../templates/home.html" class="nav-item" title="Головна">
+                <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
+            </a>
+            <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
+                <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
+            </a>
+            <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
+                <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
+            </a>
+            <a href="../templates/profile.html" class="nav-item" title="Профіль">
+                <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
+            </a>
+            <a href="../templates/settings.html" class="nav-item" title="Налаштування">
+                <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main privacy-main">
+        <section class="tournaments-section privacy-heading-card">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="status-dot status-upcoming"></span>
+                    <h2>Політика конфіденційності</h2>
+                </div>
+            </div>
+            <p class="privacy-intro">На цій сторінці пояснено, як платформа #HACKATHONS збирає, використовує та захищає персональні дані користувачів.</p>
+        </section>
+
+        <section class="tournaments-section privacy-policy-card" aria-label="Текст політики конфіденційності">
+            <article class="policy-section">
+                <h3>Вступ</h3>
+                <p>Ця система зберігає та обробляє персональні дані користувачів лише в обсязі, необхідному для роботи платформи та проведення турніру.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Які дані ми збираємо</h3>
+                <p>Під час реєстрації користувач надає ім&rsquo;я, електронну адресу, пароль та іншу інформацію, необхідну для участі в системі.</p>
+                <ul>
+                    <li>ідентифікаційні дані користувача;</li>
+                    <li>контактні дані (наприклад, email);</li>
+                    <li>дані облікового запису, потрібні для авторизації.</li>
+                </ul>
+            </article>
+
+            <article class="policy-section">
+                <h3>Як використовуються дані</h3>
+                <p>Усі дані використовуються виключно для авторизації, організації роботи команд, оцінювання результатів та адміністрування турніру.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Передача третім особам</h3>
+                <p>Персональні дані не передаються третім особам без згоди користувача, за винятком випадків, передбачених законодавством.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Захист даних</h3>
+                <p>Паролі користувачів зберігаються у зашифрованому вигляді, а доступ до персональної інформації мають лише авторизовані користувачі відповідно до їхньої ролі в системі.</p>
+                <p>Система використовує технічні засоби захисту для запобігання несанкціонованому доступу, зміні або втраті даних.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Cookies</h3>
+                <p>Платформа може використовувати технічні cookies для підтримки сесії, автентифікації та стабільної роботи інтерфейсу.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Права користувача</h3>
+                <p>Користувач має право переглядати власні дані, змінювати їх та звертатися до адміністратора щодо видалення інформації після завершення використання системи.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Зміни політики</h3>
+                <p>Ми можемо періодично оновлювати цю політику. Актуальна версія завжди публікується на цій сторінці.</p>
+            </article>
+
+            <article class="policy-section">
+                <h3>Контактна інформація</h3>
+                <p>З питань обробки персональних даних звертайтеся до адміністратора платформи через розділ підтримки.</p>
+            </article>
+        </section>
+
+        <section class="tournaments-section privacy-meta-card" aria-label="Додаткова інформація">
+            <p class="privacy-updated">Останнє оновлення: 29.03.2026</p>
+            <button type="button" class="tournament-btn" disabled>Завантажити PDF</button>
+        </section>
+    </main>
+
+    <footer class="privacy-footer">
+        <p class="footer-copy">© 2026 #HACKATHONS</p>
+        <nav class="footer-links" aria-label="Інформаційні посилання">
+            <a href="../templates/about.html">Про нас</a>
+            <a href="../templates/privacy.html" aria-current="page">Політика конфіденційності</a>
+            <a href="../templates/support.html">Підтримка</a>
+        </nav>
+    </footer>
 </body>
 </html>

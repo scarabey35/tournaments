@@ -1,0 +1,190 @@
+.privacy-main {
+    display: grid;
+    gap: 20px;
+    justify-items: center;
+}
+
+.privacy-main > .tournaments-section {
+    width: 100%;
+    max-width: 960px;
+}
+
+.privacy-heading-card {
+    gap: 14px;
+}
+
+.privacy-heading-card h2 {
+    font-size: 38px;
+    line-height: 1.05;
+}
+
+.privacy-intro {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 75ch;
+}
+
+.privacy-policy-card {
+    gap: 22px;
+    padding: 28px;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        var(--card-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.policy-section {
+    display: grid;
+    gap: 10px;
+    max-width: 82ch;
+}
+
+.policy-section + .policy-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 18px;
+}
+
+body:not(.dark-theme) .policy-section + .policy-section {
+    border-top-color: rgba(15, 23, 42, 0.1);
+}
+
+.policy-section h3 {
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.policy-section p,
+.policy-section li {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+}
+
+.policy-section p {
+    color: var(--text-color);
+}
+
+.policy-section ul {
+    margin-left: 20px;
+    display: grid;
+    gap: 6px;
+}
+
+.privacy-meta-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.privacy-updated {
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.privacy-meta-card .tournament-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.72;
+}
+
+.privacy-meta-card .tournament-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    filter: none;
+}
+
+.privacy-footer {
+    margin: 0 24px 20px 96px;
+    padding: 18px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--header-bg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-copy {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-links a[aria-current="page"] {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .privacy-heading-card h2 {
+        font-size: 30px;
+    }
+
+    .privacy-policy-card {
+        padding: 22px;
+    }
+
+    .privacy-footer {
+        margin: 0 16px 88px;
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacy-main {
+        gap: 16px;
+    }
+
+    .privacy-heading-card h2 {
+        font-size: 26px;
+    }
+
+    .policy-section h3 {
+        font-size: 20px;
+    }
+
+    .policy-section p,
+    .policy-section li {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .privacy-meta-card {
+        align-items: stretch;
+    }
+
+    .privacy-meta-card .tournament-btn {
+        width: 100%;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
