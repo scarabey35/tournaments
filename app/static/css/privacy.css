@@ -85,17 +85,6 @@ body:not(.dark-theme) .policy-section + .policy-section {
     font-weight: 600;
 }
 
-.privacy-meta-card .tournament-btn:disabled {
-    cursor: not-allowed;
-    opacity: 0.72;
-}
-
-.privacy-meta-card .tournament-btn:disabled:hover {
-    transform: none;
-    box-shadow: none;
-    filter: none;
-}
-
 .privacy-footer {
     margin: 0 24px 20px 96px;
     padding: 18px 24px;
