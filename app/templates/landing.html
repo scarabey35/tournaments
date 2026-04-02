@@ -13,7 +13,7 @@
     <div class="logo">#HACKATHONS</div>
     <nav class="nav">
         <button id="themeToggle" class="theme-toggle">🌙</button>
-        <a href="../templates/register.html" class="register-btn">Реєстрація</a>
+        <a href="{{ url_for('user.register') }}" class="register-btn">Реєстрація</a>
     </nav>
 </header>
 
@@ -25,7 +25,7 @@
                 природничих наук та інших дисциплін — у форматі хакатонів, олімпіад
                 та командних турнірів.
             </p>
-            <a href="../templates/register.html" class="hero-button">Взяти участь</a>
+            <a href="{{ url_for('user.register') }}" class="hero-button">Взяти участь</a>
         </section>
 
         <section class="info">

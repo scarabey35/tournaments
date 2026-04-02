@@ -1,69 +1,31 @@
-from flask import Blueprint, render_template, request, redirect
-from app.extension import db
-
-from app.models.tournament import Tournament
-from app.models.team import Team
-from app.models.submission import Submission
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from app.models import db, Tournament
 
 admin = Blueprint("admin", __name__)
 
 
-@admin.route("/admin")
-def admin_panel():
-
+@admin.route("/")
+def dashboard():
     tournaments = Tournament.query.all()
-    teams = Team.query.all()
-    submissions = Submission.query.all()
-
-    return render_template(
-        "admin.html",
-        tournaments=tournaments,
-        teams=teams,
-        submissions=submissions
-    )
+    return render_template("admin/dashboard.html", tournaments=tournaments)
 
 
-@admin.route("/create_tournament", methods=["POST"])
+@admin.route("/create_tournament", methods=["GET", "POST"])
 def create_tournament():
+    if request.method == "POST":
+        name = request.form.get("name")
+        description = request.form.get("description")
 
-    name = request.form["name"]
-    deadline = request.form["deadline"]
-    description = request.form["description"]
+        tournament = Tournament(
+            name=name,
+            description=description,
+            status="draft"
+        )
 
-    tournament = Tournament(
-        name=name,
-        deadline=deadline,
-        description=description
-    )
+        db.session.add(tournament)
+        db.session.commit()
 
-    db.session.add(tournament)
-    db.session.commit()
+        flash("Турнір створено!", "success")
+        return redirect(url_for("admin.dashboard"))
 
-    return redirect("/admin")
-
-
-@admin.route("/add_team/<int:tournament_id>", methods=["POST"])
-def add_team(tournament_id):
-
-    name = request.form["name"]
-
-    team = Team(
-        name=name,
-        tournament_id=tournament_id
-    )
-
-    db.session.add(team)
-    db.session.commit()
-
-    return redirect("/admin")
-
-
-@admin.route("/delete_team/<int:team_id>")
-def delete_team(team_id):
-
-    team = Team.query.get(team_id)
-
-    db.session.delete(team)
-    db.session.commit()
-
-    return redirect("/admin")
+    return render_template("admin/create_tournament.html")
