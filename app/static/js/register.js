@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
+    const firstNameInput = document.querySelector('#first-name');
+    const lastNameInput = document.querySelector('#last-name');
     const emailInput = document.querySelector('input[type="email"]');
     const passwordInput = document.querySelector('input[type="password"]');
     const roleSelect = document.querySelector('.select');
@@ -52,12 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         clearError();
 
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
         const email = emailInput.value.trim();
         const password = passwordInput.value;
         const role = roleSelect.value;
 
         // Перевірка заповненості
-        if (!email || !password || !role) {
+        if (!firstName || !lastName || !email || !password || !role) {
             showError('Будь ласка, заповніть всі поля');
             return;
         }
@@ -79,6 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Захист від XSS при вводі (екрануємо на льоту)
+    firstNameInput.addEventListener('input', function() {
+        this.value = escapeHTML(this.value);
+    });
+
+    lastNameInput.addEventListener('input', function() {
+        this.value = escapeHTML(this.value);
+    });
+
     emailInput.addEventListener('input', function() {
         this.value = escapeHTML(this.value);
     });
