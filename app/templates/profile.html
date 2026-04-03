@@ -4,123 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мій профіль • HACKATHONS</title>
-    <script src="../static/js/themeToggle.js" defer></script>
-    <script src="../static/js/profile.js" defer></script>
-    <link rel="stylesheet" href="../static/css/home.css">
-    <link rel="stylesheet" href="../static/css/profile.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+    <script src="{{ url_for('static', filename='js/themeToggle.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body data-role="student">
-    <header class="header">
-        <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
-        <div class="logo">#HACKATHONS</div>
-        <div class="role">Роль: <span id="roleDisplay">Учень</span></div>
-    </header>
 
-    <aside class="sidebar">
-        <nav class="sidebar-nav">
-            <a href="../templates/home.html" class="nav-item" title="Головна">
-                <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
-            </a>
-            <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
-                <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
-            </a>
-            <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
-                <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
-            </a>
-            <a href="../templates/profile.html" class="nav-item active" title="Профіль">
-                <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
-            </a>
-            <a href="../templates/settings.html" class="nav-item" title="Налаштування">
-                <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
-            </a>
-        </nav>
-    </aside>
+<body>
+<header class="header">
+    <button id="themeToggle" class="theme-toggle">&#9789;</button>
+    <div class="logo">#HACKATHONS</div>
+    <div class="role">
+        Роль: <span>{{ user.role }}</span>
+    </div>
+</header>
 
-    <main class="main profile-main">
-        <section class="section-header profile-header">
-            <div class="section-title">
-                <span class="status-dot status-upcoming"></span>
-                <h2>Мій профіль</h2>
-            </div>
-        </section>
+<aside class="sidebar">
+    <nav class="sidebar-nav">
 
-        <section class="profile-grid" aria-label="Профіль користувача">
-            <article class="tournaments-section profile-card">
-                <h3 class="profile-card-title">Особисті дані</h3>
-                <div class="profile-user">
-                    <div class="profile-avatar" aria-hidden="true">
-                        <img src="../static/icons/profile.svg" alt="" width="44" height="44">
-                    </div>
-                    <div class="profile-user-info">
-                        <h4>Андрій Коваленко</h4>
-                        <p>andrii@example.com</p>
-                    </div>
-                </div>
-                <div class="profile-meta">
-                    <div class="meta-item">
-                        <span class="icon icon-flag" aria-hidden="true"></span>
-                        <span class="meta-label">Роль: Учень</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="icon icon-calendar" aria-hidden="true"></span>
-                        <span class="meta-label">Зареєстровано: 12.03.2026</span>
-                    </div>
-                </div>
-            </article>
+        <a href="{{ url_for('landing.home') }}" class="nav-item" title="Головна">
+            <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28">
+        </a>
 
-            <article class="tournaments-section profile-card">
-                <h3 class="profile-card-title">Зміна паролю</h3>
-                <form class="password-form" action="#" method="post" novalidate>
-                    <label class="form-field">
-                        <span>Старий пароль</span>
-                        <input type="password" placeholder="Введіть старий пароль" disabled>
-                    </label>
-                    <label class="form-field">
-                        <span>Новий пароль</span>
-                        <input type="password" placeholder="Введіть новий пароль" disabled>
-                    </label>
-                    <label class="form-field">
-                        <span>Підтвердити пароль</span>
-                        <input type="password" placeholder="Повторіть новий пароль" disabled>
-                    </label>
-                    <button type="button" class="tournament-btn" disabled>Змінити пароль</button>
-                    <p class="form-note">Кнопка неактивна: логіку зміни паролю буде додано пізніше.</p>
-                </form>
-            </article>
+        <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
+            <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24">
+        </a>
 
-            <article class="tournaments-section profile-card profile-stats">
-                <h3 class="profile-card-title">Додаткова інформація</h3>
-                <div class="stats-grid">
-                    <div class="meta-item">
-                        <span class="icon icon-calendar" aria-hidden="true"></span>
-                        <span class="meta-label">Участь у 12 турнірах</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="icon icon-flag" aria-hidden="true"></span>
-                        <span class="meta-label">3 місце в хакатоні Future Labs</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="icon icon-clock" aria-hidden="true"></span>
-                        <span class="meta-label">Python, JavaScript, React</span>
-                    </div>
-                </div>
-            </article>
-        </section>
-    </main>
+        <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
+            <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30">
+        </a>
 
-    <footer class="profile-footer">
-        <p class="profile-footer-copy">© 2026 #HACKATHONS</p>
-        <nav class="profile-footer-links" aria-label="Інформаційні посилання">
-            <a href="../templates/about.html">Про нас</a>
-            <a href="../templates/privacy.html">Політика конфіденційності</a>
-            <a href="../templates/support.html">Підтримка</a>
-        </nav>
-        <div class="profile-footer-social" aria-label="Соціальні мережі">
-            <a href="#" aria-label="Instagram" title="Instagram">IG</a>
-            <a href="#" aria-label="Telegram" title="Telegram">TG</a>
-            <a href="#" aria-label="GitHub" title="GitHub">GH</a>
+        <a href="{{ url_for('user.profile') }}" class="nav-item active" title="Профіль">
+            <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24">
+        </a>
+
+        <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
+            <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40">
+        </a>
+
+    </nav>
+</aside>
+
+<main class="main profile-main">
+
+    <!--Flash messages-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <section class="section-header profile-header">
+        <div class="section-title">
+            <h2>Мій профіль</h2>
         </div>
-    </footer>
+    </section>
+
+    <section class="profile-grid">
+
+        <!--USER INFO-->
+        <article class="profile-card">
+            <h3>Особисті дані</h3>
+
+            <div class="profile-user">
+                <div class="profile-avatar">
+                    <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="44">
+                </div>
+
+                <div>
+                    <h4>{{ user.name }}</h4>
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+
+            <div class="profile-meta">
+                <div>
+                    <span>Роль: {{ user.role }}</span>
+                </div>
+
+                <div>
+                    <span>
+                        Зареєстровано:
+                        {{ user.created_at.strftime('%d.%m.%Y') }}
+                    </span>
+                </div>
+            </div>
+        </article>
+
+        <!--PASSWORD CHANGE-->
+        <article class="profile-card">
+            <h3>Зміна паролю</h3>
+
+            <form method="POST" class="password-form">
+
+                <label>
+                    Старий пароль
+                    <input type="password" name="old_password" required>
+                </label>
+
+                <label>
+                    Новий пароль
+                    <input type="password" name="new_password" required>
+                </label>
+
+                <label>
+                    Підтвердити пароль
+                    <input type="password" name="confirm_password" required>
+                </label>
+
+                <button type="submit">Змінити пароль</button>
+
+            </form>
+        </article>
+
+        <!--XTRA INFO-->
+        <article class="profile-card">
+            <h3>Додаткова інформація</h3>
+
+            <p>Statistics:</p>
+            <ul>
+                <li>TODO</li>
+                <li>TODO</li>
+                <li>TODO</li>
+            </ul>
+
+        </article>
+
+    </section>
+
+    <!--LOGOUT-->
+    <div style="margin-top:20px;">
+        <a href="{{ url_for('user.logout') }}">Вийти</a>
+    </div>
+
+</main>
+
+<footer class="profile-footer">
+    <p>© 2026 #HACKATHONS</p>
+
+    <a href="{{ url_for('landing.privacy') }}">Політика конфіденційності</a>
+</footer>
+
 </body>
 </html>
