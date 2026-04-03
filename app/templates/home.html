@@ -19,21 +19,25 @@
 
     <aside class="sidebar">
     <nav class="sidebar-nav">
-        <a href="../templates/home.html" class="nav-item active" title="Головна">
-            <img src="../static/icons/home.svg" alt="Головна" width="28" height="28">
-        </a>
-        <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
-            <img src="../static/icons/tournaments.svg" alt="Турніри" width="24" height="24">
-        </a>
-        <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
-            <img src="../static/icons/leaderboard.svg" alt="Лідерборд" width="30" height="30">
-        </a>
-        <a href="../templates/profile.html" class="nav-item" title="Профіль">
-            <img src="../static/icons/profile.svg" alt="Профіль" width="24" height="24">
-        </a>
-        <a href="../templates/settings.html" class="nav-item" title="Налаштування">
-            <img src="../static/icons/settings.svg" alt="Налаштування" width="40" height="40">
-        </a>
+    <a href="{{ url_for('landing.home') }}" class="nav-item active" title="Головна">
+        <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28" height="28">
+    </a>
+
+    <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
+        <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24" height="24">
+    </a>
+
+    <a href="{{ url_for('tournaments.leaderboard', tournament_id=1) }}" class="nav-item" title="Лідерборд">
+        <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30" height="30">
+    </a>
+
+    <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
+        <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24" height="24">
+    </a>
+
+    <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
+        <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
+    </a>
     </nav>
 </aside>
 

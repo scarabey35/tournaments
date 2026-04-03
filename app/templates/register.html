@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="uk">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Реєстрація користувача</title>
-        <script src="../static/javascript/register.js" defer></script>
-        <link rel="stylesheet" href="../static/css/register.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <script src="{{ url_for('static', filename='javascript/register.js') }}" defer></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <div class="logo">#HACKATHONS</div>
@@ -17,7 +20,19 @@
         <div class="container">
             <h1>Реєстрація користувача</h1>
             <div class="subtitle">Створіть акаунт для участі у турнірі</div>
-            <form>
+
+            <!-- 🔔 Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
                 <div class="section">
                     <div class="section-title">Ім'я</div>
                     <input
@@ -40,37 +55,32 @@
                 </div>
                 <div class="section">
                     <div class="section-title">Email</div>
-                    <input
-                        type="email"
-                        placeholder="Введіть вашу електронну пошту"
-                        required
-                    >
+                    <input type="email" name="email" placeholder="Введіть email" required>
                 </div>
+
                 <div class="section">
                     <div class="section-title">Пароль</div>
-                    <input
-                        type="password"
-                        placeholder="Придумайте пароль"
-                        required
-                    >
+                    <input type="password" name="password" placeholder="Придумайте пароль" required>
                 </div>
+
                 <div class="section">
-                    <div class="section-title">Роль користувача</div>
-                    <select class="select" required>
-                        <option value="participant">Учасник</option>
+                    <div class="section-title">Роль</div>
+                    <select name="role" class="select" required>
+                        <option value="team">Учасник</option>
                         <option value="jury">Журі</option>
                         <option value="admin">Адміністратор</option>
                         <option value="teacher">Учитель</option>
                     </select>
-                    <small style="color: gray;">Оберіть роль зі списку</small>
                 </div>
-                <button type="submit" class="button">   
+
+                <button type="submit" class="button">
                     Зареєструватися
                 </button>
                 <div class="footer">
                     Вже є акаунт? <a href="/login">Увійти</a>
                 </div>
             </form>
+
             <div class="footer">
                 Турнір з програмування © 2026
             </div>
