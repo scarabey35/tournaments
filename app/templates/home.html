@@ -19,24 +19,24 @@
 
     <aside class="sidebar">
     <nav class="sidebar-nav">
-    <a href="{{ url_for('landing.home') }}" class="nav-item active" title="Головна">
-        <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28" height="28">
+    <a href="../templates/home.html" class="nav-item active" title="Головна">
+        <img src="../static/icons/home.svg" width="28" height="28">
     </a>
 
-    <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
-        <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24" height="24">
+    <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
+        <img src="../static/icons/tournaments.svg" width="24" height="24">
     </a>
 
-    <a href="{{ url_for('tournaments.leaderboard', tournament_id=1) }}" class="nav-item" title="Лідерборд">
-        <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30" height="30">
+    <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
+        <img src="../static/icons/leaderboard.svg" width="30" height="30">
     </a>
 
-    <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
-        <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24" height="24">
+    <a href="../templates/profile.html" class="nav-item" title="Профіль">
+        <img src="../static/icons/profile.svg" width="24" height="24">
     </a>
 
-    <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
-        <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
+    <a href="../templates/settings.html" class="nav-item" title="Налаштування">
+        <img src="../static/icons/settings.svg" width="40" height="40">
     </a>
     </nav>
 </aside>
@@ -339,41 +339,5 @@
     <button data-role="admin" onclick="setRole('admin')">Адмін</button>
 </div>
 
-<script>
-(function () {
-    if (typeof window.setRole === 'function') return;
-
-    const roleNames = {
-        teacher: '\u0423\u0447\u0438\u0442\u0435\u043b\u044c',
-        jury: '\u0416\u0443\u0440\u0456',
-        student: '\u0423\u0447\u0435\u043d\u044c',
-        admin: '\u0410\u0434\u043c\u0456\u043d',
-        guest: '\u0413\u0456\u0441\u0442\u044c'
-    };
-
-    function normalizeRole(role) {
-        const nextRole = String(role || '').toLowerCase();
-        return roleNames[nextRole] ? nextRole : 'guest';
-    }
-
-    window.setRole = function (role) {
-        const activeRole = normalizeRole(role);
-        document.body.dataset.role = activeRole;
-
-        const roleDisplay = document.getElementById('roleDisplay');
-        if (roleDisplay) {
-            roleDisplay.textContent = roleNames[activeRole];
-        }
-    };
-
-    document.addEventListener('click', function (event) {
-        const button = event.target.closest('.role-switcher button[data-role]');
-        if (!button) return;
-        window.setRole(button.dataset.role);
-    });
-
-    window.setRole(document.body.dataset.role || 'student');
-})();
-</script>
 </body>
 </html>

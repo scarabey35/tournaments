@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Реєстрація</title>
 
-    <!-- ✅ правильні шляхи -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-    <script src="{{ url_for('static', filename='js/register.js') }}" defer></script>
+    <link rel="stylesheet" href="../static/css/register.css">
+    <script src="../static/js/register.js" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -21,17 +20,6 @@
         <div class="container">
             <h1>Реєстрація користувача</h1>
             <div class="subtitle">Створіть акаунт для участі у турнірі</div>
-
-            <!-- 🔔 Flash messages -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="flash {{ category }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
 
             <form method="POST">
 
@@ -85,7 +73,7 @@
                 <!-- 🔗 LOGIN -->
                 <div class="footer">
                     Вже є акаунт?
-                    <a href="{{ url_for('user.login') }}">Увійти</a>
+                    <a href="../templates/login.html">Увійти</a>
                 </div>
 
             </form>

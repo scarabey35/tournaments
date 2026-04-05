@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вхід до акаунту</title>
-
-    <!-- ✅ Flask static -->
-    <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <script src="../static/js/login.js" defer></script>
+    <link rel="stylesheet" href="../static/css/register.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -22,12 +20,6 @@
         <h1>Вхід до акаунту</h1>
         <div class="subtitle">Введіть ваші дані для входу</div>
 
-        <!-- 🔔 Flash messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% for category, message in messages %}
-                <div class="flash {{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endwith %}
 
         <form method="POST">
 
@@ -55,7 +47,7 @@
 
             <div class="footer">
                 Немає акаунту?
-                <a href="{{ url_for('user.register') }}">Зареєструватися</a>
+                <a href="../templates/register.html">Зареєструватися</a>
             </div>
 
         </form>

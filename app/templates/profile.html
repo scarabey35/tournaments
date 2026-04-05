@@ -5,58 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мій профіль • HACKATHONS</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
 
-    <script src="{{ url_for('static', filename='js/themeToggle.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
+    <script src="../static/js/themeToggle.js" defer></script>
+    <script src="../static/js/profile.js" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-role="test">
 <header class="header">
     <button id="themeToggle" class="theme-toggle">&#9789;</button>
     <div class="logo">#HACKATHONS</div>
-    <div class="role">
-        Роль: <span>{{ user.role }}</span>
-    </div>
 </header>
 
-<aside class="sidebar">
+   <aside class="sidebar">
     <nav class="sidebar-nav">
+    <a href="../templates/home.html" class="nav-item" title="Головна">
+        <img src="../static/icons/home.svg" width="28" height="28">
+    </a>
 
-        <a href="{{ url_for('landing.home') }}" class="nav-item" title="Головна">
-            <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28">
-        </a>
+    <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
+        <img src="../static/icons/tournaments.svg" width="24" height="24">
+    </a>
 
-        <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
-            <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24">
-        </a>
+    <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
+        <img src="../static/icons/leaderboard.svg" width="30" height="30">
+    </a>
 
-        <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
-            <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30">
-        </a>
+    <a href="../templates/profile.html" class="nav-item active" title="Профіль">
+        <img src="../static/icons/profile.svg" width="24" height="24">
+    </a>
 
-        <a href="{{ url_for('user.profile') }}" class="nav-item active" title="Профіль">
-            <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24">
-        </a>
-
-        <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
-            <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40">
-        </a>
-
+    <a href="../templates/settings.html" class="nav-item" title="Налаштування">
+        <img src="../static/icons/settings.svg" width="40" height="40">
+    </a>
     </nav>
 </aside>
 
 <main class="main profile-main">
 
-    <!--Flash messages-->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-            <div class="flash {{ category }}">{{ message }}</div>
-        {% endfor %}
-    {% endwith %}
 
     <section class="section-header profile-header">
         <div class="section-title">
@@ -72,25 +61,21 @@
 
             <div class="profile-user">
                 <div class="profile-avatar">
-                    <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="44">
+                    <p>ДК</p>
                 </div>
 
-                <div>
-                    <h4>{{ user.name }}</h4>
-                    <p>{{ user.email }}</p>
+                <div class="profile-user-info">
+                    <h4>Данiл Колбасенко</h4>
+                    <p>DanilKolbasenko@gmail.com</p>
                 </div>
             </div>
 
             <div class="profile-meta">
                 <div>
-                    <span>Роль: {{ user.role }}</span>
+                    <span>Роль: <span id="roleDisplay"></span></span>
                 </div>
-
                 <div>
-                    <span>
-                        Зареєстровано:
-                        {{ user.created_at.strftime('%d.%m.%Y') }}
-                    </span>
+                    <span>Зареєстровано: 01.01.2026</span>
                 </div>
             </div>
         </article>
@@ -101,18 +86,18 @@
 
             <form method="POST" class="password-form">
 
-                <label>
-                    Старий пароль
+                <label class="form-field">
+                    <span>Старий пароль</span>
                     <input type="password" name="old_password" required>
                 </label>
 
-                <label>
-                    Новий пароль
+                <label class="form-field">
+                    <span>Новий пароль</span>
                     <input type="password" name="new_password" required>
                 </label>
 
-                <label>
-                    Підтвердити пароль
+                <label class="form-field">
+                    <span>Підтвердити пароль</span>
                     <input type="password" name="confirm_password" required>
                 </label>
 
@@ -120,33 +105,13 @@
 
             </form>
         </article>
-
-        <!--XTRA INFO-->
-        <article class="profile-card">
-            <h3>Додаткова інформація</h3>
-
-            <p>Statistics:</p>
-            <ul>
-                <li>TODO</li>
-                <li>TODO</li>
-                <li>TODO</li>
-            </ul>
-
-        </article>
-
     </section>
-
-    <!--LOGOUT-->
-    <div style="margin-top:20px;">
-        <a href="{{ url_for('user.logout') }}">Вийти</a>
-    </div>
 
 </main>
 
 <footer class="profile-footer">
     <p>© 2026 #HACKATHONS</p>
-
-    <a href="{{ url_for('landing.privacy') }}">Політика конфіденційності</a>
+    <a href="../templates/privacy.html">Політика конфіденційності</a>
 </footer>
 
 </body>
