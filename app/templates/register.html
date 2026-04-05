@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Реєстрація</title>
 
-    <link rel="stylesheet" href="../static/css/register.css">
-    <script src="../static/js/register.js" defer></script>
+    <!-- ✅ правильні шляхи -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <script src="{{ url_for('static', filename='js/register.js') }}" defer></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
@@ -20,55 +22,72 @@
             <h1>Реєстрація користувача</h1>
             <div class="subtitle">Створіть акаунт для участі у турнірі</div>
 
-    
+            <!-- 🔔 Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
             <form method="POST">
+
+                <!-- 👤 ІМʼЯ -->
                 <div class="section">
                     <div class="section-title">Ім'я</div>
                     <input
                         type="text"
-                        id="first-name"
-                        name="first_name"
+                        name="name"
                         placeholder="Введіть ім'я"
                         required
                     >
                 </div>
+
+                <!-- 📧 EMAIL -->
                 <div class="section">
-                    <div class="section-title">Прізвище</div>
+                    <div class="section-title">Email</div>
                     <input
-                        type="text"
-                        id="last-name"
-                        name="last_name"
-                        placeholder="Введіть прізвище"
+                        type="email"
+                        name="email"
+                        placeholder="Введіть email"
                         required
                     >
                 </div>
-                <div class="section">
-                    <div class="section-title">Email</div>
-                    <input type="email" name="email" placeholder="Введіть email" required>
-                </div>
 
+                <!-- 🔐 PASSWORD -->
                 <div class="section">
                     <div class="section-title">Пароль</div>
-                    <input type="password" name="password" placeholder="Придумайте пароль" required>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Придумайте пароль"
+                        required
+                    >
                 </div>
 
+                <!-- 🎭 ROLE -->
                 <div class="section">
                     <div class="section-title">Роль</div>
                     <select name="role" class="select" required>
                         <option value="team">Учасник</option>
                         <option value="jury">Журі</option>
                         <option value="admin">Адміністратор</option>
-                        <option value="teacher">Учитель</option>
                     </select>
                 </div>
 
                 <button type="submit" class="button">
                     Зареєструватися
                 </button>
+
+                <!-- 🔗 LOGIN -->
                 <div class="footer">
-                    Вже є акаунт? <a href="../templates/login.html">Увійти</a>
+                    Вже є акаунт?
+                    <a href="{{ url_for('user.login') }}">Увійти</a>
                 </div>
+
             </form>
 
             <div class="footer">

@@ -21,3 +21,7 @@ def leaderboard(tournament_id):
 
     # поки просто передаємо турнір
     return render_template("leaderboard.html", tournament=tournament)
+
+@tournaments_bp.route("/leaderboard")
+def leaderboard_global():
+    return render_template("leaderboard.html")

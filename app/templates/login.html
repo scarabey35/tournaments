@@ -1,50 +1,70 @@
 <!doctype html>
 <html lang="uk">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Вхід до акаунту</title>
-        <script src="../static/js/login.js" defer></script>
-        <link rel="stylesheet" href="../static/css/register.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header class="header">
-            <div class="logo">#HACKATHONS</div>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід до акаунту</title>
 
-        <main class="register-main">
-            <div class="container">
-                <h1>Вхід до акаунту</h1>
-                <div class="subtitle">Введіть ваші дані для входу</div>
-                <form id="loginForm">
-                    <div class="section">
-                        <div class="section-title">Email</div>
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Введіть вашу електронну пошту"
-                            required
-                        >
-                    </div>
-                    <div class="section">
-                        <div class="section-title">Пароль</div>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Введіть пароль"
-                            required
-                        >
-                    </div>
-                    <button type="submit" class="button">Увійти</button>
-                    <div class="footer">
-                     Немає акаунту? <a href="../templates/register.html">Зареєструватися</a>
-                    </div>
-                </form>
-                <div class="footer">
-                    Турнір з програмування © 2026
-                </div>
+    <!-- ✅ Flask static -->
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header class="header">
+    <div class="logo">#HACKATHONS</div>
+</header>
+
+<main class="register-main">
+    <div class="container">
+        <h1>Вхід до акаунту</h1>
+        <div class="subtitle">Введіть ваші дані для входу</div>
+
+        <!-- 🔔 Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="section">
+                <div class="section-title">Email</div>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Введіть email"
+                    required
+                >
             </div>
-        </main>
-    </body>
+
+            <div class="section">
+                <div class="section-title">Пароль</div>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Введіть пароль"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="button">Увійти</button>
+
+            <div class="footer">
+                Немає акаунту?
+                <a href="{{ url_for('user.register') }}">Зареєструватися</a>
+            </div>
+
+        </form>
+
+        <div class="footer">
+            Турнір з програмування © 2026
+        </div>
+    </div>
+</main>
+
+</body>
 </html>

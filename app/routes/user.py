@@ -18,7 +18,7 @@ def register():
             return redirect(url_for("user.register"))
 
         user = User(
-            name=email.split("@")[0],
+            name = request.form.get("name"),
             email=email,
             password_hash=generate_password_hash(password),
             role=role,
