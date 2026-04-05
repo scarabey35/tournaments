@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мій профіль • HACKATHONS</title>
 
-    <link rel="stylesheet" href="../static/css/home.css">
-    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 
-    <script src="../static/js/themeToggle.js" defer></script>
-    <script src="../static/js/profile.js" defer></script>
+    <script src="{{ url_for('static', filename='js/themeToggle.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -22,24 +22,24 @@
 
    <aside class="sidebar">
     <nav class="sidebar-nav">
-    <a href="../templates/home.html" class="nav-item" title="Головна">
-        <img src="../static/icons/home.svg" width="28" height="28">
+    <a href="{{ url_for('landing.home') }}" class="nav-item" title="Головна">
+        <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28" height="28">
     </a>
 
-    <a href="../templates/tournaments.html" class="nav-item" title="Турніри">
-        <img src="../static/icons/tournaments.svg" width="24" height="24">
+    <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
+        <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24" height="24">
     </a>
 
-    <a href="../templates/leaderboard.html" class="nav-item" title="Лідерборд">
-        <img src="../static/icons/leaderboard.svg" width="30" height="30">
+    <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
+        <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30" height="30">
     </a>
 
-    <a href="../templates/profile.html" class="nav-item active" title="Профіль">
-        <img src="../static/icons/profile.svg" width="24" height="24">
+    <a href="{{ url_for('user.profile') }}" class="nav-item active" title="Профіль">
+        <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24" height="24">
     </a>
 
-    <a href="../templates/settings.html" class="nav-item" title="Налаштування">
-        <img src="../static/icons/settings.svg" width="40" height="40">
+    <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
+        <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
     </a>
     </nav>
 </aside>
@@ -111,7 +111,7 @@
 
 <footer class="profile-footer">
     <p>© 2026 #HACKATHONS</p>
-    <a href="../templates/privacy.html">Політика конфіденційності</a>
+    <a href="{{ url_for('landing.privacy') }}">Політика конфіденційності</a>
 </footer>
 
 </body>
