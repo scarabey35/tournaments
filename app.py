@@ -21,7 +21,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    app.register_blueprint(landing_db)
+    app.register_blueprint(landing_bp)
     app.register_blueprint(admin, url_prefix="/admin")
     app.register_blueprint(tournaments_bp, url_prefix="/tournaments")
     app.register_blueprint(user_bp)
