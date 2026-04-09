@@ -76,3 +76,7 @@ def profile():
         flash("Пароль успішно змінено!", "success")
 
     return render_template("profile.html", user=current_user)
+
+@user_bp.route("/settings")
+def settings():
+    return render_template("settings.html")
