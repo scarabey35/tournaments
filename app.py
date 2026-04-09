@@ -1,6 +1,8 @@
 import os
 from flask import Flask
+from flask_session import Session 
 from app.models import db
+from app.extension import migrate
 
 from app.routes.landing import landing_bp
 from app.routes.admin import admin
@@ -8,28 +10,16 @@ from app.routes.tournaments import tournaments_bp
 from app.routes.user import user_bp
 
 def create_app():
-    base_dir = os.path.abspath(os.path.dirname(__file__))
+    app = Flask(__name__, 
+                template_folder=os.path.join(os.path.dirname(__file__), "app", "templates"),
+                static_folder=os.path.join(os.path.dirname(__file__), "app", "static"))
 
-    template_dir = os.path.join(base_dir, "app", "templates")
-    static_dir = os.path.join(base_dir, "app", "static")
-
-    instance_path = os.path.join(base_dir, "instance")
-    if not os.path.exists(instance_path):
-        os.makedirs(instance_path)
-
-    db_path = os.path.join(instance_path, "app.db")
-
-    app = Flask(
-        __name__,
-        template_folder=template_dir,
-        static_folder=static_dir,
-    )
-
-    app.config["SECRET_KEY"] = "super-secret-key"
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "super-secret-key-change-in-production")
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'instance', 'app.db')}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
+    migrate.init_app(app, db)
 
     app.register_blueprint(landing_bp)
     app.register_blueprint(admin, url_prefix="/admin")
