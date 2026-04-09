@@ -178,6 +178,14 @@ body::before {
     transition: all 0.3s ease;
 }
 
+.admin-nav-item {
+    display: none;
+}
+
+body[data-role="admin"] .admin-nav-item {
+    display: flex;
+}
+
 .nav-item:hover img {
     opacity: 1;
 }

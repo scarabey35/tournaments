@@ -1,0 +1,164 @@
+﻿.admin-hero {
+    gap: 14px;
+}
+
+.admin-dashboard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-create-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: start;
+}
+
+.admin-create-form .filter-group textarea,
+.admin-create-form .filter-group input[type="text"],
+.admin-create-form .filter-group input[type="date"],
+.admin-create-form .filter-group input[type="datetime-local"],
+.admin-create-form .filter-group input[type="number"],
+.admin-create-form .filter-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: var(--card-bg-soft);
+    color: var(--text-color);
+    font-size: 15px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.admin-create-form .filter-group textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.admin-create-form .filter-group textarea:focus,
+.admin-create-form .filter-group input[type="text"]:focus,
+.admin-create-form .filter-group input[type="date"]:focus,
+.admin-create-form .filter-group input[type="datetime-local"]:focus,
+.admin-create-form .filter-group input[type="number"]:focus,
+.admin-create-form .filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.12);
+}
+
+.admin-create-form .filter-btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+
+.admin-main {
+    display: grid;
+    gap: 18px;
+}
+
+.admin-form {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.admin-form-full {
+    grid-column: 1 / -1;
+}
+
+.admin-form textarea,
+.admin-form input[type="datetime-local"],
+.admin-form input[type="number"],
+.admin-form input[type="date"],
+.admin-form input[type="text"],
+.admin-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.admin-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.admin-form textarea:focus,
+.admin-form input[type="datetime-local"]:focus,
+.admin-form input[type="number"]:focus,
+.admin-form input[type="date"]:focus,
+.admin-form input[type="text"]:focus,
+.admin-form select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
+}
+
+.admin-actions .tournament-btn {
+    min-width: 140px;
+}
+
+.admin-btn-muted {
+    background: transparent;
+}
+
+.admin-btn-danger {
+    background: linear-gradient(120deg, rgba(220, 38, 38, 0.35), rgba(255, 255, 255, 0.06));
+}
+
+.tournament-btn:disabled,
+.tournament-btn[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+    transform: none;
+}
+
+.admin-alerts {
+    display: grid;
+    gap: 10px;
+}
+
+.admin-alert {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.admin-alert.success {
+    border-color: rgba(16, 185, 129, 0.45);
+}
+
+.admin-alert.danger {
+    border-color: rgba(239, 68, 68, 0.45);
+}
+
+@media (max-width: 1100px) {
+    .admin-dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 920px) {
+    .admin-create-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-actions .tournament-btn {
+        width: 100%;
+    }
+
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

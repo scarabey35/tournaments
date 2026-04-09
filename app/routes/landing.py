@@ -15,3 +15,13 @@ def home():
 @landing_bp.route("/privacy")
 def privacy():
     return render_template("privacy.html")
+
+
+@landing_bp.route("/admin_dashboard")
+def admin_dashboard():
+    return render_template("admin_dashboard.html")
+
+
+@landing_bp.route("/admin_create_tournament")
+def admin_create_tournament():
+    return render_template("admin_create_tournament.html")

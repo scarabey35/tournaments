@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -18,29 +18,32 @@
     </header>
 
     <aside class="sidebar">
-    <nav class="sidebar-nav">
-    <a href="{{ url_for('landing.home') }}" class="nav-item active" title="Головна">
-        <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28" height="28">
-    </a>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('landing.home') }}" class="nav-item active" title="Головна">
+                <img src="{{ url_for('static', filename='icons/home.svg') }}" width="28" height="28">
+            </a>
 
-    <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
-        <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24" height="24">
-    </a>
+            <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item" title="Турніри">
+                <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" width="24" height="24">
+            </a>
 
-    <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
-        <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30" height="30">
-    </a>
+            <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
+                <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" width="30" height="30">
+            </a>
 
-    <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
-        <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24" height="24">
-    </a>
+            <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
+                <img src="{{ url_for('static', filename='icons/profile.svg') }}" width="24" height="24">
+            </a>
 
-    <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
-        <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
-    </a>
-    </nav>
-</aside>
+            <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
+                <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
+            </a>
 
+            <a href="{{ url_for('landing.admin_dashboard') }}" class="nav-item admin-nav-item" title="Адмін-панель">
+                <img src="{{ url_for('static', filename='icons/admin.svg') }}" width="28" height="28">
+            </a>
+        </nav>
+    </aside>
 
     <main class="main">
         <section class="role-dashboard">
@@ -52,7 +55,7 @@
                             <span class="status-dot status-upcoming"></span>
                             <h2>Мої турніри</h2>
                         </div>
-                        <button class="tournament-btn create-btn">+ Створити турнір</button>
+                        <a href="/admin_create_tournament" class="tournament-btn create-btn">+ Створити турнір</a>
                     </div>
 
                     <div class="tournament-list">
@@ -99,8 +102,6 @@
                 </div>
             </div>
 
-
-            
             <!-- Адмін -->
             <div class="role-section admin" data-role-section="admin">
                 <div class="role-grid">
@@ -110,11 +111,10 @@
                                 <span class="status-dot status-upcoming"></span>
                                 <h2>Адмін-панель</h2>
                             </div>
-                            <button class="tournament-btn create-btn">+ Створити турнір</button>
+                            <a href="/admin_create_tournament" class="tournament-btn create-btn">+ Створити турнір</a>
                         </div>
-            
+
                         <div class="tournament-list">
-                            <!-- Здесь будут карточки турниров, с командами и кнопками удаления -->
                             <article class="tournament-card tournament-card-upcoming">
                                 <div class="title-row">
                                     <span class="status-badge status-upcoming">DRAFT</span>
@@ -139,8 +139,6 @@
                     </div>
                 </div>
             </div>
-
-            
 
             <!-- Журі -->
             <div class="role-section jury" data-role-section="jury">
@@ -329,15 +327,12 @@
             </div>
         </section>
     </main>
- 
-    
-    
-<div class="role-switcher">
-    <button data-role="teacher" onclick="setRole('teacher')">Учитель</button>
-    <button data-role="jury" onclick="setRole('jury')">Журі</button>
-    <button data-role="student" onclick="setRole('student')">Учень</button>
-    <button data-role="admin" onclick="setRole('admin')">Адмін</button>
-</div>
 
+    <div class="role-switcher">
+        <button data-role="teacher" onclick="setRole('teacher')">Учитель</button>
+        <button data-role="jury" onclick="setRole('jury')">Журі</button>
+        <button data-role="student" onclick="setRole('student')">Учень</button>
+        <button data-role="admin" onclick="setRole('admin')">Адмін</button>
+    </div>
 </body>
 </html>
