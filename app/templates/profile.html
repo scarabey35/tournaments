@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body data-role="test">
+<body data-role="{{ user.role }}">
 <header class="header">
     <button id="themeToggle" class="theme-toggle">&#9789;</button>
     <div class="logo">#HACKATHONS</div>
@@ -61,12 +61,12 @@
 
             <div class="profile-user">
                 <div class="profile-avatar">
-                    <p>ДК</p>
+                    <p>{{user.name[0:3]}}</p>
                 </div>
 
                 <div class="profile-user-info">
-                    <h4>Данiл Колбасенко</h4>
-                    <p>DanilKolbasenko@gmail.com</p>
+                    <h4>{{user.name}}</h4>
+                    <p>{{user.email}}</p>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                     <span>Роль: <span id="roleDisplay"></span></span>
                 </div>
                 <div>
-                    <span>Зареєстровано: 01.01.2026</span>
+                    <span>Зареєстровано: {{ user.created_at.strftime('%d.%m.%Y') }}</span>
                 </div>
             </div>
         </article>

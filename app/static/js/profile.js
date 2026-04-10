@@ -3,11 +3,9 @@
     const roleDisplay = document.getElementById('roleDisplay');
 
     const roleNames = {
-        teacher: 'Вчитель',
+        team: 'Учасник',
         jury: 'Журі',
-        student: 'Учень',
-        admin: 'Адмін',
-        test: 'test'
+        admin: 'Адмін'
     };
 
     const currentRole = (body.dataset.role || 'guest').toLowerCase();
