@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* контейнер */
+.container {
+    padding: 20px;
+}
+
+/* кнопки */
+button {
+    background: #3b82f6;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+/* інпути */
+input, select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: white;
+}
+
+/* карточки */
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* таблиці */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+}
