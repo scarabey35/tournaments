@@ -8,6 +8,7 @@ from app.routes.landing import landing_bp
 from app.routes.admin import admin
 from app.routes.tournaments import tournaments_bp
 from app.routes.user import user_bp
+from app.routes.teams import teams_bp
 
 login_manager = LoginManager()
 login_manager.login_view = "user.login"
