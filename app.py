@@ -37,6 +37,7 @@ def create_app():
     app.register_blueprint(admin, url_prefix="/admin")
     app.register_blueprint(tournaments_bp, url_prefix="/tournaments")
     app.register_blueprint(user_bp)
+    app.register_blueprint(teams_bp)
 
     with app.app_context():
         db.create_all()
