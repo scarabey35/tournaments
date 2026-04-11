@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
+from flask import get_flashed_messages
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import db, User
 
@@ -7,6 +8,11 @@ user_bp = Blueprint("user", __name__)
 
 @user_bp.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("landing.home"))
+
+    if request.method == "GET":
+        get_flashed_messages()
     if request.method == "POST":
         email = request.form.get("email")
         if User.query.filter_by(email=email).first():
@@ -30,6 +36,12 @@ def register():
 
 @user_bp.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("landing.home"))
+
+    if request.method == "GET":
+        get_flashed_messages()
+
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
@@ -39,7 +51,7 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             flash("Вхід виконано успішно!", "success")
-            return redirect(url_for("user.profile"))
+            return redirect(url_for("landing.home"))
 
         flash("Невірний email або пароль", "danger")
 
@@ -49,6 +61,9 @@ def login():
 @user_bp.route("/logout")
 @login_required
 def logout():
+    if request.method == "GET":
+        get_flashed_messages()
+
     logout_user()
     flash("Ви вийшли з системи", "info")
     return redirect(url_for("landing.landing"))
@@ -57,6 +72,9 @@ def logout():
 @user_bp.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
+    if request.method == "GET":
+        get_flashed_messages()
+
     if request.method == "POST":
         # логіка зміни пароля
         old_password = request.form.get("old_password")

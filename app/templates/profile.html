@@ -84,7 +84,7 @@
         <article class="profile-card">
             <h3>Зміна паролю</h3>
 
-            <form method="POST" class="password-form">
+            <form method="POST" action="{{ url_for('user.profile') }}" class="password-form">
 
                 <label class="form-field">
                     <span>Старий пароль</span>
@@ -104,6 +104,18 @@
                 <button type="submit">Змінити пароль</button>
 
             </form>
+		
+	   {% with messages = get_flashed_messages(with_categories=true) %}
+  	      {% if messages %}
+  	          <div class="flash-container">
+  	            {% for category, message in messages %}
+  	              <div class="flash {{ category }}">
+  	                {{ message }}
+  	              </div>
+  	            {% endfor %}
+  	          </div>
+  	        {% endif %}
+  	    {% endwith %}
         </article>
     </section>
 
