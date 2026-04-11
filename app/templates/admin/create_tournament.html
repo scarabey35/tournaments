@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Створення турніру • HACKATHONS</title>
     <script src="{{ url_for('static', filename='js/themeToggle.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/admin.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/admin/create_tournament.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/create_tournament.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-theme" data-role="admin">
@@ -59,7 +59,7 @@
         </section>
 
         <section class="tournaments-section">
-            <form class="filters admin-form admin-create-form" id="admin-create-tournament-form">
+            <form class="filters admin-form admin-create-form" id="admin-create-tournament-form" method="post" action="{{ url_for('admin.create_tournament') }}">
                 <div class="filter-group">
                     <label for="title">Назва турніру</label>
                     <input id="title" name="title" type="text" required>

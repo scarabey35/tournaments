@@ -23,4 +23,4 @@ def create_tournament():
         flash("Турнір створено (заглушка)", "success")
         return redirect(url_for("admin.dashboard"))
 
-    return render_template("admin_create_tournament.html")
+    return render_template("admin/create_tournament.html")

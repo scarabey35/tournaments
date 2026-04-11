@@ -24,4 +24,4 @@ def admin_dashboard():
 
 @landing_bp.route("/admin_create_tournament")
 def admin_create_tournament():
-    return render_template("admin_create_tournament.html")
+    return render_template("admin/create_tournament.html")
