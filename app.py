@@ -1,6 +1,5 @@
 import os
 from flask import Flask
-from flask_migrate import Migrate
 from flask_login import LoginManager
 from app.models import db
 from app.extension import migrate
@@ -9,6 +8,7 @@ from app.routes.admin import admin
 from app.routes.tournaments import tournaments_bp
 from app.routes.user import user_bp
 from app.routes.teams import teams_bp
+from app.routes.rounds import rounds_bp
 
 login_manager = LoginManager()
 login_manager.login_view = "user.login"
@@ -39,6 +39,7 @@ def create_app():
     app.register_blueprint(tournaments_bp, url_prefix="/tournaments")
     app.register_blueprint(user_bp)
     app.register_blueprint(teams_bp)
+    app.register_blueprint(rounds_bp)
 
     with app.app_context():
         db.create_all()
