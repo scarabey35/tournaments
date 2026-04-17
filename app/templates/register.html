@@ -10,7 +10,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <header class="header">
         <div class="logo">#HACKATHONS</div>
@@ -21,61 +20,66 @@
             <h1>Реєстрація користувача</h1>
             <div class="subtitle">Створіть акаунт для участі у турнірі</div>
 
-            <form method="POST">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
 
-                <!-- 👤 ІМʼЯ -->
+            <form method="POST" action="{{ url_for('user.register') }}" novalidate>
                 <div class="section">
                     <div class="section-title">Ім'я</div>
                     <input
                         type="text"
                         name="name"
                         placeholder="Введіть ім'я"
+                        value="{{ form_data.name if form_data else '' }}"
+                        minlength="2"
+                        maxlength="255"
                         required
                     >
                 </div>
 
-                <!-- 📧 EMAIL -->
                 <div class="section">
                     <div class="section-title">Email</div>
                     <input
                         type="email"
                         name="email"
                         placeholder="Введіть email"
+                        value="{{ form_data.email if form_data else '' }}"
+                        maxlength="255"
+                        autocomplete="email"
                         required
                     >
                 </div>
 
-                <!-- 🔐 PASSWORD -->
                 <div class="section">
                     <div class="section-title">Пароль</div>
                     <input
                         type="password"
                         name="password"
                         placeholder="Придумайте пароль"
+                        minlength="8"
+                        maxlength="128"
+                        autocomplete="new-password"
                         required
                     >
-                </div>
-
-                <!-- 🎭 ROLE -->
-                <div class="section">
-                    <div class="section-title">Роль</div>
-                    <select name="role" class="select" required>
-                        <option value="team">Учасник</option>
-                        <option value="jury">Журі</option>
-                        <option value="admin">Адміністратор</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="button">
                     Зареєструватися
                 </button>
 
-                <!-- 🔗 LOGIN -->
                 <div class="footer">
                     Вже є акаунт?
                     <a href="{{ url_for('user.login') }}">Увійти</a>
                 </div>
-
             </form>
 
             <div class="footer">
