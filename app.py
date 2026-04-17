@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from app.models import db
 from app.extension import migrate
 from app.routes.landing import landing_bp
