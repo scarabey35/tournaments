@@ -1,3 +1,14 @@
+from flask import Blueprint, request, redirect, url_for, flash, render_template
+from flask_login import login_required
+from datetime import datetime
+from app.models import db, Tournament
+from app.decorators import roles_required
+
+admin = Blueprint("admin", __name__)
+
+
+@admin.route("/dashboard")
+@admin.route("/")
 @login_required
 @roles_required("admin")
 def dashboard():
