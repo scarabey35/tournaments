@@ -1,7 +1,6 @@
 (function () {
     const roleNames = {
         // name in unicode for best compatibility
-        teacher: '\u0423\u0447\u0438\u0442\u0435\u043b\u044c',
         jury: '\u0416\u0443\u0440\u0456',
         student: '\u0423\u0447\u0435\u043d\u044c',
         admin: '\u0410\u0434\u043c\u0456\u043d',
