@@ -8,7 +8,6 @@ admin = Blueprint("admin", __name__)
 
 
 @admin.route("/dashboard")
-@admin.route("/")
 @login_required
 @roles_required("admin")
 def dashboard():
