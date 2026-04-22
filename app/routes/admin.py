@@ -17,7 +17,6 @@ def dashboard():
 
 
 @admin.route("/create_tournament", methods=["GET", "POST"])
-@admin.route("/create-tournament", methods=["GET", "POST"])
 @login_required
 @roles_required("admin")
 def create_tournament():
