@@ -8,6 +8,12 @@ user_bp = Blueprint("user", __name__)
 
 @user_bp.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("landing.home"))
+
+    if request.method == "GET":
+        get_flashed_messages()
+
     if request.method == "POST":
         email = request.form.get("email", "").strip().lower()
         if User.query.filter_by(email=email).first():
