@@ -226,3 +226,75 @@ input:focus {
     background: #0a1f44;
     color: white;
 }
+
+.form-select {
+    padding: 13px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 204, 0, 0.15);
+    background-color: rgba(0, 20, 60, 0.6);
+    color: #ffffff;
+}
+
+.form-select:focus {
+    border-color: #ffcc00;
+    box-shadow:
+        0 0 10px rgba(255, 204, 0, 0.5),
+        0 0 20px rgba(0, 87, 183, 0.4);
+    background-color: rgba(0, 30, 80, 0.85);
+}
+
+.form-select option {
+    background: #0a1f44;
+    color: #ffffff;
+}
+
+.role-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.role-option {
+    display: block;
+    height: 100%;
+    padding: 16px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 204, 0, 0.18);
+    background: rgba(0, 20, 60, 0.6);
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.role-option:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 204, 0, 0.55);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.btn-check:checked + .role-option {
+    border-color: #ffcc00;
+    background: linear-gradient(145deg, rgba(255, 204, 0, 0.18), rgba(0, 87, 183, 0.22));
+    box-shadow: 0 0 0 1px rgba(255, 204, 0, 0.35), 0 0 18px rgba(255, 204, 0, 0.2);
+}
+
+.btn-check:focus-visible + .role-option {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 204, 0, 0.28);
+}
+
+.role-option-title {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffcc00;
+}
+
+.role-option-text {
+    display: block;
+    margin: 0;
+    color: #c8d6f2;
+    font-size: 13px;
+    line-height: 1.45;
+}
