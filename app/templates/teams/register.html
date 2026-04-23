@@ -6,6 +6,43 @@
     <title>Реєстрація команди</title>
 </head>
 <body>
+<h1>Реєстрація команди</h1>
+
+<form method="POST">
+
+    <h3>Дані команди</h3>
+    <input type="text" name="team_name" placeholder="Назва команди" required><br>
+    <input type="text" name="city" placeholder="Місто"><br>
+    <input type="text" name="organization" placeholder="Організація"><br>
+    <input type="text" name="contact" placeholder="Контакт"><br>
+
+    <h3>Капітан</h3>
+    <input type="text" name="captain_name" placeholder="Ім'я капітана" required><br>
+    <input type="email" name="captain_email" placeholder="Email капітана" required><br>
+
+    <h3>Учасники</h3>
+
+    <div>
+        <input type="text" name="member_name" placeholder="Ім'я учасника">
+        <input type="email" name="member_email" placeholder="Email учасника">
+    </div>
+
+
+    <div>
+        <input type="text" name="member_name" placeholder="Ім'я учасника">
+        <input type="email" name="member_email" placeholder="Email учасника">
+    </div>
     
+
+    <div>
+        <input type="text" name="member_name" placeholder="Ім'я учасника">
+        <input type="email" name="member_email" placeholder="Email учасника">
+    </div>
+
+    <br>
+    <button type="submit">Зареєструвати команду</button>
+
+</form>
+
 </body>
 </html>
