@@ -14,6 +14,9 @@ class Tournament(db.Model):
     registration_start = db.Column(db.DateTime, nullable=False)
     registration_end = db.Column(db.DateTime, nullable=False)
 
+    submission_deadline = db.Column(db.DateTime, nullable=True)
+    format = db.Column(db.String(50), nullable=True)  
+
     max_teams = db.Column(db.Integer)
 
     status = db.Column(db.String(50), default="draft")  
