@@ -20,7 +20,9 @@ class Tournament(db.Model):
     # draft / registration / running / finished
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
 
     # relations
     teams = db.relationship("Team", backref="tournament", lazy=True)
     rounds = db.relationship("Round", backref="tournament", lazy=True)
+    creator = db.relationship("User", backref="tournaments", lazy=True)

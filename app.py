@@ -46,6 +46,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
     return app
 
 app = create_app()
