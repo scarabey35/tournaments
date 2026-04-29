@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for, flash, render_template, get_flashed_messages
+from flask import Blueprint, request, redirect, url_for, flash, render_template, get_flashed_messages, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from app.models import db, User, Team
@@ -69,10 +69,11 @@ def login():
     return render_template("login.html")
 
 
-@user_bp.route("/logout")
+@user_bp.route("/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
+    session.clear()
     flash("Ви вийшли з системи", "info")
     return redirect(url_for("landing.landing"))
 

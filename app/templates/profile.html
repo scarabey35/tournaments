@@ -128,7 +128,11 @@
         <a href="{{ url_for('landing.privacy') }}">Політика конфіденційності</a>
         <a href="/support">Підтримка</a>
     </nav>
+    <form method="POST" action="{{ url_for('user.logout') }}" class="logout-form">
+        <button type="submit" class="logout-btn">Вийти з акаунту</button>
+    </form>
 </footer>
 
 </body>
 </html>
+

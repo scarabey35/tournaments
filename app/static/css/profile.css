@@ -244,3 +244,35 @@ body:not(.dark-theme) .profile-user {
         gap: 10px;
     }
 }
+
+.logout-form {
+    margin-left: auto;
+}
+
+.logout-btn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.18);
+}
+
+@media (max-width: 768px) {
+    .logout-form {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}
