@@ -5,7 +5,6 @@ from app.models import db, User, Team
 
 user_bp = Blueprint("user", __name__)
 
-
 @user_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -15,23 +14,39 @@ def register():
         get_flashed_messages()
 
     if request.method == "POST":
+        name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
+        role = request.form.get("role", "team")
+
+        if not name or not email or not password:
+            flash("Усі поля обовʼязкові для заповнення", "danger")
+            return redirect(url_for("user.register"))
+
+        if len(name) < 4:
+            flash("Ім'я користувача має містити мінімум 4 символи", "danger")
+            return redirect(url_for("user.register"))
+
+        if len(password) < 8:
+            flash("Пароль має містити мінімум 8 символів", "danger")
+            return redirect(url_for("user.register"))
+
         if User.query.filter_by(email=email).first():
             flash("Email вже використовується", "danger")
             return redirect(url_for("user.register"))
 
         user = User(
-            name=request.form.get("name"),
+            name=name,
             email=email,
-            password_hash=generate_password_hash(request.form.get("password")),
-            role=request.form.get("role", "team"),
+            password_hash=generate_password_hash(password),
+            role=role,
         )
         db.session.add(user)
         db.session.commit()
 
         login_user(user)
         flash("Реєстрація успішна!", "success")
-	
+
         return redirect(url_for("landing.home"))
 
     return render_template("register.html")
@@ -48,14 +63,7 @@ def login():
             login_user(user)
             flash("Вхід виконано успішно!", "success")
 
-            # Редирект залежно від ролі
-            if user.role == "admin":
-                return redirect(url_for("admin.dashboard"))
-            elif user.role == "jury":
-                return redirect(url_for("jury.assignments"))
-            else:
-                return redirect(url_for("user.profile"))
-
+            return redirect(url_for("landing.home"))
         flash("Невірний email або пароль", "danger")
 
     return render_template("login.html")
