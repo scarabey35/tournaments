@@ -78,37 +78,15 @@ def logout():
     return redirect(url_for("landing.landing"))
 
 
-@user_bp.route("/profile", methods=["GET", "POST"])
+@user_bp.route("/profile", methods=["GET"])
 @login_required
 def profile():
-    if request.method == "POST":
-        old_password = request.form.get("old_password")
-        new_password = request.form.get("new_password")
-        confirm = request.form.get("confirm_password")
-
-        if not check_password_hash(current_user.password_hash, old_password):
-            flash("Старий пароль невірний", "danger")
-            return redirect(url_for("user.profile"))
-
-        if new_password != confirm:
-            flash("Паролі не співпадають", "danger")
-            return redirect(url_for("user.profile"))
-
-        if len(new_password) < 6:
-            flash("Пароль має бути не менше 6 символів", "danger")
-            return redirect(url_for("user.profile"))
-
-        current_user.password_hash = generate_password_hash(new_password)
-        db.session.commit()
-        flash("Пароль успішно змінено!", "success")
-        return redirect(url_for("user.profile"))
-
-    # Дані команди для role=team
+    # Team data for role=team
     team = None
     if current_user.role == "team" and current_user.team_id:
         team = Team.query.get(current_user.team_id)
 
-    # Дані журі: список оцінених робіт
+    # Jury data: list of evaluated submissions
     jury_evaluations = []
     if current_user.role == "jury":
         from app.models import Evaluation
@@ -124,6 +102,39 @@ def profile():
         team=team,
         jury_evaluations=jury_evaluations,
     )
+
+
+@user_bp.route("/profile/change-password", methods=["POST"])
+@login_required
+def change_password():
+    old_password = request.form.get("old_password", "")
+    new_password = request.form.get("new_password", "")
+    confirm_password = request.form.get("confirm_password", "")
+
+    if not old_password or not new_password or not confirm_password:
+        flash("Fill in all fields to change password", "danger")
+        return redirect(url_for("user.profile"))
+
+    if not check_password_hash(current_user.password_hash, old_password):
+        flash("Current password is incorrect", "danger")
+        return redirect(url_for("user.profile"))
+
+    if new_password != confirm_password:
+        flash("New password and confirmation do not match", "danger")
+        return redirect(url_for("user.profile"))
+
+    if old_password == new_password:
+        flash("New password must be different from current password", "danger")
+        return redirect(url_for("user.profile"))
+
+    if len(new_password) < 8:
+        flash("New password must be at least 8 characters long", "danger")
+        return redirect(url_for("user.profile"))
+
+    current_user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    flash("Password changed successfully", "success")
+    return redirect(url_for("user.profile"))
 
 
 @user_bp.route("/settings")

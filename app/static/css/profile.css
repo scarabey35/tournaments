@@ -98,7 +98,7 @@ body:not(.dark-theme) .profile-user {
     font-size: 14px;
 }
 
-.password-form button {
+.password-form > button[type="submit"] {
     width: fit-content;
     padding: 12px 20px;
     border: none;
@@ -110,7 +110,7 @@ body:not(.dark-theme) .profile-user {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.password-form button:hover {
+.password-form > button[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 20px rgba(255, 204, 0, 0.35);
 }
@@ -275,4 +275,48 @@ body:not(.dark-theme) .profile-user {
     .logout-btn {
         width: 100%;
     }
+}
+
+
+.password-input-wrap {
+    position: relative;
+}
+
+.password-input-wrap input {
+    padding-right: 44px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    box-shadow: none;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-color);
+    outline: none;
+}
+
+body:not(.dark-theme) .password-toggle:hover,
+body:not(.dark-theme) .password-toggle:focus-visible {
+    background: rgba(15, 23, 42, 0.05);
+    border-color: rgba(15, 23, 42, 0.12);
 }

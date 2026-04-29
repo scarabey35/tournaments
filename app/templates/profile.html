@@ -84,21 +84,30 @@
         <article class="profile-card">
             <h3>Зміна паролю</h3>
 
-            <form method="POST" action="{{ url_for('user.profile') }}" class="password-form">
+            <form method="POST" action="{{ url_for('user.change_password') }}" class="password-form">
 
                 <label class="form-field">
                     <span>Старий пароль</span>
-                    <input type="password" name="old_password" required>
+                    <div class="password-input-wrap">
+                        <input type="password" name="old_password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" data-target="old_password" aria-label="Hold to show current password">&#128065;</button>
+                    </div>
                 </label>
 
                 <label class="form-field">
                     <span>Новий пароль</span>
-                    <input type="password" name="new_password" required>
+                    <div class="password-input-wrap">
+                        <input type="password" name="new_password" required minlength="8" autocomplete="new-password">
+                        <button type="button" class="password-toggle" data-target="new_password" aria-label="Hold to show new password">&#128065;</button>
+                    </div>
                 </label>
 
                 <label class="form-field">
                     <span>Підтвердити пароль</span>
-                    <input type="password" name="confirm_password" required>
+                    <div class="password-input-wrap">
+                        <input type="password" name="confirm_password" required minlength="8" autocomplete="new-password">
+                        <button type="button" class="password-toggle" data-target="confirm_password" aria-label="Hold to show password confirmation">&#128065;</button>
+                    </div>
                 </label>
 
                 <button type="submit">Змінити пароль</button>
