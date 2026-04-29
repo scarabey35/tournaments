@@ -220,8 +220,8 @@ project/
 |---|---|---|
 | GET/POST | `/register` | Реєстрація |
 | GET/POST | `/login` | Вхід |
-| GET | `/logout` | Вихід |
-| GET/POST | `/profile` | Профіль (POST — зміна пароля) |
+| POST | `/logout` | Вихід (через форму на сторінці профілю) |
+| GET/POST | `/profile` | Профіль (POST — зміна пароля; окрема POST-форма — logout) |
 
 ### Адміністратор (`admin`, prefix `/admin`)
 | Метод | URL | Доступ | Опис |
