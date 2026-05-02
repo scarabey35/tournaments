@@ -100,16 +100,18 @@
             <div class="button-row admin-actions">
 
                 <a href="#"
-                   class="tournament-btn admin-btn-muted">
+                   class="tournament-btn admin-btn-muted"
+                   data-admin-action="edit">
                     Редагувати
                 </a>
 
                 <a href="#"
-                   class="tournament-btn admin-btn-danger">
+                   class="tournament-btn admin-btn-danger"
+                   data-admin-action="delete">
                     Видалити
                 </a>
 
-                <a href="#"
+                <a href="{{ url_for('tournaments.tournament_detail', tournament_id=tournament.id) }}"
                    class="tournament-btn">
                     Переглянути
                 </a>
