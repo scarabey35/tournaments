@@ -60,162 +60,72 @@
 
         <section class="tournaments-section">
             <div class="tournament-list admin-dashboard-grid">
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Хакатон 2026</h3>
-                        <span class="status-badge status-current">активний</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: активний</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">12 команд</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 15.04.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
 
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Code Spring Cup</h3>
-                        <span class="status-badge status-past">завершений</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: завершений</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">24 команди</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 30.03.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
+    {% if tournaments %}
+        {% for tournament in tournaments %}
 
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Future Labs Draft</h3>
-                        <span class="status-badge status-upcoming">чернетка</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: чернетка</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">8 команд</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 20.05.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
+        <article class="tournament-card">
+            <div class="title-row">
+                <h3>{{ tournament.name }}</h3>
 
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Urban Hack Week</h3>
-                        <span class="status-badge status-current">активний</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: активний</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">16 команд</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 02.06.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
-
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Neon Builder League</h3>
-                        <span class="status-badge status-upcoming">чернетка</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: чернетка</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">6 команд</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 11.06.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
-
-                <article class="tournament-card">
-                    <div class="title-row">
-                        <h3>Final Demo Day</h3>
-                        <span class="status-badge status-past">завершений</span>
-                    </div>
-                    <div class="card-meta">
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">Статус: завершений</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-flag" aria-hidden="true"></span>
-                            <span class="meta-label">18 команд</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="icon icon-calendar" aria-hidden="true"></span>
-                            <span class="meta-label">До: 28.02.2026</span>
-                        </div>
-                    </div>
-                    <div class="button-row admin-actions">
-                        <button type="button" class="tournament-btn admin-btn-muted" data-admin-action="edit">Редагувати</button>
-                        <button type="button" class="tournament-btn admin-btn-danger" data-admin-action="delete">Видалити</button>
-                        <button type="button" class="tournament-btn" data-admin-action="view">Переглянути</button>
-                    </div>
-                </article>
+                <span class="status-badge">
+                    {{ tournament.status }}
+                </span>
             </div>
+
+            <div class="card-meta">
+
+                <div class="meta-item">
+                    <span class="meta-label">
+                        Статус: {{ tournament.status }}
+                    </span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">
+                        Макс команд:
+                        {{ tournament.max_teams or "∞" }}
+                    </span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">
+                        До:
+                        {{ tournament.registration_end.strftime('%d.%m.%Y') }}
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="button-row admin-actions">
+
+                <a href="#"
+                   class="tournament-btn admin-btn-muted">
+                    Редагувати
+                </a>
+
+                <a href="#"
+                   class="tournament-btn admin-btn-danger">
+                    Видалити
+                </a>
+
+                <a href="#"
+                   class="tournament-btn">
+                    Переглянути
+                </a>
+
+            </div>
+        </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Турнірів поки немає.</p>
+
+    {% endif %}
+
+</div>
         </section>
     </main>
 </body>
