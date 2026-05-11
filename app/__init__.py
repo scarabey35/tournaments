@@ -2,6 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from .models import db
 from .extension import migrate
+import os
 
 login_manager = LoginManager()
 login_manager.login_view = 'user.login'
@@ -10,6 +11,15 @@ login_manager.login_message_category = "info"
 
 def create_app():
     app = Flask(__name__)
+
+    app.config['SECRET_KEY'] = 'dev'
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+        'DATABASE_URL',
+        'sqlite:///app.db'
+    )
+
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -40,6 +40,7 @@
 | Flask-Login | 0.6.3 |
 | Werkzeug | 3.1.8 |
 | База даних | SQLite (`instance/app.db`) |
+| pytest | Тести |
 
 ---
 
