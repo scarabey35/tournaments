@@ -1,4 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for
+from flask_login import current_user
+from app.models import Tournament
 
 landing_bp = Blueprint("landing", __name__)
 
@@ -10,7 +12,12 @@ def landing():
 
 @landing_bp.route("/home")
 def home():
-    return render_template("home.html")
+    admin_tournaments = []
+    if current_user.is_authenticated and current_user.role == "admin":
+        admin_tournaments = (
+            Tournament.query.order_by(Tournament.created_at.desc()).limit(5).all()
+        )
+    return render_template("home.html", admin_tournaments=admin_tournaments)
 
 
 @landing_bp.route("/privacy")

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -67,7 +67,7 @@
                 </div>
                 <a class="tournament-btn create-btn" href="{{ url_for('admin.dashboard') }}">Повернутися до панелі</a>
             </div>
-            <p class="section-note">Усі поля обов'язкові, окрім максимальної кількості команд. Дані нікуди не відправляються.</p>
+            <p class="section-note">Усі поля обов'язкові, окрім максимальної кількості команд.</p>
         </section>
 
         <section class="tournaments-section">
@@ -88,8 +88,13 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="registration_deadline">Дата завершення реєстрації</label>
-                    <input id="registration_deadline" name="registration_deadline" type="date" required>
+                    <label for="registration_start">Початок реєстрації</label>
+                    <input id="registration_start" name="registration_start" type="datetime-local" required>
+                </div>
+
+                <div class="filter-group">
+                    <label for="registration_end">Завершення реєстрації</label>
+                    <input id="registration_end" name="registration_end" type="datetime-local" required>
                 </div>
 
                 <div class="filter-group">

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -60,26 +60,36 @@
                         </div>
 
                         <div class="tournament-list">
-                            <article class="tournament-card tournament-card-upcoming">
-                                <div class="title-row">
-                                    <span class="status-badge status-upcoming">DRAFT</span>
-                                    <h3>Турнір 1</h3>
-                                </div>
-                                <p class="description">Адмін може керувати турніром.</p>
-                                <div class="card-meta">
-                                    <div class="meta-item">
-                                        <span class="icon icon-calendar" aria-hidden="true"></span>
-                                        <span class="meta-label">Дедлайн: 25.03.2026</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <span class="icon icon-flag" aria-hidden="true"></span>
-                                        <span class="meta-label">Команди: 5</span>
-                                    </div>
-                                </div>
-                                <button class="tournament-btn">Додати команду</button>
-                                <button class="tournament-btn">Видалити команду</button>
-                                <button class="tournament-btn">Переглянути подання</button>
-                            </article>
+                            {% if admin_tournaments %}
+                                {% for tournament in admin_tournaments %}
+                                    <article class="tournament-card tournament-card-upcoming">
+                                        <div class="title-row">
+                                            <span class="status-badge status-upcoming">{{ tournament.status|upper }}</span>
+                                            <h3>{{ tournament.name }}</h3>
+                                        </div>
+                                        <p class="description">{{ tournament.description or "Адмін може керувати турніром." }}</p>
+                                        <div class="card-meta">
+                                            <div class="meta-item">
+                                                <span class="icon icon-calendar" aria-hidden="true"></span>
+                                                <span class="meta-label">
+                                                    Реєстрація до: {{ tournament.registration_end.strftime('%d.%m.%Y %H:%M') }}
+                                                </span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="icon icon-flag" aria-hidden="true"></span>
+                                                <span class="meta-label">Команди: {{ tournament.teams|length }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="button-row">
+                                            <a class="tournament-btn" href="{{ url_for('tournaments.tournament_detail', tournament_id=tournament.id) }}">Відкрити турнір</a>
+                                            <a class="tournament-btn" href="#" data-admin-action="edit">Редагувати</a>
+                                            <a class="tournament-btn" href="#" data-admin-action="delete">Видалити</a>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                            {% else %}
+                                <div class="empty-message">Поки немає створених турнірів</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@
     <script src="{{ url_for('static', filename='js/leaderboard.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+<body>
     <header class="header">
         <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
@@ -36,116 +37,83 @@
 
     <main class="main">
         <h1 class="page-title">Лідерборд</h1>
-        <p id="ranking-subtitle" class="page-subtitle">Глобальний рейтинг</p>
-
-        <section class="ranking-controls" aria-label="Керування рейтингом">
-            <div class="toggle-group" role="tablist">
-                <button class="toggle-btn active" type="button" role="tab" aria-selected="true" data-target="global-ranking">Глобальний рейтинг</button>
-                <button class="toggle-btn" type="button" role="tab" aria-selected="false" data-target="tournament-ranking">Турнірний рейтинг</button>
-            </div>
-            <label class="select-group" for="tournamentSelect">
-                <span>Турнір</span>
-                <select id="tournamentSelect">
-                    <option>Усі турніри</option>
-                    <option>Хакатон Future Labs</option>
-                    <option>Global Dev Sprint</option>
-                </select>
-            </label>
-        </section>
-
-        <section id="global-ranking" class="ranking-card">
-            <div class="table-wrapper">
-                <table class="ranking-table">
-                    <thead>
-                        <tr>
-                            <th>Місце</th>
-                            <th>Назва команди</th>
-                            <th>Набрано балів</th>
-                            <th>Активність</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>AlgoStorm</td>
-                            <td>985</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Team Quantum</td>
-                            <td>942</td>
-                            <td>22</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>CodeRaptors</td>
-                            <td>910</td>
-                            <td>21</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Skyline Devs</td>
-                            <td>876</td>
-                            <td>19</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Binary Bards</td>
-                            <td>844</td>
-                            <td>18</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="tournament-ranking" class="ranking-card hidden">
-            <div class="table-wrapper">
-                <table class="ranking-table">
-                    <thead>
-                        <tr>
-                            <th>Місце</th>
-                            <th>Назва команди</th>
-                            <th>Набрано балів</th>
-                            <th>Активність</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Future Hackers</td>
-                            <td>768</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Dev Orbit</td>
-                            <td>742</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Nova Squad</td>
-                            <td>701</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Pixel Pulse</td>
-                            <td>668</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Syntax Crew</td>
-                            <td>640</td>
-                            <td>13</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        {% if tournament %}
+            <p id="ranking-subtitle" class="page-subtitle">Турнір: {{ tournament.name }}</p>
+            <section class="ranking-card">
+                <div class="table-wrapper">
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>Місце</th>
+                                <th>Команда</th>
+                                <th>Підсумковий бал</th>
+                                <th>Backend</th>
+                                <th>Database</th>
+                                <th>Frontend</th>
+                                <th>Functionality</th>
+                                <th>Usability</th>
+                                <th>Сабміти</th>
+                                <th>Оцінки</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if leaderboard %}
+                                {% for row in leaderboard %}
+                                    <tr>
+                                        <td>{{ row.rank }}</td>
+                                        <td>{{ row.team.name }}</td>
+                                        <td>{{ row.total_avg }}</td>
+                                        <td>{{ row.backend }}</td>
+                                        <td>{{ row.database }}</td>
+                                        <td>{{ row.frontend }}</td>
+                                        <td>{{ row.functionality }}</td>
+                                        <td>{{ row.usability }}</td>
+                                        <td>{{ row.submission_count }}</td>
+                                        <td>{{ row.evaluations_count }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">Наразі немає даних для лідерборду цього турніру.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        {% else %}
+            <p id="ranking-subtitle" class="page-subtitle">Оберіть завершений турнір для перегляду рейтингу</p>
+            <section class="ranking-card">
+                <div class="table-wrapper">
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>Турнір</th>
+                                <th>Статус</th>
+                                <th>Дія</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if tournaments %}
+                                {% for item in tournaments %}
+                                    <tr>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.status }}</td>
+                                        <td>
+                                            <a href="{{ url_for('tournaments.leaderboard', tournament_id=item.id) }}">Відкрити рейтинг</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">Завершених турнірів поки немає.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        {% endif %}
     </main>
 </body>
 </html>

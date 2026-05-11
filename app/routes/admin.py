@@ -24,17 +24,21 @@ def create_tournament():
         description = request.form.get("description", "").strip()
         max_teams_raw = request.form.get("max_teams", "").strip()
         start_date_raw = request.form.get("start_date", "").strip()
-        registration_end_raw = request.form.get("registration_deadline", "").strip()
-        submission_deadline_raw = request.form.get("submission_deadline", "").strip()  # FIX: було відсутнє
-        format_ = request.form.get("format", "").strip()  # FIX: було відсутнє
+        registration_start_raw = request.form.get("registration_start", "").strip()
+        registration_end_raw = (
+            request.form.get("registration_end", "").strip()
+            or request.form.get("registration_deadline", "").strip()
+        )
+        submission_deadline_raw = request.form.get("submission_deadline", "").strip()
+        format_ = request.form.get("format", "").strip()
 
         # --- Валідація обов'язкових полів ---
         if not name:
             flash("Назва турніру обов'язкова", "danger")
             return render_template("admin/create_tournament.html")
 
-        if not registration_end_raw:
-            flash("Вкажіть дату завершення реєстрації", "danger")
+        if not registration_start_raw or not registration_end_raw:
+            flash("Вкажіть початок і завершення вікна реєстрації", "danger")
             return render_template("admin/create_tournament.html")
 
         if not submission_deadline_raw:
@@ -50,10 +54,14 @@ def create_tournament():
         fmt_datetime = "%Y-%m-%dT%H:%M"
 
         try:
-            registration_end = datetime.strptime(registration_end_raw, fmt_date)
-            registration_start = datetime.utcnow()
+            registration_start = datetime.strptime(registration_start_raw, fmt_datetime)
+            registration_end = datetime.strptime(registration_end_raw, fmt_datetime)
         except ValueError:
-            flash("Невірний формат дати реєстрації", "danger")
+            flash("Невірний формат вікна реєстрації", "danger")
+            return render_template("admin/create_tournament.html")
+
+        if registration_end <= registration_start:
+            flash("Завершення реєстрації має бути пізніше за початок", "danger")
             return render_template("admin/create_tournament.html")
 
         start_date = None
@@ -68,6 +76,10 @@ def create_tournament():
             submission_deadline = datetime.strptime(submission_deadline_raw, fmt_datetime)
         except ValueError:
             flash("Невірний формат дедлайну здачі робіт", "danger")
+            return render_template("admin/create_tournament.html")
+
+        if submission_deadline <= registration_end:
+            flash("Дедлайн сабмітів має бути пізніше завершення реєстрації", "danger")
             return render_template("admin/create_tournament.html")
 
         max_teams = None
@@ -87,11 +99,11 @@ def create_tournament():
             start_date=start_date,
             registration_start=registration_start,
             registration_end=registration_end,
-            submission_deadline=submission_deadline,   # FIX: додано
-            format=format_,                            # FIX: додано
+            submission_deadline=submission_deadline,
+            format=format_,
             max_teams=max_teams,
             status="draft",
-            created_by=current_user.id,               # FIX: додано
+            created_by=current_user.id,
         )
         db.session.add(tournament)
         db.session.commit()
