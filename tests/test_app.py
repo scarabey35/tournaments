@@ -214,7 +214,7 @@ def test_admin_team_submission_jury_and_leaderboard_flow(client, app):
         tournament_db = Tournament.query.filter_by(name="Hackathon 2026").first()
         assert tournament_db is not None
         assert tournament_db.status == "draft"
-        tournament_id = tournament_db.id  # Зберігаємо ID для подальшого використання
+        tournament_id = tournament_db.id
 
     # Створення раунду
     round_response = client.post(
@@ -232,12 +232,11 @@ def test_admin_team_submission_jury_and_leaderboard_flow(client, app):
     assert round_response.status_code == 302
 
     with app.app_context():
-        # Використовуємо db.session.get замість query.get (рекомендація SQLAlchemy 2.0)
         tournament_db = db.session.get(Tournament, tournament_id)
         round_db = Round.query.filter_by(tournament_id=tournament_id, name="Round 1").first()
         assert round_db is not None
         assert tournament_db.status == "running"
-        round_id = round_db.id # Зберігаємо ID
+        round_id = round_db.id
 
     # 3. Реєстрація команди (під користувачем team)
     logout(client, app)
@@ -264,7 +263,6 @@ def test_admin_team_submission_jury_and_leaderboard_flow(client, app):
         assert team_db is not None
         team_id = team_db.id
         
-        # Перевірка прив'язки користувача до команди через збережений email
         user_check = User.query.filter_by(email=team_user_email).first()
         assert user_check.team_id == team_id
 
@@ -312,8 +310,8 @@ def test_admin_team_submission_jury_and_leaderboard_flow(client, app):
     evaluate_response_1 = client.post(
         endpoint_path(app, "jury.evaluate", submission_id=submission_id),
         data={
-            "backend_score": "110", # має обрізатися до 100
-            "database_score": "-5", # має обрізатися до 0
+            "backend_score": "110", # має стати 100
+            "database_score": "-5", # має стати 0
             "frontend_score": "80",
             "functionality_score": "70",
             "usability_score": "95",
