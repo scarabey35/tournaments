@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оцінювання • {{ submission.team.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+</head>
+<body>
+    <main class="main" style="max-width: 900px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title"><h2>Оцінювання: {{ submission.team.name }}</h2></div>
+            <a class="tournament-btn" href="{{ url_for('jury.assignments') }}">Назад</a>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <article class="tournament-card">
+            <p>GitHub: <a href="{{ submission.github_url }}" target="_blank">{{ submission.github_url }}</a></p>
+            <p>Відео: <a href="{{ submission.video_url }}" target="_blank">{{ submission.video_url }}</a></p>
+        </article>
+
+        <section class="tournament-card">
+            <form method="post" style="display: grid; gap: 10px;">
+                <label>Backend (0-100)<input type="number" min="0" max="100" name="backend_score" value="{{ evaluation.backend_score if evaluation.backend_score is not none else '' }}" required></label>
+                <label>Database (0-100)<input type="number" min="0" max="100" name="database_score" value="{{ evaluation.database_score if evaluation.database_score is not none else '' }}" required></label>
+                <label>Frontend (0-100)<input type="number" min="0" max="100" name="frontend_score" value="{{ evaluation.frontend_score if evaluation.frontend_score is not none else '' }}" required></label>
+                <label>Functionality (0-100)<input type="number" min="0" max="100" name="functionality_score" value="{{ evaluation.functionality_score if evaluation.functionality_score is not none else '' }}" required></label>
+                <label>Usability (0-100)<input type="number" min="0" max="100" name="usability_score" value="{{ evaluation.usability_score if evaluation.usability_score is not none else '' }}" required></label>
+                <label>Коментар<textarea name="comment" rows="4">{{ evaluation.comment if evaluation.comment else '' }}</textarea></label>
+                <button class="tournament-btn" type="submit">Зберегти оцінку</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

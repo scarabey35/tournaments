@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подача роботи • {{ round.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+</head>
+<body>
+    <main class="main" style="max-width: 900px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title">
+                <h2>Сабміт команди «{{ team.name }}»</h2>
+            </div>
+            <a class="tournament-btn" href="{{ url_for('rounds.round_detail', round_id=round.id) }}">Назад до раунду</a>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <section class="tournament-card">
+            <form method="post" style="display: grid; gap: 12px;">
+                <label>GitHub URL
+                    <input type="url" name="github_url" required value="{{ submission.github_url if submission else '' }}">
+                </label>
+                <label>Video URL
+                    <input type="url" name="video_url" required value="{{ submission.video_url if submission else '' }}">
+                </label>
+                <label>Live Demo URL
+                    <input type="url" name="live_demo_url" value="{{ submission.live_demo_url if submission and submission.live_demo_url else '' }}">
+                </label>
+                <label>Опис
+                    <textarea name="description" rows="5">{{ submission.description if submission and submission.description else '' }}</textarea>
+                </label>
+                <button class="tournament-btn" type="submit">{% if submission %}Оновити сабміт{% else %}Подати сабміт{% endif %}</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

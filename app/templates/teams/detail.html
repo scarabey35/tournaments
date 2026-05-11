@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ team.name }} • Команда</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+</head>
+<body>
+    <main class="main" style="max-width: 900px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title"><h2>{{ team.name }}</h2></div>
+            <a class="tournament-btn" href="{{ url_for('tournaments.tournament_detail', tournament_id=team.tournament_id) }}">До турніру</a>
+        </section>
+
+        <article class="tournament-card">
+            <p><strong>Місто:</strong> {{ team.city or "Не вказано" }}</p>
+            <p><strong>Організація:</strong> {{ team.organization or "Не вказано" }}</p>
+            <p><strong>Контакт:</strong> {{ team.contact or "Не вказано" }}</p>
+        </article>
+
+        <article class="tournament-card">
+            <h3>Склад команди</h3>
+            {% if team.members %}
+                <ul style="padding-left: 18px;">
+                    {% for member in team.members %}
+                        <li>
+                            {{ member.name }} ({{ member.email }})
+                            {% if member.is_captain %}<strong> — капітан</strong>{% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Учасники відсутні.</p>
+            {% endif %}
+        </article>
+    </main>
+</body>
+</html>
 

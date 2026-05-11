@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Призначені роботи • Jury</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+</head>
+<body>
+    <main class="main" style="max-width: 1100px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title"><h2>Мої призначені роботи</h2></div>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% if evaluations %}
+            <div class="tournament-list">
+                {% for ev in evaluations %}
+                    <article class="tournament-card">
+                        <h3>Команда: {{ ev.submission.team.name }}</h3>
+                        <p>Раунд: {{ ev.submission.round.name }}</p>
+                        <p>GitHub: <a href="{{ ev.submission.github_url }}" target="_blank">{{ ev.submission.github_url }}</a></p>
+                        <p>Відео: <a href="{{ ev.submission.video_url }}" target="_blank">{{ ev.submission.video_url }}</a></p>
+                        <a class="tournament-btn" href="{{ url_for('jury.evaluate', submission_id=ev.submission_id) }}">Оцінити</a>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <article class="tournament-card"><p>Наразі немає призначених робіт.</p></article>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створити раунд • HACKATHONS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="main" style="max-width: 900px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title">
+                <h2>Створення раунду для «{{ tournament.name }}»</h2>
+            </div>
+            <a class="tournament-btn" href="{{ url_for('tournaments.tournament_detail', tournament_id=tournament.id) }}">Назад</a>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <section class="tournament-card">
+            <form method="post" style="display: grid; gap: 12px;">
+                <label>Назва раунду
+                    <input type="text" name="name" required>
+                </label>
+                <label>Опис
+                    <textarea name="description" rows="4"></textarea>
+                </label>
+                <label>Вимоги до технологій
+                    <textarea name="requirements" rows="4"></textarea>
+                </label>
+                <label>Must have
+                    <textarea name="must_have" rows="4"></textarea>
+                </label>
+                <label>Старт
+                    <input type="datetime-local" name="start_time" required>
+                </label>
+                <label>Дедлайн
+                    <input type="datetime-local" name="end_time" required>
+                </label>
+                <button class="tournament-btn" type="submit">Створити раунд</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

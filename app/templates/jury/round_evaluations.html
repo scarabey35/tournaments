@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зведення оцінок • {{ round.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
+</head>
+<body>
+    <main class="main" style="max-width: 1100px; margin: 40px auto;">
+        <section class="section-header">
+            <div class="section-title"><h2>Зведення оцінок: {{ round.name }}</h2></div>
+            <a class="tournament-btn" href="{{ url_for('rounds.round_detail', round_id=round.id) }}">Назад</a>
+        </section>
+
+        {% if summary %}
+            <div class="tournament-list">
+                {% for row in summary %}
+                    <article class="tournament-card">
+                        <h3>{{ row.submission.team.name }}</h3>
+                        <p>Оцінено: {{ row.filled }} / {{ row.total }}</p>
+                        <p>Середній бал: {{ row.avg_total if row.avg_total is not none else "—" }}</p>
+                        <p>GitHub: <a href="{{ row.submission.github_url }}" target="_blank">{{ row.submission.github_url }}</a></p>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <article class="tournament-card"><p>Немає оцінок для відображення.</p></article>
+        {% endif %}
+    </main>
+</body>
+</html>
