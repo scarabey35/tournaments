@@ -2,6 +2,7 @@
     const roleNames = {
         // name in unicode for best compatibility
         jury: '\u0416\u0443\u0440\u0456',
+        team: '\u0423\u0447\u0430\u0441\u043d\u0438\u043a',
         student: '\u0423\u0447\u0435\u043d\u044c',
         admin: '\u0410\u0434\u043c\u0456\u043d',
         guest: '\u0413\u0456\u0441\u0442\u044c'
@@ -9,6 +10,7 @@
 
     function normalizeRole(role) {
         const nextRole = String(role || '').toLowerCase();
+        if (nextRole === 'team') return 'student';
         return Object.prototype.hasOwnProperty.call(roleNames, nextRole) ? nextRole : 'guest';
     }
 

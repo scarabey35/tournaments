@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body data-role="student">
+<body data-role="{{ current_user.role if current_user.is_authenticated else 'guest' }}">
     <!-- Шапка -->
     <header class="header">
         <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
-        <div class="role">Роль: <span id="roleDisplay">Учень</span></div>
+        <div class="role">Роль: <span id="roleDisplay"></span></div>
     </header>
 
     <aside class="sidebar">
@@ -39,9 +39,11 @@
                 <img src="{{ url_for('static', filename='icons/settings.svg') }}" width="40" height="40">
             </a>
 
+            {% if current_user.is_authenticated and current_user.role == "admin" %}
             <a href="{{ url_for('landing.admin_dashboard') }}" class="nav-item admin-nav-item" title="Адмін-панель">
                 <img src="{{ url_for('static', filename='icons/admin.svg') }}" width="28" height="28">
             </a>
+            {% endif %}
         </nav>
     </aside>
 
@@ -282,11 +284,8 @@
             </div>
         </section>
     </main>
-
-    <div class="role-switcher">
-        <button data-role="admin" onclick="setRole('admin')">Адмін</button>
-        <button data-role="jury" onclick="setRole('jury')">Журі</button>
-        <button data-role="student" onclick="setRole('student')">Учень</button>
-    </div>
 </body>
 </html>
+
+
+

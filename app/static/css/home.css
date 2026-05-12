@@ -179,10 +179,6 @@ body::before {
 }
 
 .admin-nav-item {
-    display: none;
-}
-
-body[data-role="admin"] .admin-nav-item {
     display: flex;
 }
 

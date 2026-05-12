@@ -4,6 +4,7 @@ const roleDisplay = document.getElementById('roleDisplay');
 const roleNames = {
     teacher: 'Вчитель',
     jury: 'Журі',
+    team: 'Учасник',
     student: 'Учень',
     admin: 'Адмін',
     guest: 'Гість'

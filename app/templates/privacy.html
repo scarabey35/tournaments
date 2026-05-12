@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/privacy.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body data-role="student">
+<body data-role="{{ current_user.role if current_user.is_authenticated else 'guest' }}">
     <header class="header">
         <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
@@ -32,6 +32,11 @@
             <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
                 <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Налаштування" width="40" height="40">
             </a>
+            {% if current_user.is_authenticated and current_user.role == "admin" %}
+            <a href="{{ url_for('admin.dashboard') }}" class="nav-item admin-nav-item" title="Адмін-панель">
+                <img src="{{ url_for('static', filename='icons/admin.svg') }}" alt="Адмін-панель" width="28" height="28">
+            </a>
+            {% endif %}
         </nav>
     </aside>
 
