@@ -128,6 +128,102 @@
         </article>
     </section>
 
+    {% if user.role == "team" %}
+        <section class="profile-grid">
+            <article class="profile-card">
+                <h3>Склад команди</h3>
+                {% if team %}
+                    <p><strong>Команда:</strong> {{ team.name }}</p>
+                    <p><strong>Місто:</strong> {{ team.city or "не вказано" }}</p>
+                    <p><strong>Організація:</strong> {{ team.organization or "не вказано" }}</p>
+                    <p><strong>Контакт:</strong> {{ team.contact or "не вказано" }}</p>
+                    {% if team.members %}
+                        <ul>
+                            {% for member in team.members %}
+                                <li>{{ member.name }} ({{ member.email }}){% if member.is_captain %} — капітан{% endif %}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Учасників поки немає.</p>
+                    {% endif %}
+                {% else %}
+                    <p>Ви ще не прив'язані до команди.</p>
+                {% endif %}
+            </article>
+
+            <article class="profile-card">
+                <h3>Історія участі та сабмітів</h3>
+                {% if team_submissions %}
+                    <ul>
+                        {% for sub in team_submissions %}
+                            <li>
+                                {{ sub.round.tournament.name }} / {{ sub.round.name }} —
+                                {{ sub.created_at.strftime('%d.%m.%Y %H:%M') }}
+                                (<a href="{{ sub.github_url }}" target="_blank">GitHub</a>)
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Сабмітів поки немає.</p>
+                {% endif %}
+            </article>
+        </section>
+    {% endif %}
+
+    {% if user.role == "jury" %}
+        <section class="profile-grid">
+            <article class="profile-card">
+                <h3>Оцінені роботи</h3>
+                {% if jury_evaluations %}
+                    <ul>
+                        {% for ev in jury_evaluations %}
+                            <li>
+                                {{ ev.submission.team.name }} / {{ ev.submission.round.name }} —
+                                {% if ev.backend_score is not none %}
+                                    оцінено
+                                {% else %}
+                                    призначено
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Призначених робіт поки немає.</p>
+                {% endif %}
+            </article>
+        </section>
+    {% endif %}
+
+    {% if user.role == "admin" %}
+        <section class="profile-grid">
+            <article class="profile-card">
+                <h3>Створені турніри</h3>
+                {% if admin_tournaments %}
+                    <ul>
+                        {% for t in admin_tournaments %}
+                            <li>{{ t.name }} — {{ t.status }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Створених турнірів поки немає.</p>
+                {% endif %}
+            </article>
+
+            <article class="profile-card">
+                <h3>Створені раунди</h3>
+                {% if admin_rounds %}
+                    <ul>
+                        {% for r in admin_rounds %}
+                            <li>{{ r.tournament.name }} / {{ r.name }} — {{ r.status }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Створених раундів поки немає.</p>
+                {% endif %}
+            </article>
+        </section>
+    {% endif %}
+
 </main>
 
 <footer class="profile-footer">

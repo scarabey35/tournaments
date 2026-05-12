@@ -75,6 +75,10 @@
                 </div>
                 <div class="filter-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
                     <label>
+                        <input type="checkbox" name="status" value="draft" {% if "draft" in selected_statuses %}checked{% endif %}>
+                        Draft
+                    </label>
+                    <label>
                         <input type="checkbox" name="status" value="registration" {% if "registration" in selected_statuses %}checked{% endif %}>
                         Registration open
                     </label>

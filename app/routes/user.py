@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, flash, render_template, get_flashed_messages, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
-from app.models import db, User, Team
+from app.models import db, User, Team, Tournament, Round, Submission, Evaluation
 
 user_bp = Blueprint("user", __name__)
 
@@ -81,26 +81,56 @@ def logout():
 @user_bp.route("/profile", methods=["GET"])
 @login_required
 def profile():
-    # Team data for role=team
     team = None
+    team_submissions = []
     if current_user.role == "team" and current_user.team_id:
-        team = Team.query.get(current_user.team_id)
+        team = db.session.get(Team, current_user.team_id)
+        if team:
+            team_submissions = (
+                Submission.query
+                .filter_by(team_id=team.id)
+                .join(Round)
+                .order_by(Round.start_time.desc())
+                .all()
+            )
 
-    # Jury data: list of evaluated submissions
     jury_evaluations = []
     if current_user.role == "jury":
-        from app.models import Evaluation
         jury_evaluations = (
             Evaluation.query
             .filter_by(jury_id=current_user.id)
+            .join(Submission)
+            .join(Round)
+            .order_by(Round.start_time.desc())
             .all()
         )
+
+    admin_tournaments = []
+    admin_rounds = []
+    if current_user.role == "admin":
+        admin_tournaments = (
+            Tournament.query
+            .filter_by(created_by=current_user.id)
+            .order_by(Tournament.created_at.desc())
+            .all()
+        )
+        if admin_tournaments:
+            tournament_ids = [t.id for t in admin_tournaments]
+            admin_rounds = (
+                Round.query
+                .filter(Round.tournament_id.in_(tournament_ids))
+                .order_by(Round.start_time.desc())
+                .all()
+            )
 
     return render_template(
         "profile.html",
         user=current_user,
         team=team,
+        team_submissions=team_submissions,
         jury_evaluations=jury_evaluations,
+        admin_tournaments=admin_tournaments,
+        admin_rounds=admin_rounds,
     )
 
 

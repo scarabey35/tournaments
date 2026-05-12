@@ -9,7 +9,7 @@ tournaments_bp = Blueprint("tournaments", __name__)
 @tournaments_bp.route("/")
 def tournaments_list():
     selected_statuses = request.args.getlist("status")
-    allowed_statuses = {"registration", "running", "finished"}
+    allowed_statuses = {"draft", "registration", "running", "finished"}
     selected_statuses = [s for s in selected_statuses if s in allowed_statuses]
 
     query = Tournament.query.order_by(Tournament.created_at.desc())
