@@ -1,349 +1,139 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Турніри • HACKATHON 2026</title>
+    <title>Турніри • HACKATHONS</title>
     <script src="{{ url_for('static', filename='js/themeToggle.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/tournaments.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tournaments.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-    <!-- Шапка -->
+<body>
     <header class="header">
         <button id="themeToggle" class="theme-toggle" aria-label="Перемкнути тему">&#9789;</button>
         <div class="logo">#HACKATHONS</div>
     </header>
 
     <aside class="sidebar">
-    <nav class="sidebar-nav">
-        <a href="{{ url_for('landing.home') }}" class="nav-item" title="Головна">
-            <img src="{{ url_for('static', filename='icons/home.svg') }}" alt="Головна" width="28" height="28">
-        </a>
-        <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item active" title="Турніри">
-            <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" alt="Турніри" width="24" height="24">
-        </a>
-        <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
-            <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" alt="Лідерборд" width="30" height="30">
-        </a>
-        <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
-            <img src="{{ url_for('static', filename='icons/profile.svg') }}" alt="Профіль" width="24" height="24">
-        </a>
-        <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
-            <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Налаштування" width="40" height="40">
-        </a>
-    </nav>
-</aside>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('landing.home') }}" class="nav-item" title="Головна">
+                <img src="{{ url_for('static', filename='icons/home.svg') }}" alt="Головна" width="28" height="28">
+            </a>
+            <a href="{{ url_for('tournaments.tournaments_list') }}" class="nav-item active" title="Турніри">
+                <img src="{{ url_for('static', filename='icons/tournaments.svg') }}" alt="Турніри" width="24" height="24">
+            </a>
+            <a href="{{ url_for('tournaments.leaderboard_global') }}" class="nav-item" title="Лідерборд">
+                <img src="{{ url_for('static', filename='icons/leaderboard.svg') }}" alt="Лідерборд" width="30" height="30">
+            </a>
+            <a href="{{ url_for('user.profile') }}" class="nav-item" title="Профіль">
+                <img src="{{ url_for('static', filename='icons/profile.svg') }}" alt="Профіль" width="24" height="24">
+            </a>
+            <a href="{{ url_for('user.settings') }}" class="nav-item" title="Налаштування">
+                <img src="{{ url_for('static', filename='icons/settings.svg') }}" alt="Налаштування" width="40" height="40">
+            </a>
+        </nav>
+    </aside>
 
     <main class="main">
-        <h1 class="page-title">Змагання</h1>
-        <section class="filters" aria-label="Фільтри турнірів">
-            <div class="filter-group search-group">
-                <label for="tournamentSearch">Пошук</label>
-                <div class="search-row">
-                    <input id="tournamentSearch" type="text" placeholder="Пошук за назвою">
-                    <button type="button" class="search-btn" id="tournamentSearchBtn" aria-label="Шукати">
-                        <span class="icon icon-search" aria-hidden="true">🔍</span>
-                    </button>
+        <h1 class="page-title">Турніри</h1>
+
+        {% if current_user.is_authenticated and current_user.role == "team" %}
+            <section class="tournament-card" style="margin-bottom: 16px;">
+                <div class="title-row">
+                    <span class="status-badge status-current">ВАШ БЛОК</span>
+                    <h3>Ваш турнір / ваше завдання / ваш сабміт</h3>
                 </div>
-            </div>
-            <div class="filter-group" data-filter-group="series">
-                <label>Серія</label>
-                <div class="filter-options">
-                    <label><input type="checkbox" data-filter="series" value="hackathon"> Хакатони</label>
-                    <label><input type="checkbox" data-filter="series" value="regional"> Регіональні</label>
-                    <label><input type="checkbox" data-filter="series" value="global-dev"> Global Dev</label>
-                    <label><input type="checkbox" data-filter="series" value="hybrid"> Гібридна</label>
-                    <label><input type="checkbox" data-filter="series" value="final"> Фінал</label>
+                {% if my_tournament %}
+                    <p><strong>Турнір:</strong> {{ my_tournament.name }}</p>
+                    <p><strong>Статус турніру:</strong> {{ my_tournament.status }}</p>
+                    {% if my_active_round %}
+                        <p><strong>Активний раунд:</strong> {{ my_active_round.name }}</p>
+                        <p><strong>Дедлайн:</strong> {{ my_active_round.end_time.strftime('%d.%m.%Y %H:%M') }}</p>
+                        <p><strong>Сабміт:</strong> {{ "подано" if my_submission else "не подано" }}</p>
+                        <div class="button-row">
+                            <a class="tournament-btn" href="{{ url_for('rounds.round_detail', round_id=my_active_round.id) }}">Відкрити раунд</a>
+                            <a class="tournament-btn" href="{{ url_for('rounds.submit', round_id=my_active_round.id) }}">
+                                {{ "Редагувати сабміт" if my_submission else "Подати сабміт" }}
+                            </a>
+                        </div>
+                    {% else %}
+                        <p>Активного раунду немає.</p>
+                        <a class="tournament-btn" href="{{ url_for('tournaments.tournament_detail', tournament_id=my_tournament.id) }}">Відкрити турнір</a>
+                    {% endif %}
+                {% else %}
+                    <p>Ви ще не зареєстровані в команді турніру.</p>
+                {% endif %}
+            </section>
+        {% endif %}
+
+        <section class="tournament-card" style="margin-bottom: 16px;">
+            <form method="get" action="{{ url_for('tournaments.tournaments_list') }}" style="display: grid; gap: 10px;">
+                <div class="title-row">
+                    <span class="status-badge status-upcoming">ФІЛЬТРИ</span>
+                    <h3>Статуси турнірів</h3>
                 </div>
-            </div>
-            <div class="filter-group" data-filter-group="format">
-                <label>Формат</label>
-                <div class="filter-options">
-                    <label><input type="checkbox" data-filter="format" value="online"> Онлайн</label>
-                    <label><input type="checkbox" data-filter="format" value="offline"> Офлайн</label>
-                    <label><input type="checkbox" data-filter="format" value="hybrid"> Гібрид</label>
+                <div class="filter-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <label>
+                        <input type="checkbox" name="status" value="registration" {% if "registration" in selected_statuses %}checked{% endif %}>
+                        Registration open
+                    </label>
+                    <label>
+                        <input type="checkbox" name="status" value="running" {% if "running" in selected_statuses %}checked{% endif %}>
+                        Running
+                    </label>
+                    <label>
+                        <input type="checkbox" name="status" value="finished" {% if "finished" in selected_statuses %}checked{% endif %}>
+                        Finished
+                    </label>
                 </div>
-            </div>
+                <div class="button-row">
+                    <button class="tournament-btn" type="submit">Застосувати</button>
+                    <a class="tournament-btn" href="{{ url_for('tournaments.tournaments_list') }}">Скинути</a>
+                </div>
+            </form>
         </section>
 
-        <section class="active-tournaments" aria-label="Мої активні турніри">
-            <div class="section-head">
-                <h2 class="section-title">Мої активні турніри</h2>
-                <p class="section-subtitle">Турніри, у яких ви берете участь і зараз працюєте над роботою.</p>
-            </div>
-            <div class="active-tournament-list">
-                <article class="tournament-detail" data-participant="true">
-                    <div class="detail-header">
-                        <div class="detail-main">
-                            <p class="detail-kicker">Ви учасник цього турніру</p>
-                            <h2 class="detail-title">Хакатон Future Labs</h2>
-                            <p class="detail-description">
-                                Створіть прототип інноваційного сервісу для смарт-міст. Фокус на енергоефективності,
-                                аналітиці даних та зручному міському досвіді. Працюйте в командах і подайте фінальний проєкт до дедлайну.
-                            </p>
-                        </div>
-                        <div class="detail-actions">
-                            <button
-                                type="button"
-                                class="submit-btn participation-only"
-                                data-tournament-title="Хакатон Future Labs"
-                                data-deadline="18 березня 2026, 23:59"
-                                aria-label="Здати роботу для турніру Хакатон Future Labs"
-                            >
-                                Здати роботу
-                            </button>
-                            <p class="detail-note participation-note">Ви не берете участі в цьому турнірі</p>
-                            <p class="detail-note">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                Дедлайн подачі: 18 березня • 23:59
-                            </p>
-                        </div>
-                    </div>
-                    <div class="detail-stats">
-                        <div class="stat-card">
-                            <span class="stat-label">Дедлайн здачі</span>
-                            <span class="stat-value">18 березня 2026, 23:59</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-label">Команд у турнірі</span>
-                            <span class="stat-value">24</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-label">Ваш статус</span>
-                            <span class="stat-value">Підтверджено</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="tournament-detail" data-participant="true">
-                    <div class="detail-header">
-                        <div class="detail-main">
-                            <p class="detail-kicker">Ви учасник цього турніру</p>
-                            <h2 class="detail-title">Регіональні виклики</h2>
-                            <p class="detail-description">
-                                Побудуйте рішення для цифрової трансформації малого бізнесу. Команди з різних регіонів
-                                змагаються за найкращий прототип та інвестиційну підтримку.
-                            </p>
-                        </div>
-                        <div class="detail-actions">
-                            <button
-                                type="button"
-                                class="submit-btn participation-only"
-                                data-tournament-title="Регіональні виклики"
-                                data-deadline="22 березня 2026, 20:00"
-                                aria-label="Здати роботу для турніру Регіональні виклики"
-                            >
-                                Здати роботу
-                            </button>
-                            <p class="detail-note participation-note">Ви не берете участі в цьому турнірі</p>
-                            <p class="detail-note">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                Дедлайн подачі: 22 березня • 20:00
-                            </p>
-                        </div>
-                    </div>
-                    <div class="detail-stats">
-                        <div class="stat-card">
-                            <span class="stat-label">Дедлайн здачі</span>
-                            <span class="stat-value">22 березня 2026, 20:00</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-label">Команд у турнірі</span>
-                            <span class="stat-value">18</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-label">Ваш статус</span>
-                            <span class="stat-value">Підтверджено</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <footer class="tournaments-footer">
-            <div class="footer-content">
-                <p class="footer-title">Інші турніри</p>
-                <p class="footer-subtitle">Ці події ще не в роботі — можна переглянути умови та подати заявку.</p>
-            </div>
-        </footer>
-
-        <section class="tournaments">
-            <div class="tournament-section">
-                <div class="tournament-list" data-list="all">
-                    <article class="tournament-card" data-series="regional" data-format="offline">
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Серія: Регіональні</span>
+        <section class="tournament-section">
+            <div class="tournament-list">
+                {% if tournaments %}
+                    {% for tournament in tournaments %}
+                        <article class="tournament-card">
+                            <div class="title-row">
+                                <span class="status-badge status-current">{{ tournament.status|upper }}</span>
+                                <h3>{{ tournament.name }}</h3>
                             </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: Офлайн</span>
+                            <p class="card-description">{{ tournament.description or "Опис відсутній." }}</p>
+                            <div class="card-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">Реєстрація: {{ tournament.registration_start.strftime('%d.%m.%Y %H:%M') }} — {{ tournament.registration_end.strftime('%d.%m.%Y %H:%M') }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Дедлайн сабмітів: {{ tournament.submission_deadline.strftime('%d.%m.%Y %H:%M') if tournament.submission_deadline else "не вказано" }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Команд: {{ tournament.teams|length }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Формат: {{ tournament.format or "не вказано" }}</span>
+                                </div>
                             </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">15 березня • 09:00</span>
+                            <div class="button-row">
+                                <a class="tournament-btn" href="{{ url_for('tournaments.tournament_detail', tournament_id=tournament.id) }}">Детальніше</a>
+                                <a class="tournament-btn" href="{{ url_for('tournaments.leaderboard', tournament_id=tournament.id) }}">Лідерборд</a>
+                                {% if current_user.is_authenticated and current_user.role == "team" %}
+                                    <a class="tournament-btn" href="{{ url_for('teams.register_team', tournament_id=tournament.id) }}">Реєстрація команди</a>
+                                {% endif %}
                             </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Дедлайн: 27 березня • 18:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Команд: 12</span>
-                            </div>
-                        </div>
-                        <h3>Інноваційна серія 3</h3>
-                        <p class="card-description">Офлайн інтенсив для команд, що працюють над інноваційними сервісами для міської інфраструктури.</p>
-                        <button type="button" class="tournament-btn" aria-label="Детальніше про турнір Інноваційна серія 3">Детальніше</button>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <article class="tournament-card">
+                        <p>Турніри за вибраними фільтрами не знайдено.</p>
                     </article>
-                    <article class="tournament-card" data-series="global-dev" data-format="hybrid">
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Серія: Global Dev</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: Гібрид</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">25 березня • 11:30</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Дедлайн: 05 квітня • 22:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Команд: 30</span>
-                            </div>
-                        </div>
-                        <h3>Global Dev Sprint</h3>
-                        <p class="card-description">Гібридний спринт для команд, що створюють глобальні розробницькі рішення.</p>
-                        <button type="button" class="tournament-btn" aria-label="Детальніше про турнір Global Dev Sprint">Детальніше</button>
-                    </article>
-                    <article class="tournament-card" data-series="hybrid" data-format="offline">
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Серія: Гібридна</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: Офлайн</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">28 березня • 18:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Дедлайн: 10 квітня • 19:30</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Команд: 16</span>
-                            </div>
-                        </div>
-                        <h3>Гібридна ліга</h3>
-                        <p class="card-description">Команди працюють над рішеннями для локальних бізнесів у гібридному форматі.</p>
-                        <button type="button" class="tournament-btn" aria-label="Детальніше про турнір Гібридна ліга">Детальніше</button>
-                    </article>
-                    <article class="tournament-card" data-series="final" data-format="online">
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Серія: Фінал</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-clock" aria-hidden="true"></span>
-                                <span class="meta-label">Формат: Онлайн</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">02 квітня • 12:00</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-calendar" aria-hidden="true"></span>
-                                <span class="meta-label">Дедлайн: 18 квітня • 23:59</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="icon icon-flag" aria-hidden="true"></span>
-                                <span class="meta-label">Команд: 40</span>
-                            </div>
-                        </div>
-                        <h3>Фінал #HACK2026</h3>
-                        <p class="card-description">Фінальна онлайн-подія з презентаціями найсильніших проєктів сезону.</p>
-                        <button type="button" class="tournament-btn" aria-label="Детальніше про турнір Фінал #HACK2026">Детальніше</button>
-                    </article>
-                    <div class="empty-message">Нічого не знайдено</div>
-                </div>
+                {% endif %}
             </div>
         </section>
     </main>
-
-    <!-- Модалка здачі роботи -->
-    <div class="modal-overlay" id="submitModal" aria-hidden="true">
-        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
-            <header class="modal-header">
-                <div>
-                    <p class="modal-kicker" id="submitModalTournament">Турнір</p>
-                    <h2 class="modal-title" id="submitModalTitle">Здача роботи</h2>
-                    <p class="modal-deadline" id="submitModalDeadline"></p>
-                </div>
-                <button type="button" class="modal-close" aria-label="Закрити модальне вікно">&times;</button>
-            </header>
-
-            <form class="modal-form" id="submitForm" enctype="multipart/form-data">
-                <label class="form-field">
-                    <span class="field-label">Спосіб здачі</span>
-                    <select id="submissionType" name="submission_type" required>
-                        <option value="file" selected>Завантажити файл</option>
-                        <option value="link">Надати посилання</option>
-                        <option value="image">Завантажити фото</option>
-                    </select>
-                </label>
-
-                <div class="field-group" id="file-group">
-                    <label class="form-field">
-                        <span class="field-label">Файл (zip, pdf, docx, код популярних ЯП)</span>
-                        <input
-                            type="file"
-                            name="project_file"
-                            accept=".zip,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.py,.js,.ts,.jsx,.tsx,.java,.c,.cpp,.cc,.h,.hpp,.cs,.go,.rb,.php,.rs,.swift,.kt,.kts,.m,.mm,.sql,.pl,.sh,.bat,.ps1,.ipynb"
-                        />
-                    </label>
-                </div>
-
-                <div class="field-group" id="link-group" hidden>
-                    <label class="form-field">
-                        <span class="field-label">Посилання на репозиторій / демо</span>
-                        <input type="url" name="project_link" placeholder="https://..." pattern="https?://.+" />
-                    </label>
-                </div>
-
-                <div class="field-group" id="image-group" hidden>
-                    <label class="form-field">
-                        <span class="field-label">Фото (png, jpg)</span>
-                        <input type="file" name="project_image" accept="image/png,image/jpeg" />
-                    </label>
-                </div>
-
-                <label class="form-field">
-                    <span class="field-label">Коментар (необов'язково)</span>
-                    <textarea name="comment" rows="3" placeholder="Коротко опишіть, що здаєте"></textarea>
-                </label>
-
-                <div class="modal-actions">
-                    <button type="button" class="secondary-btn modal-close">Скасувати</button>
-                    <button type="submit" class="primary-btn">Відправити</button>
-                </div>
-                <p class="form-note">Після відправки ви побачите підтвердження. За потреби можна повторно надіслати нову версію.</p>
-            </form>
-        </div>
-    </div>
 </body>
 </html>

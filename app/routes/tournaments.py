@@ -1,15 +1,53 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app.decorators import roles_required
-from app.models import db, Evaluation, Round, Submission, Tournament
+from app.models import db, Evaluation, Round, Submission, Team, Tournament
 
 tournaments_bp = Blueprint("tournaments", __name__)
 
 
 @tournaments_bp.route("/")
 def tournaments_list():
-    tournaments = Tournament.query.order_by(Tournament.created_at.desc()).all()
-    return render_template("tournaments.html", tournaments=tournaments)
+    selected_statuses = request.args.getlist("status")
+    allowed_statuses = {"registration", "running", "finished"}
+    selected_statuses = [s for s in selected_statuses if s in allowed_statuses]
+
+    query = Tournament.query.order_by(Tournament.created_at.desc())
+    if selected_statuses:
+        query = query.filter(Tournament.status.in_(selected_statuses))
+    tournaments = query.all()
+
+    my_team = None
+    my_tournament = None
+    my_active_round = None
+    my_submission = None
+
+    if current_user.is_authenticated and current_user.role == "team" and current_user.team_id:
+        my_team = Team.query.get(current_user.team_id)
+        if my_team:
+            my_tournament = Tournament.query.get(my_team.tournament_id)
+            if my_tournament:
+                my_active_round = (
+                    Round.query
+                    .filter_by(tournament_id=my_tournament.id, status="active")
+                    .order_by(Round.start_time.desc())
+                    .first()
+                )
+                if my_active_round:
+                    my_submission = Submission.query.filter_by(
+                        round_id=my_active_round.id,
+                        team_id=my_team.id,
+                    ).first()
+
+    return render_template(
+        "tournaments.html",
+        tournaments=tournaments,
+        selected_statuses=selected_statuses,
+        my_team=my_team,
+        my_tournament=my_tournament,
+        my_active_round=my_active_round,
+        my_submission=my_submission,
+    )
 
 
 @tournaments_bp.route("/<int:tournament_id>")
